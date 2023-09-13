@@ -1,0 +1,190 @@
+body
+{
+    margin: 0 auto;
+}
+
+/**inicio do estilo do header**/
+header
+{
+    display: flex;
+    height: 15vh;
+    width: 100vw;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.Logo.Icon
+{
+    display: flex;
+    width: 10%;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Logo.Icon .Clinik
+{
+    height: 100%;
+    object-fit: fill;
+}
+
+.Logo.Icon .Linhas
+{
+    height: 80%;
+}
+
+.Logo.nomeSlogan
+{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+}
+
+.Logo.nomeSlogan .Nome
+{
+    object-fit: fill;
+    width: 65%;
+    height: 70%;
+}
+
+.Logo.nomeSlogan .Slogan
+{
+    color: #3C9FAC;
+    margin: 0%;
+    height: 30%;
+    font-family: cursive;
+}
+
+@media only screen and (max-width: 600px) {
+    .Logo.nomeSlogan .Slogan 
+    {
+      font-size: 10px;
+    }
+  }
+/**fim do estilo do header**/
+
+
+/**inicio do estilo do main**/
+main
+{
+    background-image: url(../Imagens/Background.png);
+    height: 70vh;
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formLogin
+{
+    height: 80%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    box-shadow: 0 0 20px 0 #3C9FAC;
+    border-radius:  10px;
+    justify-content: space-around;
+}
+
+.Text
+{
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px #3C9FAC;
+}
+
+/**inicio do estilo do botão de logar**/
+.formLogin button
+{
+    border: none;
+}
+
+.formLogin .btn 
+{  
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 250px;
+    cursor: pointer;
+    margin-bottom: 2%;
+}
+
+.formLogin .btn-one 
+{
+    font-family: fantasy;
+    color: #050505;
+    transition: all 0.3s;
+    position: relative;
+}
+  
+.formLogin .btn-one span 
+{
+    transition: all 0.3s;
+}
+
+.formLogin .btn-one::before 
+{
+    border-radius: 10px;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: solid 1px rgba(60, 159, 172, 0.5);
+    transform: scale(0.1, 1);
+}
+  
+.formLogin .btn-one:hover span 
+{
+    letter-spacing: 2px;
+    color: #3C9FAC;
+}
+  
+.formLogin .btn-one:hover::before 
+{
+    opacity: 1; 
+    transform: scale(1, 1); 
+    
+}
+  
+.formLogin .btn-one::after 
+{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: all 0.3s;
+    background-color: rgba(60, 159, 172, 0.5);
+    border-radius: 10px
+}
+  
+.formLogin .btn-one:hover::after 
+{
+    opacity: 0; 
+    transform: scale(0.1, 1);
+}
+/**fim do estilo do botão de logar**/
+/**fim do estilo do main**/
+
+/**inicio do estilo do footer**/
+footer
+{
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+}
+/**fim do estilo do footer**/

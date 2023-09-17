@@ -31,7 +31,13 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
             }
 
             $_SESSION['id'] = $usuario['id'];
-            $_SESSION['nome'] = $usuario['nome_completo'];
+            $_SESSION['nome'] = $usuario['nome'];
+            $_SESSION['cargo'] = $usuario['cargo'];
+            $_SESSION['email'] = $usuario['email'];
+            $_SESSION['nickname'] = $usuario['nickname'];
+            $_SESSION['telefone'] = $usuario['telefone'];
+            $_SESSION['crm'] = $usuario['crm'];
+            $_SESSION['especialidade'] = $usuario['especialidade'];
 
             header("Location: menuPrincipal.php");
         }

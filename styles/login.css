@@ -1,6 +1,7 @@
-body
-{
-    margin: 0 auto;
+ /* Reset de estilos padrão do navegador */
+ body, ul {
+    margin: 0;
+    padding: 0;
 }
 
 /**inicio do estilo do header**/

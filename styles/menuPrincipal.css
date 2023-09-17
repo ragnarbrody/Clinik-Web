@@ -1,0 +1,173 @@
+ /* Reset de estilos padrão do navegador */
+ body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/**inicio do estilo do header**/
+header
+{
+    display: flex;
+    height: 15vh;
+    width: 100vw;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.Logo.Icon
+{
+    display: flex;
+    width: 10%;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Logo.Icon .Clinik
+{
+    height: 100%;
+    object-fit: fill;
+}
+
+.Logo.Icon .Linhas
+{
+    height: 80%;
+}
+
+.Logo.nomeSlogan
+{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+}
+
+.Logo.nomeSlogan .Nome
+{
+    object-fit: fill;
+    width: 65%;
+    height: 70%;
+}
+
+.Logo.nomeSlogan .Slogan
+{
+    color: #3C9FAC;
+    margin: 0%;
+    height: 30%;
+    font-family: cursive;
+}
+
+@media only screen and (max-width: 600px) {
+    .Logo.nomeSlogan .Slogan 
+    {
+      font-size: 10px;
+    }
+  }
+/**fim do estilo do header**/
+
+
+/**inicio do estilo do main**/
+main
+{
+    flex-direction: column;
+    background-image: url(../Imagens/MinBackground5.jpg);
+    height: 75vh;
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+}
+
+.menu ul.menuServicos
+{
+    list-style: none;
+    background-color: #826B51;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    align-items: center;
+}
+
+.icons
+{
+    margin-right: 5px;
+    height: 30px;
+    object-fit: fill;
+}
+
+.menu ul.menuServicos li 
+{
+    margin: 0 10px; /* Espaçamento entre os itens */
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    align-items: center;
+}
+
+.menu ul.menuServicos li:hover 
+{
+    background-color: #5c4c3a;
+}
+
+.menu ul.menuServicos li a
+{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+}
+
+#conteudo
+{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fundoConteudo
+{
+    padding: 1%;
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    box-shadow: 0 0 20px 0 #3C9FAC;
+    border-radius:  10px;
+    justify-content: space-around;
+}
+
+/**fim do estilo do main**/
+
+/**inicio do estilo do footer**/
+footer
+{
+    border-top: #3C9FAC 4px solid;
+    height: 9vh;
+    min-height: 9vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerLogo
+{
+    display: flex;
+    align-items: center;
+    width: auto; /* Defina a largura automática para acomodar a imagem */
+    height: 100%;
+    margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+.footerLogo .Clinik
+{
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain; /* Pode ser 'cover' ou 'contain' dependendo do comportamento desejado */
+}
+/**fim do estilo do footer**/

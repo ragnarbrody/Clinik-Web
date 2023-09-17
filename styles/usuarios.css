@@ -1,0 +1,18 @@
+#tabelaDiv
+{
+    padding: 1vw;
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    box-shadow: 0 0 20px 0 #3C9FAC;
+    border-radius:  10px;
+    justify-content: space-around;
+}
+
+#tabelaDiv table
+{
+    border-radius:  10px;
+    margin-bottom: 10px;
+}

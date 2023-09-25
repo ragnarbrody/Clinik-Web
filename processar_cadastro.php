@@ -3,7 +3,7 @@ include('./protect.php');
 include('./conexao.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recupere os dados do formulário
+    // Recupera os dados do formulário
     $nome = $mysqli->real_escape_string($_POST['nome']);
     $cargo = $mysqli->real_escape_string($_POST['cargo']);
     $email = $mysqli->real_escape_string($_POST['email']);
@@ -13,13 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $especialidade = $mysqli->real_escape_string($_POST['especialidade']);
     $senha = $mysqli->real_escape_string($_POST['senha']);
 
-    // Valide os dados aqui, por exemplo, verifique se o email é único ou se os campos estão preenchidos corretamente
-
-    // Insira os dados no banco de dados
-    $sql = "INSERT INTO usuarios (nome, cargo, email, telefone) VALUES ('$nome', '$cargo', '$email', '$telefone', '$nickname', '$crm', '$especialidade', '$senha')";
+    // Insere os dados no banco de dados
+    $sql = "INSERT INTO usuarios (nome, cargo, email, telefone, nickname, crm, especialidade, senha) VALUES ('$nome', '$cargo', '$email', '$telefone', '$nickname', '$crm', '$especialidade', '$senha')";
 
     if ($mysqli->query($sql)) {
-        echo "Usuário cadastrado com sucesso!";
+        echo '<script>
+            alert("Usuário cadastrado com sucesso!");
+            window.parent.closeModalAndReload(); // Chama a função do pai para fechar o modal e recarregar a página pai
+        </script>'; 
     } else {
         echo "Erro ao cadastrar usuário: " . $mysqli->error;
     }

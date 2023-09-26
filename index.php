@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('./conexao.php');
 
 if(isset($_POST['usuario']) && isset($_POST['senha']))
@@ -43,7 +44,9 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
         }
         else
         {
-            echo "Falha ao logar, usuário ou senha incorretos!";
+            $_SESSION['nao_autenticado'] =true;
+            header('location: index.php');
+            exist();
         }
     }
 }
@@ -69,6 +72,7 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
             </div>     
         </header>
         <main>
+          
             <form action="" method="POST" class="formLogin">
                 <img src="./Imagens/LoginTitle.png" alt="Nome do aplicativo Clinik Flow" class="Titulo">
                 <div class="Input">
@@ -78,11 +82,25 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
                 <div class="Input">
                     <i class="fas fa-lock iPassword"></i>
                     <input type="password" placeholder="Senha" required class="Text Senha" name="senha">                  
-                </div>              
+                </div> 
+                <?php
+                if  (isset($_SESSION['nao_autenticado'])):
+                 ?> 
+                <div class="lerro"> 
+                    <p><b>falha ao logar, usuario ou senha incorreto<b>
+                    </P>
+
+                </div>
+                <?php
+                unset($_SESSION['nao_autenticado']);
+                endif;
+                ?>
+                          
                 <button type="submit" class="btn btn-one">
                     <span>LOGAR</span>
                 </button>                            
             </form>
+         
         </main>
         <footer>
             <div class="Logo Icon">

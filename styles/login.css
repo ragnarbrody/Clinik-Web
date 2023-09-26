@@ -12,7 +12,10 @@ header
     width: 100vw;
     align-items: center;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content:space-evenly;
+    position: static;
+    flex-wrap: nowrap;
+    background-color: #050505;
 }
 
 .Logo.Icon
@@ -26,13 +29,15 @@ header
 
 .Logo.Icon .Clinik
 {
-    height: 100%;
-    object-fit: fill;
+    height: 70%;
+    flex-wrap: nowrap;
+    
 }
 
 .Logo.Icon .Linhas
 {
     height: 80%;
+  
 }
 
 .Logo.nomeSlogan
@@ -63,8 +68,14 @@ header
     .Logo.nomeSlogan .Slogan 
     {
       font-size: 10px;
+      
     }
-  }
+    .formLogin{
+        height: 300px;
+    }
+
+  
+}
 /**fim do estilo do header**/
 
 
@@ -80,18 +91,24 @@ main
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
-.formLogin
+.formLogin 
 {
-    height: 80%;
+    height: 300px;
+    width: 300px;
     align-items: center;
     display: flex;
     flex-direction: column;
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
     box-shadow: 0 0 20px 0 #3C9FAC;
     border-radius:  10px;
     justify-content: space-around;
+    flex-wrap: nowrap;
+   
+
+    
 }
 
 .Text
@@ -187,5 +204,14 @@ footer
     height: 15vh;
     display: flex;
     justify-content: center;
+    position: static;
+    align-items: center;
+}
+.Titulo{
+    height: 15%;
 }
 /**fim do estilo do footer**/
+.text user{
+    display: flex;
+    flex-direction: column;
+}

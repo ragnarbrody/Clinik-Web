@@ -55,16 +55,14 @@ header
 {
     color: #3C9FAC;
     margin: 0%;
-    height: 30%;
+    height: 100%;
     font-family: cursive;
 }
 
-@media only screen and (max-width: 600px) {
-    .Logo.nomeSlogan .Slogan 
-    {
-      font-size: 10px;
-    }
-  }
+.mobile-menu{
+    display: none;
+   }
+
 /**fim do estilo do header**/
 
 
@@ -86,7 +84,7 @@ main
     list-style: none;
     background-color: #826B51;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 10px;
     align-items: center;
 }
@@ -171,3 +169,37 @@ footer
     object-fit: contain; /* Pode ser 'cover' ou 'contain' dependendo do comportamento desejado */
 }
 /**fim do estilo do footer**/
+@media screen and (max-width: 800px) {
+    .Logo.nomeSlogan .Slogan 
+    {
+      font-size: 10px;
+      height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+   
+ 
+    }
+ 
+    .mobile-menu{
+        display: block;
+      
+    }
+  
+    .menu ul.menuServicos
+{
+    
+    background-color: #826B51;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    flex-direction: column;
+}
+.Logo.Icon{
+    height: 80%;
+    width: 80%;
+    margin-left: 2px;
+}
+    
+  }

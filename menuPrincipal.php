@@ -22,9 +22,12 @@ include('./protect.php')
             <div class="Logo nomeSlogan">
                 <img src="./Imagens/Clinik.png" alt="Nome do aplicativo Clinik Flow" class="Nome">
                 <p class="Slogan">Seja bem-vindo(a) ao Clinik Flow, <?php echo $_SESSION['nome'];?></p>
-            </div>     
+            </div>  
+            
+            
         </header>
         <main>
+            <nav class="nav-bar">
             <div class="menu">
                 <ul class="menuServicos">
                     <li><a href="./home.php" id="item0"><img src="./Imagens/HomeIcon.png" alt="icone de usuarios" class="icons"> Home</a></li>
@@ -34,9 +37,20 @@ include('./protect.php')
                     <li><a href="#" id="item4"><img src="./Imagens/Financeiro.png" alt="icone de usuarios" class="icons"> Financeiro</a></li>
                     <li class="btnSair no-ajax"><a href="./logout.php"><img src="./Imagens/sair.png" alt="icone de usuarios" class="icons">Sair</a></li>
                 </ul>
+                
             </div>
+            <div class="mobile-menu">
+                <button><img class="icon" src=./imagens/DBon.png alt="AAAAA"></button>
+</div> 
+            
+        
+            </nav>
+      
+
+
             <div class="conteudo pagina-conteudo" id="conteudo">
                 <div class="fundoConteudo">
+                    
                     <h2>Bem Vindo(a)!</h2>
                     <p>Nesta página você encontra seus dados de usuário:</p>
                     <div class="dados">

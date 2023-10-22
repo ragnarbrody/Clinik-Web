@@ -3,7 +3,7 @@ include('./conexao.php');
 include('./protect.php');
 
 // Consulta SQL para obter todos os registros de usuários
-$sql_code = "SELECT * FROM usuarios";
+$sql_code = "SELECT * FROM paciente";
 $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
 // Variável para armazenar a tabela HTML
@@ -15,28 +15,34 @@ if ($sql_query->num_rows > 0) {
     $tabelaHTML .= '<table border="1">
             <tr>
                 <th>ID</th>
-                <th>Nickname</th>
                 <th>Nome</th>
-                <th>Cargo</th>
-                <th>Email</th>
+                <th>CPF</th>
+                <th>RNE</th>
+                <th>Nome da Mãe</th>              
+                <th>Sexo</th>
+                <th>Etnia</th>
+                <th>Data de Nascimento</th>
                 <th>Telefone</th>
-                <th>CRM</th>
-                <th>Especialidade</th>
+                <th>Carteira de Saúde</th>
+                <th>Protocolo</th>
             </tr>';
 
     // Loop através dos registros e exibir em linhas da tabela
     while ($row = $sql_query->fetch_assoc()) {
         $tabelaHTML .= '<tr>';
-        $tabelaHTML .= '<td>' . $row['id'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['nickname'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['nome'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['cargo'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['email'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['ID'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['nome_completo'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['CPF'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['RNE'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['nome_mae'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['sexo'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['etnia'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['data_nascimento'] . '</td>';
         $tabelaHTML .= '<td>' . $row['telefone'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['crm'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['especialidade'] . '</td>';
-        $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEdit(' . $row["id"] . ')">Editar</button></td>';
-        $tabelaHTML .= '<td>' . '<button class="excluir-btnUser" data-id="' . $row["id"] . '">Excluir</button>' . '</td>';
+        $tabelaHTML .= '<td>' . $row['numero_carteirinha'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['protocolo_atendimento'] . '</td>';
+        $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEditPac(' . $row["ID"] . ')">Editar</button></td>';
+        $tabelaHTML .= '<td>' . '<button class="excluir-btnPac" data-id="' . $row["ID"] . '">Excluir</button>' . '</td>';
         // Deixei aqui pra adicionar mais colunas se precisar
         $tabelaHTML .= '</tr>';
     }
@@ -44,7 +50,7 @@ if ($sql_query->num_rows > 0) {
     // Fechar a tabela HTML
     $tabelaHTML .= '</table>';
 } else {
-    $tabelaHTML .= 'Nenhum usuário cadastrado.';
+    $tabelaHTML .= 'Nenhum paciente cadastrado.';
 }
 ?>
 <!DOCTYPE html>
@@ -54,7 +60,7 @@ if ($sql_query->num_rows > 0) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./styles/header.css">
         <link rel="stylesheet" href="./styles/menu.css">
-        <link rel="stylesheet" href="./styles/usuarios.css">
+        <link rel="stylesheet" href="./styles/pacientes.css">
         <link rel="stylesheet" href="./styles/footer.css">
         <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -82,25 +88,25 @@ if ($sql_query->num_rows > 0) {
                     <li class="btnSair no-ajax"><a href="./logout.php"><img src="./Imagens/sair.png" alt="icone de usuarios" class="icons">Sair</a></li>
                 </ul>
             </div>
-            <div class="conteudoUsuarios">
+            <div class="conteudoPacientes">
                 <div id="tabelaDiv">
-                    <h2>Usuários</h2>
+                    <h2>Pacientes</h2>
                     <?php echo $tabelaHTML; ?>
                     <div class="btnsTabela">
-                        <button onclick="openModalReg()">Cadastrar</button>
+                        <button onclick="openModalRegPac()">Cadastrar</button>
                     </div>
                 </div>
                 <!--Os modais abaixo só aparecem quando chamados pelas respectivas funções-->
                 <div class="modal">
-                    <div class="modal-content" id="editarUser">
+                    <div class="modal-content" id="editarPaciente">
                         <span class="close-btn" onclick="closeModal()">&times;</span>
-                        <iframe src="editar_usuario.php" width="100%" height="400"></iframe>
+                        <iframe src="editar_paciente.php" width="100%" height="400"></iframe>
                     </div>
                 </div>
-                <div class="modal" id="cadastrarUser">
+                <div class="modal" id="cadastrarPac">
                     <div class="modal-content">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
-                        <iframe src="cadastrar_usuario.php" width="100%" height="400"></iframe>
+                        <span class="close-btn" onclick="closeTesteModal()">&times;</span>
+                        <iframe src="cadastrar_paciente" width="100%" height="400"></iframe>
                     </div>
                 </div>
             </div>

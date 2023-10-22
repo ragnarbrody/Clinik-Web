@@ -1,0 +1,39 @@
+.menu ul.menuServicos
+ {
+     list-style: none;
+     background-color: #826B51;
+     display: flex;
+     justify-content: space-around;
+     padding: 10px;
+     align-items: center;
+ }
+ 
+ .icons
+ {
+     margin-right: 5px;
+     height: 30px;
+     object-fit: fill;
+ }
+ 
+ .menu ul.menuServicos li 
+ {
+     margin: 0 10px; /* Espaçamento entre os itens */
+     padding: 5px 10px;
+     border-radius: 5px;
+     transition: background-color 0.3s;
+     cursor: pointer;
+     align-items: center;
+ }
+ 
+ .menu ul.menuServicos li:hover 
+ {
+     background-color: #5c4c3a;
+ }
+ 
+ .menu ul.menuServicos li a
+ {
+     display: flex;
+     align-items: center;
+     text-decoration: none;
+     color: #fff;
+ }

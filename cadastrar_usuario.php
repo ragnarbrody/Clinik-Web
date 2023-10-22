@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
 <body>
     <div class="addUser">
         <h2>Cadastro de Usuário</h2>
-        <form action="processar_cadastro.php" method="POST" class="form_addUser">
+        <form action="processar_cadastroUser.php" method="POST" class="form_addUser">
             <div class="conteudoForm">
                 <div class="conjInput">
                     <label for="nome">Nome:</label>

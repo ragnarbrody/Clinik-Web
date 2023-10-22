@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    /*
     // Função para carregar o conteúdo da página vinculada no elemento "conteudo"
     function carregarConteudo(url) {
         $.ajax({
@@ -29,4 +30,5 @@ $(document).ready(function () {
         var url = $(this).attr("href");
         carregarConteudo(url); // Chama a função para carregar o conteúdo
     });
+    */
 });

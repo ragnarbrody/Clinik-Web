@@ -1,0 +1,27 @@
+/**inicio do estilo do footer**/
+footer
+{
+    border-top: #3C9FAC 4px solid;
+    height: 9vh;
+    min-height: 9vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerLogo
+{
+    display: flex;
+    align-items: center;
+    width: auto; /* Defina a largura automática para acomodar a imagem */
+    height: 100%;
+    margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+.footerLogo .Clinik
+{
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain; /* Pode ser 'cover' ou 'contain' dependendo do comportamento desejado */
+}
+/**fim do estilo do footer**/

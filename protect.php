@@ -9,7 +9,8 @@ if(!isset($_SESSION))
 //verifica se o usuário fez login a partir da analisa da variavel "ID" dentro de $_SESSION
 if(!isset($_SESSION['id']))
 {
-    die("Você não pode acessar esta página porque não está logado.<p><a href=\"index.php\">Entrar</p>");
+    //envia o usuário para a pagina de login
+    header("Location: index.php");
 }
 
 ?>

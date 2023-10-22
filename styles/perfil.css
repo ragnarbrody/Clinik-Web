@@ -17,7 +17,7 @@ main
     display: flex;
 }
 
-.conteudoMenuPrincipal
+.conteudoPerfil
 {
     height: 100%;
     display: flex;
@@ -27,7 +27,7 @@ main
 
 .containerConteudo
 {
-    padding: 1%;
+    padding: 1vw;
     width: fit-content;
     align-items: center;
     display: flex;

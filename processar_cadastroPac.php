@@ -25,10 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $endereco_numero = $mysqli->real_escape_string($_POST['endereco_numero']);
     $complemento = $mysqli->real_escape_string($_POST['complemento']);
     $numero_carteirinha = $mysqli->real_escape_string($_POST['carteirinha']);
-    $protocolo_atendimento = $mysqli->real_escape_string($_POST['protocolo']);
 
     // Insere os dados no banco de dados
-    $sql = "INSERT INTO paciente (nome_completo, CPF, RG, nome_pai, nome_mae, RNE, estado_civil, sexo, etnia, nacionalidade, data_nascimento, responsavel_legal, telefone, nome_emergencia, telefone_emergencia, parentesco_emergencia, CEP, endereco_rua, endereco_numero, complemento, numero_carteirinha, protocolo_atendimento) VALUES ('$nome', '$CPF', '$RG', '$nome_pai', '$nome_mae', '$RNE', '$estado_civil', '$sexo', '$etnia', '$nacionalidade', '$data_nascimento', '$responsavel_legal', '$telefone', '$nome_emergencia', '$telefone_emergencia', '$parentesco_emergencia', '$CEP', '$endereco_rua', '$endereco_numero', '$complemento', '$numero_carteirinha', '$protocolo_atendimento')";
+    $sql = "INSERT INTO paciente (nome_completo, CPF, RG, nome_pai, nome_mae, RNE, estado_civil, sexo, etnia, nacionalidade, data_nascimento, responsavel_legal, telefone, nome_emergencia, telefone_emergencia, parentesco_emergencia, CEP, endereco_rua, endereco_numero, complemento, numero_carteirinha) VALUES ('$nome', '$CPF', '$RG', '$nome_pai', '$nome_mae', '$RNE', '$estado_civil', '$sexo', '$etnia', '$nacionalidade', '$data_nascimento', '$responsavel_legal', '$telefone', '$nome_emergencia', '$telefone_emergencia', '$parentesco_emergencia', '$CEP', '$endereco_rua', '$endereco_numero', '$complemento', '$numero_carteirinha')";
 
     if ($mysqli->query($sql)) {
         echo '<script>

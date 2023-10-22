@@ -1,0 +1,65 @@
+ /* Reset de estilos padrão do navegador */
+ body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/**inicio do estilo do main**/
+main
+{
+    flex-direction: column;
+    background-image: url(../Imagens/MinBackground5.jpg);
+    height: 75vh;
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+}
+
+.conteudoPerfil
+{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerConteudo
+{
+    padding: 1vw;
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    box-shadow: 0 0 20px 0 #3C9FAC;
+    border-radius:  10px;
+    justify-content: space-around;
+}
+
+.dados
+{
+    display: flex;  
+}
+
+.divSeparador
+{
+    padding-left: 2%;
+    padding-right: 2%;
+    border-left: 1px solid black;
+}
+
+.divSeparador:first-child
+{
+    padding-right: 2%;
+    padding-left: 0;
+    border-left: none;
+}
+
+.divSeparador:last-child
+{
+    padding-right: 0%;
+    padding-left: 2;
+}
+/**fim do estilo do main**/

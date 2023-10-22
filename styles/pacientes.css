@@ -41,6 +41,30 @@ main
     margin-bottom: 10px;
 }
 
+#searchInput
+{
+    margin-bottom: 2%;
+}
+
+.perfil-btn
+{
+    display: flex;
+    text-decoration: none;
+    border: 1px solid #737071;
+    padding: 2.2px;
+    font-size: 12px;
+    color: black;
+    font-family: sans-serif;
+    justify-content: center;
+    background-color: #E6E6E6;
+}
+
+.perfil-btn:hover
+{
+    border-color: #549CB7;
+    background-color: #A4F4FD;
+}
+
 /*Códigos Css para o modal de editar usuario*/
 /* Estilo do modal */
 

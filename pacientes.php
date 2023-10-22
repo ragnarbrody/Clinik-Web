@@ -41,8 +41,9 @@ if ($sql_query->num_rows > 0) {
         $tabelaHTML .= '<td>' . $row['telefone'] . '</td>';
         $tabelaHTML .= '<td>' . $row['numero_carteirinha'] . '</td>';
         $tabelaHTML .= '<td>' . $row['protocolo_atendimento'] . '</td>';
+        $tabelaHTML .= '<td><a class="perfil-btn" href="./perfil_paciente.php?id=' . $row["ID"] . '">Perfil</a></td>';
         $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEditPac(' . $row["ID"] . ')">Editar</button></td>';
-        $tabelaHTML .= '<td>' . '<button class="excluir-btnPac" data-id="' . $row["ID"] . '">Excluir</button>' . '</td>';
+        $tabelaHTML .= '<td><button class="excluir-btnPac" data-id="' . $row["ID"] . '">Excluir</button>' . '</td>';
         // Deixei aqui pra adicionar mais colunas se precisar
         $tabelaHTML .= '</tr>';
     }
@@ -91,6 +92,8 @@ if ($sql_query->num_rows > 0) {
             <div class="conteudoPacientes">
                 <div id="tabelaDiv">
                     <h2>Pacientes</h2>
+                    <label for="searchInput">Pesquisar por nome ou CPF: </label>
+                    <input type="text" id="searchInput" name="searchInput" placeholder="Nome ou CPF">
                     <?php echo $tabelaHTML; ?>
                     <div class="btnsTabela">
                         <button onclick="openModalRegPac()">Cadastrar</button>
@@ -117,5 +120,30 @@ if ($sql_query->num_rows > 0) {
             </div>
         </footer>
         <script src="./scripts/funcoesModal.js"></script>
+        <script>
+            // Captura o elemento de entrada de texto
+            var searchInput = document.getElementById('searchInput');
+
+            // Adiciona um ouvinte de evento de entrada de texto para a barra de pesquisa
+            searchInput.addEventListener('input', function() {
+                var searchTerm = searchInput.value.toLowerCase(); // Obtém o valor digitado e converte para minúsculas
+
+                // Seleciona todas as linhas da tabela, exceto a primeira (cabeçalho)
+                var rows = document.querySelectorAll('table tr:not(:first-child)');
+
+                // Loop através das linhas da tabela e verifica se o nome ou CPF corresponde ao termo de pesquisa
+                rows.forEach(function(row) {
+                    var nome = row.cells[1].textContent.toLowerCase(); // Obtém o nome da célula
+                    var cpf = row.cells[2].textContent.toLowerCase(); // Obtém o CPF da célula
+
+                    // Verifica se o nome ou CPF contém o termo de pesquisa
+                    if (nome.includes(searchTerm) || cpf.includes(searchTerm)) {
+                        row.style.display = ''; // Se corresponder, mostra a linha
+                    } else {
+                        row.style.display = 'none'; // Se não corresponder, oculta a linha
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

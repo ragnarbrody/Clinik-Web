@@ -92,8 +92,6 @@
                 <div class="conjInput">
                     <label for="carteirinha">Carteira de Saúde:</label>
                     <input type="number" id="carteirinha" name="carteirinha" required><br>
-                    <label for="protocolo">Complemento:</label>
-                    <input type="text" id="protocolo" name="protocolo"><br>
                 </div>
             </div>
             <div class="enviarPac">  

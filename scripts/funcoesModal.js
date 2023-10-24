@@ -14,7 +14,7 @@
     window.addEventListener("click", function(event) {
         var modal = document.querySelector('.modal');
         if (event.target == modal) {
-            closeModal(); // Chame a função para fechar o modal de teste.php
+            closeModal();
         }
     });    
 

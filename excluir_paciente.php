@@ -15,7 +15,7 @@ if (isset($_GET['ID'])) {
         echo 'Paciente com ID ' . $pacId . ' foi excluído com sucesso.';
     } else {
         // Se houver um erro na exclusão
-        echo 'Falha ao excluir o usuário com ID ' . $pacId . ': ' . $mysqli->error;
+        echo 'Falha ao excluir o paciente com ID ' . $pacId . ': ' . $mysqli->error;
     }
 } else {
     // Se o ID do usuário não foi fornecido na solicitação

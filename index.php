@@ -16,7 +16,7 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
         $nickname = $mysqli->real_escape_string($_POST['usuario']);
         $senha = $mysqli->real_escape_string($_POST['senha']);
 
-        $sql_code = "SELECT * FROM usuarios WHERE nickname = '$nickname' AND senha = '$senha'";
+        $sql_code = "SELECT * FROM usuarios WHERE Apelido = '$nickname' AND Senha = '$senha'";
         $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
         $quantidade = $sql_query->num_rows;
@@ -30,14 +30,14 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
                 session_start();
             }
 
-            $_SESSION['id'] = $usuario['id'];
-            $_SESSION['nome'] = $usuario['nome'];
-            $_SESSION['cargo'] = $usuario['cargo'];
-            $_SESSION['email'] = $usuario['email'];
-            $_SESSION['nickname'] = $usuario['nickname'];
-            $_SESSION['telefone'] = $usuario['telefone'];
-            $_SESSION['crm'] = $usuario['crm'];
-            $_SESSION['especialidade'] = $usuario['especialidade'];
+            $_SESSION['id'] = $usuario['ID'];
+            $_SESSION['nome'] = $usuario['Nome'];
+            $_SESSION['cargo'] = $usuario['Cargo'];
+            $_SESSION['email'] = $usuario['Email'];
+            $_SESSION['apelido'] = $usuario['Apelido'];
+            $_SESSION['telefone'] = $usuario['Telefone'];
+            $_SESSION['ctm'] = $usuario['Crm'];
+            $_SESSION['especialidade'] = $usuario['Especialidade'];
 
             header("Location: menuPrincipal.php");
         }

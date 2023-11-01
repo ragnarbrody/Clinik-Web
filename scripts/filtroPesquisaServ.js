@@ -10,11 +10,11 @@ searchInput.addEventListener('input', function () {
 
     /// Loop através das linhas da tabela e verifica se o nome ou CPF corresponde ao termo de pesquisa
     rows.forEach(function (row) {
-        var nome = row.cells[1].textContent.toLowerCase(); // Obtém o nome da célula
-       var cpf = row.cells[2].textContent.toLowerCase(); // Obtém o CPF da célula
+        var id = row.cells[0].textContent.toLowerCase(); // Obtém o nome da célula
+       var nome = row.cells[1].textContent.toLowerCase(); // Obtém o CPF da célula
 
         /// Verifica se o nome ou CPF contém o termo de pesquisa
-        if (nome.includes(searchTerm) || cpf.includes(searchTerm)) {
+        if (id.includes(searchTerm) || nome.includes(searchTerm)) {
             row.style.display = ''; // Se corresponder, mostra a linha
         } else {
            row.style.display = 'none'; // Se não corresponder, oculta a linha

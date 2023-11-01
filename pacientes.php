@@ -63,9 +63,10 @@ if ($sql_query->num_rows > 0) {
         <link rel="stylesheet" href="./styles/menu.css">
         <link rel="stylesheet" href="./styles/pacientes.css">
         <link rel="stylesheet" href="./styles/footer.css">
+        <link rel="icon" href="./Imagens/IconeLogo.ico" type="image/x-icon">
         <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <title>Usuarios</title>
+        <title>Pacientes</title>
     </head>
     <body>
         <header>
@@ -84,6 +85,7 @@ if ($sql_query->num_rows > 0) {
                     <li><a href="./perfil.php" id="item0"><img src="./Imagens/iconPerfil2.png" alt="icone de usuarios" class="icons">Perfil</a></li>
                     <li><a href="./usuarios.php" id="item1"><img src="./Imagens/IconPerfil.png" alt="icone de usuarios" class="icons"> Usuarios</a></li>
                     <li><a href="./pacientes.php" id="item2"><img src="./Imagens/Pacientes.png" alt="icone de pacientes" class="icons">Pacientes</a></li>
+                    <li><a href="./servicos.php" id="item3"><img src="./Imagens/box.png" alt="icone de serviços" class="icons">Serviços</a></li>
                     <li><a href="#" id="item3"><img src="./Imagens/Agenda.png" alt="icone de usuarios" class="icons">Agenda</a></li>
                     <li><a href="#" id="item4"><img src="./Imagens/Financeiro.png" alt="icone de usuarios" class="icons">Financeiro</a></li>
                     <li class="btnSair no-ajax"><a href="./logout.php"><img src="./Imagens/sair.png" alt="icone de usuarios" class="icons">Sair</a></li>

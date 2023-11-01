@@ -3,7 +3,7 @@ include('./conexao.php');
 include('./protect.php');
 
 // Consulta SQL para obter todos os registros de usuários
-$sql_code = "SELECT * FROM usuarios";
+$sql_code = "SELECT * FROM servicos";
 $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
 // Variável para armazenar a tabela HTML
@@ -15,32 +15,26 @@ if ($sql_query->num_rows > 0) {
     $tabelaHTML .= '<table border="1">
             <tr>
                 <th>ID</th>
-                <th>Apelido</th>
-                <th>Email</th>
-                <th>Nome</th>
-                <th>Setor</th>
-                <th>Cargo</th>
-                <th>CRM ou NF</th>
-                <th>Área de atuação/Especialidade</th>
-                <th>CPF</th>
-                <th>Telefone</th>
+                <th>Serviço</th>
+                <th>Valor</th>
+                <th>Descrição</th>
+                <th>Especialidade</th>
+                <th>Situacao</th>
+                <th>Duração Estimada</th>
             </tr>';
 
     // Loop através dos registros e exibir em linhas da tabela
     while ($row = $sql_query->fetch_assoc()) {
         $tabelaHTML .= '<tr>';
         $tabelaHTML .= '<td>' . $row['ID'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['Apelido'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['Email'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['Nome'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['Setor'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['Cargo'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['CRM'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['Servico'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['Valor'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['Descricao'] . '</td>';
         $tabelaHTML .= '<td>' . $row['Especialidade'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['CPF'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['Telefone'] . '</td>';
-        $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEdit(' . $row["ID"] . ')">Editar</button></td>';
-        $tabelaHTML .= '<td>' . '<button class="excluir-btnUser" data-id="' . $row["ID"] . '">Excluir</button>' . '</td>';
+        $tabelaHTML .= '<td>' . $row['Situacao'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['Duracao_Estimada'] . '</td>';
+        $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEditServ(' . $row["ID"] . ')">Editar</button></td>';
+        $tabelaHTML .= '<td>' . '<button class="excluir-btnServ" data-id="' . $row["ID"] . '">Excluir</button>' . '</td>';
         // Deixei aqui pra adicionar mais colunas se precisar
         $tabelaHTML .= '</tr>';
     }
@@ -48,7 +42,7 @@ if ($sql_query->num_rows > 0) {
     // Fechar a tabela HTML
     $tabelaHTML .= '</table>';
 } else {
-    $tabelaHTML .= 'Nenhum usuário cadastrado.';
+    $tabelaHTML .= '<br>Nenhum serviço cadastrado.';
 }
 ?> 
 <!DOCTYPE html>
@@ -58,12 +52,12 @@ if ($sql_query->num_rows > 0) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./styles/header.css">
         <link rel="stylesheet" href="./styles/menu.css">
-        <link rel="stylesheet" href="./styles/usuarios.css">
+        <link rel="stylesheet" href="./styles/servicos.css">
         <link rel="stylesheet" href="./styles/footer.css">
         <link rel="icon" href="./Imagens/IconeLogo.ico" type="image/x-icon">
         <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <title>Usuarios</title>
+        <title>Serviços</title>
     </head>
     <body>
         <header>
@@ -90,10 +84,12 @@ if ($sql_query->num_rows > 0) {
             </div>
             <div class="conteudoUsuarios">
                 <div id="tabelaDiv">
-                    <h2>Usuários</h2>
+                    <h2>Serviços</h2>
+                    <label for="searchInput">Pesquisar por ID ou Nome do Serviço: </label>
+                    <input type="text" id="searchInput" name="searchInput" placeholder="ID ou Nome"><br>
                     <?php echo $tabelaHTML; ?>
                     <div class="btnsTabela">
-                        <button onclick="openModalReg()">Cadastrar</button>
+                        <button onclick="openModalRegServ()">Cadastrar</button>
                     </div>
                 </div>
                 <!--Os modais abaixo só aparecem quando chamados pelas respectivas funções-->
@@ -103,10 +99,10 @@ if ($sql_query->num_rows > 0) {
                         <iframe src="editar_usuario.php" width="100%" height="400"></iframe>
                     </div>
                 </div>
-                <div class="modal" id="cadastrarUser">
+                <div class="modal" id="cadastrarServ">
                     <div class="modal-content">
                         <span class="close-btn" onclick="closeModal()">&times;</span>
-                        <iframe src="cadastrar_usuario.php" width="100%" height="400"></iframe>
+                        <iframe src="cadastrar_servico.php" width="100%" height="400"></iframe>
                     </div>
                 </div>
             </div>
@@ -117,5 +113,6 @@ if ($sql_query->num_rows > 0) {
             </div>
         </footer>
         <script src="./scripts/funcoesModal.js"></script>
+        <script src="./scripts/filtroPesquisaServ.js"></script>
     </body>
 </html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/cadastrar_paciente.css">
     <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
-    <title>Cadastro de Usuário</title>
+    <title>Cadastro de Paciente</title>
 </head>
 <body>
     <div class="addUser">
@@ -16,7 +16,7 @@
                     <label for="nome">Nome completo:</label>
                     <input type="text" id="nome" name="nome" required><br>
                     <label for="CPF">CPF:</label>
-                    <input type="number" id="CPF" name="CPF" required><br>
+                    <input type="number" id="CPF" name="CPF"><br>
                 </div>  
                 <div class="conjInput">          
                     <label for="RG">RG:</label>

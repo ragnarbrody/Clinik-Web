@@ -69,7 +69,7 @@
 //--------------------------------------------//
 
 //Funções para a tela de pacientes//
-    //Funções para o modal de cadastrar usuário
+    //Funções para o modal de cadastrar paciente
     function openModalRegPac() {
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
@@ -78,7 +78,7 @@
     }
     //------------------------------------------//
 
-    //Funções para o modal de edição de usuários
+    //Funções para o modal de edição de paciente
     function openModalEditPac(userId) {
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
@@ -96,7 +96,7 @@
             if (confirmDelete) {
                 var userId = this.getAttribute('data-id'); 
                 // Faz uma solicitação para o arquivo PHP de exclusão
-                fetch('excluir_paciente.php?ID=' + userId, {
+                fetch('excluir_paciente.php?id=' + userId, {
                     method: 'GET'
                 })
                 .then(response => response.text())
@@ -108,7 +108,55 @@
                     location.reload();
                 })
                 .catch(error => {
-                    console.error('Erro ao excluir o usuário:', error);
+                    console.error('Erro ao excluir o paciente:', error);
+                });
+            }
+        });
+    });
+    //------------------------------------------//  
+//--------------------------------------------//
+
+//Funções para a tela de serviços//
+    //Funções para o modal de cadastrar serviços
+    function openModalRegServ() {
+        var modal = document.querySelector('.modal');
+        var iframe = document.querySelector('iframe');
+        iframe.src = 'cadastrar_servico.php';
+        modal.style.display = 'block';
+    }
+    //------------------------------------------//
+
+    //Funções para o modal de edição de serviços
+    function openModalEditServ(userId) {
+        var modal = document.querySelector('.modal');
+        var iframe = document.querySelector('iframe');
+        iframe.src = 'editar_servico.php?id=' + userId;
+        modal.style.display = 'block';
+    }
+    //------------------------------------------//   
+    //Código para excluir o serviços
+    var excluirButtons = document.querySelectorAll('.excluir-btnServ');
+    excluirButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var userId = this.getAttribute('data-id');
+            var confirmDelete = confirm('Tem certeza de que deseja excluir este serviço?');
+            
+            if (confirmDelete) {
+                var userId = this.getAttribute('data-id'); 
+                // Faz uma solicitação para o arquivo PHP de exclusão
+                fetch('excluir_servico.php?id=' + userId, {
+                    method: 'GET'
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // Exibe a resposta do servidor após a exclusão
+                    alert(data);
+                    
+                    // Recarregar a página
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir o serviço:', error);
                 });
             }
         });

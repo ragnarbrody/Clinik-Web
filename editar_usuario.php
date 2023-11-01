@@ -3,27 +3,31 @@ include('./conexao.php');
 include('./protect.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Processar a atualização do usuário aqui
     // Recuperar dados do formulário e atualizar no banco de dados
     $id = $_POST['id'];
     $novoNome = $_POST['novoNome'];
-    $novoCargo = $_POST['novoCargo'];
-    $novoNick = $_POST['novoNick'];
     $novoEmail = $_POST['novoEmail'];
-    $novoTel = $_POST['novoTel'];
+    $novaNacionalidade = $_POST['novaNacionalidade'];
+    $novoSetor = $_POST['novoSetor'];
+    $novoCargo = $_POST['novoCargo'];
     $novoCrm = $_POST['novoCrm'];
-    $novoEspecialidade = $_POST['novoEspecialidade'];
-    // ... Outros campos e lógica de atualização
-    // Atualizar o nome e o cargo do usuário no banco de dados
-    $sql = "UPDATE usuarios SET nome = '$novoNome', cargo = '$novoCargo', nickname = '$novoNick', email = '$novoEmail', telefone = '$novoTel', crm = '$novoCrm', especialidade = '$novoEspecialidade' WHERE id = $id";
+    $novoApelido = $_POST['novoApelido'];
+    $novaSenha = $_POST['novaSenha'];
+    $novaEspecialidade = $_POST['novaEspecialidade'];
+    $novoCpf = $_POST['novoCpf'];
+    $novoRg = $_POST['novoRg'];
+    $novaData_nascimento = $_POST['novaData_nascimento'];
+    $novoTelefone = $_POST['novoTelefone'];
+    // Atualizar os dados do usuário no banco de dados
+    $sql = "UPDATE usuarios SET Nome = '$novoNome', Email = '$novoEmail', Nacionalidade = '$novaNacionalidade', Setor = '$novoSetor', Cargo = '$novoCargo', Crm = '$novoCrm', Apelido = '$novoApelido', Senha = '$novaSenha', Especialidade = '$novaEspecialidade', CPF = '$novoCpf', RG = '$novoRg', Data_nascimento = '$novaData_nascimento', Telefone = '$novoTelefone' WHERE ID = $id";
 
     if ($mysqli->query($sql)) {
         echo '<script>
-            alert("Nome e cargo do usuário atualizados com sucesso!");
+            alert("Dados do usuário atualizados com sucesso!");
             window.parent.closeModalAndReload(); // Chama a função do pai para fechar o modal e recarregar a página pai
         </script>'; 
     } else {
-        echo "Erro ao atualizar o nome e o cargo do usuário: " . $mysqli->error;
+        echo "Erro ao atualizar os dados do usuário: " . $mysqli->error;
     }
 }
 
@@ -32,7 +36,7 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     // Consultar o usuário com base no ID para obter seus dados atuais
-    $sql = "SELECT * FROM usuarios WHERE id = $id";
+    $sql = "SELECT * FROM usuarios WHERE ID = $id";
     $result = $mysqli->query($sql);
 
     if ($result->num_rows > 0) {
@@ -62,30 +66,53 @@ if (isset($_GET['id'])) {
         <h2>Editar Usuário</h2>
         <form action="editar_usuario.php" method="POST" class="form_editUser">
             <div class="conteudoForm">
-                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                <input type="hidden" name="id" value="<?php echo $row['ID']; ?>">
                 <div class="conjInput">
-                    <label for="novoNome">Nome:</label>              
-                    <input type="text" id="novoNome" name="novoNome" value="<?php echo $row['nome']; ?>"><br>
-                    <label for="novoCargo">Cargo:</label>
-                    <input type="text" id="novoCargo" name="novoCargo" value="<?php echo $row['cargo']; ?>"><br>
+                    <label for="novoNome">Nome Completo:</label>              
+                    <input type="text" id="novoNome" name="novoNome" value="<?php echo $row['Nome']; ?>"><br>
+                    <label for="novoEmail">Email:</label>
+                    <input type="email" id="novoEmail" name="novoEmail" value="<?php echo $row['Email']; ?>"><br>
                 </div>             
                 <div class="conjInput">
-                    <label for="novoNick">Nickname:</label>
-                    <input type="text" id="novoNick" name="novoNick" value="<?php echo $row['nickname']; ?>"><br>
-                    <label for="novoEmail">Email:</label>
-                    <input type="text" id="novoEmail" name="novoEmail" value="<?php echo $row['email']; ?>"><br>
+                    <label for="novaNacionalidade">Nacionalidade:</label>
+                    <input type="text" id="novaNacionalidade" name="novaNacionalidade" value="<?php echo $row['Nacionalidade']; ?>"><br>
+                    <label for="novoSetor">Setor:</label>
+                    <input type="text" id="novoSetor" name="novoSetor" value="<?php echo $row['Setor']; ?>"><br>
                 </div>
                 <div class="conjInput">
-                    <label for="novoTel">Telefone:</label>
-                    <input type="number" id="novoTel" name="novoTel" value="<?php echo $row['telefone']; ?>"><br>
-                    <label for="novoCrm">CRM:</label>
-                    <input type="text" id="novoCrm" name="novoCrm" value="<?php echo $row['crm']; ?>"><br>
-                </div>   
+                    <label for="novoCargo">Cargo:</label> 
+                    <select name="novoCargo" id="novoCargo">
+                        <option value="ADM" <?php if ($row['Cargo'] == 'ADM') echo 'selected'; ?>>ADM</option>
+                        <option value="RECEPCIONISTA" <?php if ($row['Cargo'] == 'RECEPCIONISTA') echo 'selected'; ?>>Recepcionista</option>
+                        <option value="ESPECIALISTA" <?php if ($row['Cargo'] == 'ESPECIALISTA') echo 'selected'; ?>>Especialista</option>
+                        <option value="CHEFE_DPTO" <?php if ($row['Cargo'] == 'CHEFE_DPTO') echo 'selected'; ?>>Chefe de setor</option>
+                    </select><br>
+                    <label for="novoCrm	">CRM ou NF:</label>
+                    <input type="text" id="novoCrm" name="novoCrm" value="<?php echo $row['CRM']; ?>"><br>
+                </div> 
+            </div>
+            <div class="conteudoForm">  
                 <div class="conjInput">
-                    <label for="novoEspecialidade">Especialidade:</label>
-                    <input type="text" id="novoEspecialidade" name="novoEspecialidade" value="<?php echo $row['especialidade']; ?>"><br>
-                </div>                           
-            </div>                     
+                    <label for="novoApelido">Nome de usuário:</label>
+                    <input type="text" id="novoApelido" name="novoApelido" value="<?php echo $row['Apelido']; ?>"><br>
+                    <label for="novaSenha">Senha:</label>
+                    <input type="password" id="novaSenha" name="novaSenha" value="<?php echo $row['Senha']; ?>"><br>
+                </div>
+                <div class="conjInput">
+                    <label for="novaEspecialidade">Área de Atuação/Especialidade:</label>
+                    <input type="text" id="novaEspecialidade" name="novaEspecialidade" value="<?php echo $row['Especialidade']; ?>"><br>
+                    <label for="novoCpf">CPF:</label>
+                    <input type="number" id="novoCpf" name="novoCpf" value="<?php echo $row['CPF']; ?>"><br>
+                </div> 
+                <div class="conjInput">
+                    <label for="novoRg">RG:</label>
+                    <input type="text" id="novoRg" name="novoRg" value="<?php echo $row['RG']; ?>"><br>
+                    <label for="novaData_nascimento">Data de Nascimento:</label>
+                    <input type="date" id="novaData_nascimento" name="novaData_nascimento" value="<?php echo $row['Data_nascimento']; ?>"><br>
+                    <label for="novoTelefone">Telefone:</label>
+                    <input type="number" id="novoTelefone" name="novoTelefone" value="<?php echo $row['Telefone']; ?>"><br>
+                </div> 
+            </div>                                                
             <div class="enviarUser">
                 <input type="submit" value="Salvar">
             </div>          

@@ -3,7 +3,8 @@ include('./conexao.php');
 include('./protect.php');
 
 // Consulta SQL para obter todos os registros de usuários
-$sql_code = "SELECT * FROM paciente";
+$idClinica = $_SESSION['ID_clinica'];
+$sql_code = "SELECT * FROM paciente WHERE ID_clinica = '$idClinica'";
 $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
 // Variável para armazenar a tabela HTML
@@ -43,7 +44,7 @@ if ($sql_query->num_rows > 0) {
         $tabelaHTML .= '<td>' . $row['protocolo_atendimento'] . '</td>';
         $tabelaHTML .= '<td><a class="perfil-btn" href="./perfil_paciente.php?id=' . $row["ID"] . '">Perfil</a></td>';
         $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEditPac(' . $row["ID"] . ')">Editar</button></td>';
-        $tabelaHTML .= '<td><button class="excluir-btnPac" data-id="' . $row["ID"] . '">Excluir</button>' . '</td>';
+        $tabelaHTML .= '<td><a class="excluir-btnPac" data-id="' . $row["ID"] . '">Excluir</a>' . '</td>';
         // Deixei aqui pra adicionar mais colunas se precisar
         $tabelaHTML .= '</tr>';
     }
@@ -98,7 +99,8 @@ if ($sql_query->num_rows > 0) {
                     <input type="text" id="searchInput" name="searchInput" placeholder="Nome ou CPF">
                     <?php echo $tabelaHTML; ?>
                     <div class="btnsTabela">
-                        <button onclick="openModalRegPac()">Cadastrar</button>
+                        <a class="btnMenu" onclick="openModalRegPac()">Cadastrar</a>
+                        <a class="btnMenu" href="./atendimento.php">Atendimento</a>
                     </div>
                 </div>
                 <!--Os modais abaixo só aparecem quando chamados pelas respectivas funções-->

@@ -16,7 +16,9 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
         $nickname = $mysqli->real_escape_string($_POST['usuario']);
         $senha = $mysqli->real_escape_string($_POST['senha']);
 
-        $sql_code = "SELECT * FROM usuarios WHERE Apelido = '$nickname' AND Senha = '$senha'";
+        $sql_code = "SELECT u.*, c.* FROM usuarios u
+                     JOIN clinicas c ON u.ID_clinica = c.ID
+                     WHERE u.Apelido = '$nickname' AND u.Senha = '$senha'";
         $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
         $quantidade = $sql_query->num_rows;
@@ -29,16 +31,22 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
             {
                 session_start();
             }
-
+            
+            // Dados do usuário
             $_SESSION['id'] = $usuario['ID'];
             $_SESSION['nome'] = $usuario['Nome'];
             $_SESSION['cargo'] = $usuario['Cargo'];
             $_SESSION['email'] = $usuario['Email'];
             $_SESSION['apelido'] = $usuario['Apelido'];
             $_SESSION['telefone'] = $usuario['Telefone'];
-            $_SESSION['ctm'] = $usuario['Crm'];
+            $_SESSION['crm'] = $usuario['Crm'];
             $_SESSION['especialidade'] = $usuario['Especialidade'];
+            $_SESSION['ID_clinica'] = $usuario['ID_clinica'];
 
+            // Dados da clínica
+            $_SESSION['Nome_clinica'] = $usuario['Nome_clinica'];
+            $_SESSION['Logradouro'] = $usuario['Logradouro'];
+            $_SESSION['Cidade'] = $usuario['Cidade'];
             header("Location: menuPrincipal.php");
         }
         else

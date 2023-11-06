@@ -10,9 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $especialidade = $mysqli->real_escape_string($_POST['Especialidade']);
     $situacao = $mysqli->real_escape_string($_POST['Situacao']);
     $duracao = $mysqli->real_escape_string($_POST['Duracao_Estimada']);
+    // Armazena o ID_clinica do usuário logado
+    $idClinica = $_SESSION['ID_clinica'];
 
     // Insere os dados no banco de dados
-    $sql = "INSERT INTO servicos (Servico, Valor, Descricao, Especialidade, Situacao, Duracao_Estimada) VALUES ('$servico', '$valor', '$descricao', '$especialidade', '$situacao', '$duracao')";
+    $sql = "INSERT INTO servicos (Servico, Valor, Descricao, Especialidade, Situacao, Duracao_Estimada, ID_clinica) VALUES ('$servico', '$valor', '$descricao', '$especialidade', '$situacao', '$duracao', '$idClinica')";
 
     if ($mysqli->query($sql)) {
         echo '<script>

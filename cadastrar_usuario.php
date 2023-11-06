@@ -27,7 +27,6 @@
                 <div class="conjInput">   
                     <label for="cargo">Cargo:</label> 
                     <select name="cargo" id="cargo" required>
-                        <option value="ADM">ADM</option>
                         <option value="RECEPCIONISTA">Recepcionista</option>
                         <option value="ESPECIALISTA">Especialista</option>
                         <option value="CHEFE_DPTO">Chefe de setor</option>

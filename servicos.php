@@ -2,8 +2,10 @@
 include('./conexao.php');
 include('./protect.php');
 
+// Armazena o ID_clinica do usuário logado
+$idClinica = $_SESSION['ID_clinica'];
 // Consulta SQL para obter todos os registros de usuários
-$sql_code = "SELECT * FROM servicos";
+$sql_code = "SELECT * FROM servicos WHERE ID_clinica = '$idClinica'";
 $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
 // Variável para armazenar a tabela HTML

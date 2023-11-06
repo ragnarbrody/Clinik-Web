@@ -16,7 +16,7 @@ main
    display: flex;
 }
 
-.conteudoPacientes
+.conteudoUsuarios
 {
    height: 100%;
    display: flex;
@@ -41,71 +41,6 @@ main
     margin-bottom: 10px;
 }
 
-#searchInput
-{
-    margin-bottom: 2%;
-}
-
-.perfil-btn
-{
-    display: flex;
-    text-decoration: none;
-    border: 1px solid #737071;
-    padding: 2.2px;
-    font-size: 12px;
-    color: black;
-    font-family: sans-serif;
-    justify-content: center;
-    background-color: #E6E6E6;   
-}
-
-.perfil-btn:hover
-{
-    cursor: pointer;
-    border-color: #549CB7;
-    background-color: #A4F4FD;
-}
-
-.excluir-btnPac
-{
-    display: flex;
-    text-decoration: none;
-    border: 1px solid #737071;
-    padding: 2.2px;
-    font-size: 12px;
-    color: black;
-    font-family: sans-serif;
-    justify-content: center;
-    background-color: #E6E6E6;
-}
-
-.excluir-btnPac:hover
-{
-    cursor: pointer;
-    border-color: #549CB7;
-    background-color: #A4F4FD;
-}
-
-.editar-btn
-{
-    display: flex;
-    text-decoration: none;
-    border: 1px solid #737071;
-    padding: 2.2px;
-    font-size: 12px;
-    color: black;
-    font-family: sans-serif;
-    justify-content: center;
-    background-color: #E6E6E6;
-}
-
-.editar-btn:hover
-{
-    cursor: pointer;
-    border-color: #549CB7;
-    background-color: #A4F4FD;
-}
-
 .btnMenu
 {
     display: flex;
@@ -124,16 +59,6 @@ main
     cursor: pointer;
     border-color: #549CB7;
     background-color: #A4F4FD;
-}
-
-.btnMenu:first-child
-{
-    margin-right: 1vw;
-}
-
-.btnsTabela
-{
-    display: flex;
 }
 
 /*Códigos Css para o modal de editar usuario*/

@@ -46,8 +46,10 @@ include('./protect.php')
                         <p>seu nome é: <?php echo $_SESSION['nome'];?></p>
                         <p>seu cargo no aplicativo é: <?php echo $_SESSION['cargo'];?></p>
                         <p>seu email é: <?php echo $_SESSION['email'];?></p>
-                        <p>seu nome de usuário é: <?php echo $_SESSION['nickname'];?></p>
+                        <p>seu nome de usuário é: <?php echo $_SESSION['apelido'];?></p>
                         <p>seu telefone é: <?php echo $_SESSION['telefone'];?></p>
+                        <p>o nome da sua clinica é: <?php echo $_SESSION['Nome_clinica'];?></p>
+                        <p>o endereço da sua clinica é: <?php echo $_SESSION['Logradouro'];?></p>
                     </div>
                 </div>
             </div>

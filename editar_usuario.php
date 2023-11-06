@@ -82,7 +82,9 @@ if (isset($_GET['id'])) {
                 <div class="conjInput">
                     <label for="novoCargo">Cargo:</label> 
                     <select name="novoCargo" id="novoCargo">
-                        <option value="ADM" <?php if ($row['Cargo'] == 'ADM') echo 'selected'; ?>>ADM</option>
+                        <?php if ($row['Cargo'] == 'ADM'): ?>
+                            <option value="ADM" selected>ADM</option>
+                        <?php endif; ?>
                         <option value="RECEPCIONISTA" <?php if ($row['Cargo'] == 'RECEPCIONISTA') echo 'selected'; ?>>Recepcionista</option>
                         <option value="ESPECIALISTA" <?php if ($row['Cargo'] == 'ESPECIALISTA') echo 'selected'; ?>>Especialista</option>
                         <option value="CHEFE_DPTO" <?php if ($row['Cargo'] == 'CHEFE_DPTO') echo 'selected'; ?>>Chefe de setor</option>

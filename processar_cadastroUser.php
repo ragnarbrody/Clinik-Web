@@ -17,17 +17,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data_nascimento = $mysqli->real_escape_string($_POST['data_nascimento']);
     $email = $mysqli->real_escape_string($_POST['email']);
     $telefone = $mysqli->real_escape_string($_POST['telefone']);
+    // Armazena o ID_clinica do usuário logado
+    $idClinica = $_SESSION['ID_clinica'];
 
-    // Insere os dados no banco de dados
-    $sql = "INSERT INTO usuarios (Nome, Nacionalidade, Setor, Cargo, CRM, Apelido, Senha, Especialidade, CPF, RG, Data_nascimento, Email, Telefone) VALUES ('$nome', '$nacionalidade', '$setor', '$cargo', '$crm', '$nick', '$senha', '$especialidade', '$cpf', '$rg', '$data_nascimento', '$email', '$telefone')";
+    // Consulta para obter o plano da clínica
+    $consultaPlano = "SELECT Plano, Users_Adicionais FROM clinicas WHERE ID = '$idClinica'";
+    $resultadoPlano = $mysqli->query($consultaPlano);
 
-    if ($mysqli->query($sql)) {
-        echo '<script>
-            alert("Usuário cadastrado com sucesso!");
-            window.parent.closeModalAndReload(); // Chama a função do pai para fechar o modal e recarregar a página pai
-        </script>'; 
+    if ($resultadoPlano) {
+        $dadosPlano = $resultadoPlano->fetch_assoc();
+        $plano = $dadosPlano['Plano'];
+        $usuariosAdicionais = $dadosPlano['Users_Adicionais'];
+
+        // Define o limite de usuários permitido para o plano da clínica
+        if ($plano === 'Basico') {
+            $limiteUsuarios = 5 + $usuariosAdicionais;
+        } elseif ($plano === 'Plus') {
+            $limiteUsuarios = 12 + $usuariosAdicionais;
+        } elseif ($plano === 'Personalizado') {
+            $limiteUsuarios = PHP_INT_MAX; // Limite ilimitado para plano personalizado
+        } else {
+            echo "Plano da cliníca inválido.";
+            exit;
+        }
+
+        // Consulta para contar o número de usuários existentes na clínica
+        $consultaUsuarios = "SELECT COUNT(*) as total_usuarios FROM usuarios WHERE ID_clinica = '$idClinica'";
+        $resultadoConsulta = $mysqli->query($consultaUsuarios);
+
+        if ($resultadoConsulta) {
+            $dadosConsulta = $resultadoConsulta->fetch_assoc();
+            $totalUsuarios = $dadosConsulta['total_usuarios'];
+
+            // Verifica se o número total de usuários (incluindo os usuários adicionais) atingiu o limite permitido
+            if ($totalUsuarios >= $limiteUsuarios) 
+            {
+                echo '<script>
+                alert("Limite de usuários atingido para esta clínica.");
+                window.parent.closeModalAndReload(); // Chama a função do pai para fechar o modal e recarregar a página pai
+                </script>';
+            } 
+            else 
+            {
+                // Insere o novo usuário no banco de dados
+                $sql = "INSERT INTO usuarios (Nome, Nacionalidade, Setor, Cargo, CRM, Apelido, Senha, Especialidade, CPF, RG, Data_nascimento, Email, Telefone, ID_clinica) 
+                VALUES ('$nome', '$nacionalidade', '$setor', '$cargo', '$crm', '$nick', '$senha', '$especialidade', '$cpf', '$rg', '$data_nascimento', '$email', '$telefone', '$idClinica')";
+                if ($mysqli->query($sql)) {
+                    echo '<script>
+                        alert("Usuário cadastrado com sucesso!");
+                        window.parent.closeModalAndReload(); // Chama a função do pai para fechar o modal e recarregar a página pai
+                    </script>'; 
+                } else {
+                    echo "Erro ao cadastrar usuário: " . $mysqli->error;
+                }
+            }
+        } else {
+            echo "Erro ao consultar o número de usuários da clínica: " . $mysqli->error;
+        }
     } else {
-        echo "Erro ao cadastrar usuário: " . $mysqli->error;
-    }
+        echo "Erro ao consultar o plano da clínica: " . $mysqli->error;
+    }  
 }
 ?>

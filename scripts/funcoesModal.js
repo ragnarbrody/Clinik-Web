@@ -163,3 +163,51 @@
     });
     //------------------------------------------//  
 //--------------------------------------------//
+
+//Funções para a tela de atendimento//
+    //Funções para o modal de cadastrar serviços
+    function openModalRegAtd() {
+        var modal = document.querySelector('.modal');
+        var iframe = document.querySelector('iframe');
+        iframe.src = 'cadastrar_atendimento.php';
+        modal.style.display = 'block';
+    }
+    //------------------------------------------//
+
+    //Funções para o modal de edição de serviços
+    function openModalEditAtd(userId) {
+        var modal = document.querySelector('.modal');
+        var iframe = document.querySelector('iframe');
+        iframe.src = 'editar_atendimento.php?id=' + userId;
+        modal.style.display = 'block';
+    }
+    //------------------------------------------//   
+    //Código para excluir o atendimento
+    var excluirButtons = document.querySelectorAll('.excluir-btnAtd');
+    excluirButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var userId = this.getAttribute('data-id');
+            var confirmDelete = confirm('Tem certeza de que deseja excluir este atendimento?');
+            
+            if (confirmDelete) {
+                var userId = this.getAttribute('data-id'); 
+                // Faz uma solicitação para o arquivo PHP de exclusão
+                fetch('excluir_atendimento.php?id=' + userId, {
+                    method: 'GET'
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // Exibe a resposta do servidor após a exclusão
+                    alert(data);
+                    
+                    // Recarregar a página
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir o atendimento:', error);
+                });
+            }
+        });
+    });
+    //------------------------------------------//  
+//--------------------------------------------//

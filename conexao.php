@@ -11,3 +11,28 @@ if($mysqli->error)
 {
     die("Falha ao conectar ao banco de dados: " . $mysqli->error);
 }
+
+// Função para buscar Pacientes, Serviços e Profissionais com base no ID_clinica
+function buscarDadosClinica($idClinica) {
+    global $mysqli;
+    $dados = array();
+
+    // Buscar Pacientes
+    $sqlPacientes = "SELECT ID, nome_completo, CPF, responsavel_legal FROM paciente WHERE ID_clinica = '$idClinica'";
+    $resultPacientes = $mysqli->query($sqlPacientes);
+
+    // Buscar Serviços
+    $sqlServicos = "SELECT ID, Servico, Especialidade FROM servicos WHERE ID_clinica = '$idClinica'";
+    $resultServicos = $mysqli->query($sqlServicos);
+
+    // Buscar Profissionais
+    $sqlProfissionais = "SELECT ID, Nome, Setor FROM usuarios WHERE ID_clinica = '$idClinica' AND Cargo = 'ESPECIALISTA'";
+    $resultProfissionais = $mysqli->query($sqlProfissionais);
+    
+    // Adicionar dados ao array
+    $dados['pacientes'] = $resultPacientes->fetch_all(MYSQLI_ASSOC);
+    $dados['servicos'] = $resultServicos->fetch_all(MYSQLI_ASSOC);
+    $dados['profissionais'] = $resultProfissionais->fetch_all(MYSQLI_ASSOC);
+
+    return $dados;
+}

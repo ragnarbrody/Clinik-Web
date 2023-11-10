@@ -17,6 +17,16 @@ main
     display: flex;
 }
 
+.LogoIcon
+{
+    padding: auto;
+}
+
+.LogonomeSlogan
+{
+    align-items: self-start;
+}
+
 .conteudoMenuPrincipal
 {
     height: 100%;
@@ -32,11 +42,10 @@ main
     align-items: center;
     display: flex;
     flex-direction: column;
-    background-color: transparent;
-    box-shadow: 0 0 20px 0 #F4F0F0;
+    background-color: #F4F0F0;
+    box-shadow: 0 0 20px 0 #826B51;
     border-radius:  10px;
     justify-content: space-around;
     font-size: 21.2px;
-
 }
 /**fim do estilo do main**/

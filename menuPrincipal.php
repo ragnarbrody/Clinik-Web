@@ -17,7 +17,7 @@ include('./protect.php')
     </head>
     <body>
         <header>
-            <div class="Logo Icon">
+            <div class="LogoIcon">
                 <img src="./Imagens/Logo.png" alt="Logo do aplicativo Clinik Flow" class="Clinik">
                 <img src="./Imagens/Linhas.png" alt="" class="Linhas">
             </div>          

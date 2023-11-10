@@ -17,14 +17,16 @@ include('./protect.php')
     </head>
     <body>
         <header>
-            <div class="LogoIcon">
+    
+            <div class="Logo Icon">
                 <img src="./Imagens/Logo.png" alt="Logo do aplicativo Clinik Flow" class="Clinik">
                 <img src="./Imagens/Linhas.png" alt="" class="Linhas">
             </div>          
             <div class="Logo nomeSlogan">
                 <img src="./Imagens/Clinik.png" alt="Nome do aplicativo Clinik Flow" class="Nome">
                 <p class="Slogan">Seja bem-vindo(a) ao Clinik Flow, <?php echo $_SESSION['nome'];?></p>
-            </div>     
+            </div>
+            
         </header>
         <main>
             <div class="menu">

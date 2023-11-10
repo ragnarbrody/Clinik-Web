@@ -17,16 +17,6 @@ main
     display: flex;
 }
 
-.LogoIcon
-{
-    padding: auto;
-}
-
-.LogonomeSlogan
-{
-    align-items: self-start;
-}
-
 .conteudoMenuPrincipal
 {
     height: 100%;

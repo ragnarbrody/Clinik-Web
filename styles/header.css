@@ -52,9 +52,13 @@ header
     width: 40%;
     word-break: break-all;
     align-items: center;
-    font-family: cursive;
-}
+    font-family: 'Alegreya', Arial, Helvetica, sans-serif;
 
+@font-face {
+    font-family: 'Alegreya';
+    src: url('AlegreyaSC-Regular.otf');
+}
+}
 @media only screen and (max-width: 600px) {
     .Logo.nomeSlogan .Slogan 
     {

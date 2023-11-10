@@ -30,12 +30,12 @@ include('./protect.php')
             <div class="menu">
                 <ul class="menuServicos">
                     <li><a href="./perfil.php" id="item0"><img src="./Imagens/iconPerfil2.png" alt="icone de usuarios" class="icons">Perfil</a></li>
-                    <li><a href="./usuarios.php" id="item1"><img src="./Imagens/IconPerfil.png" alt="icone de usuarios" class="icons">Usuarios</a></li>
-                    <li><a href="./pacientes.php" id="item2"><img src="./Imagens/Pacientes.png" alt="icone de pacientes" class="icons">Pacientes</a></li>
-                    <li><a href="./servicos.php" id="item3"><img src="./Imagens/box.png" alt="icone de serviços" class="icons">Serviços</a></li>
-                    <li><a href="#" id="item3"><img src="./Imagens/Agenda.png" alt="icone de usuarios" class="icons">Agenda</a></li>
-                    <li><a href="#" id="item4"><img src="./Imagens/Financeiro.png" alt="icone de usuarios" class="icons">Financeiro</a></li>
-                    <li class="btnSair no-ajax"><a href="./logout.php"><img src="./Imagens/sair.png" alt="icone de usuarios" class="icons">Sair</a></li>
+                    <li><a href="./usuarios.php" id="item1"><img src="./Imagens/7.png" alt="icone de usuarios" class="icons">Usuarios</a></li>
+                    <li><a href="./pacientes.php" id="item2"><img src="./Imagens/6.png" alt="icone de pacientes" class="icons">Pacientes</a></li>
+                    <li><a href="./servicos.php" id="item3"><img src="./Imagens/3.png" alt="icone de serviços" class="icons">Serviços</a></li>
+                    <li><a href="#" id="item3"><img src="./Imagens/4.png" alt="icone de usuarios" class="icons">Agenda</a></li>
+                    <li><a href="#" id="item4"><img src="./Imagens/2.png" alt="icone de usuarios" class="icons">Financeiro</a></li>
+                    <li class="btnSair no-ajax"><a href="./1.php"><img src="./Imagens/sair.png" alt="icone de usuarios" class="icons">Sair</a></li>
                 </ul>
             </div>
             <div class="conteudoMenuPrincipal">

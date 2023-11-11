@@ -31,7 +31,7 @@ include('./protect.php')
         <main>
             <div class="menu">
                 <ul class="menuServicos">
-                    <li><a href="./perfil.php" id="item0"><img src="./Imagens/iconPerfil2.png" alt="icone de usuarios" class="icons">Perfil</a></li>
+                    <li><a href="./perfil.php" id="item0"><img src="./Imagens/88.png" alt="icone de usuarios" class="icons">Perfil</a></li>
                     <li><a href="./usuarios.php" id="item1"><img src="./Imagens/7.png" alt="icone de usuarios" class="icons">Usuarios</a></li>
                     <li><a href="./pacientes.php" id="item2"><img src="./Imagens/6.png" alt="icone de pacientes" class="icons">Pacientes</a></li>
                     <li><a href="./servicos.php" id="item3"><img src="./Imagens/3.png" alt="icone de serviços" class="icons">Serviços</a></li>

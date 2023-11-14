@@ -46,8 +46,7 @@ include('./protect.php')
                     <p></p>
                     <div class="dados">
                         <p>Somos uma empresa de desenvolvimento de software onde fizemos esse sistema</p>
-                        <p>para facilitar as clinicas medicas no geral, focado em gestão!</p>
-                        
+                        <p>para facilitar as clinicas medicas no geral, focado em gestão</p>
                     </div>
                 </div>
             </div>

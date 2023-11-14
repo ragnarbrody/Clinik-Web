@@ -40,7 +40,6 @@ include('./protect.php')
             </div>
             <div class="conteudoPerfil">
                 <div class="containerConteudo">
-                    <h2>Bem Vindo(a)!</h2>
                     <p>Nesta página você encontra seus dados de usuário:</p>
                     <div class="dados">
                         <p>seu nome é: <?php echo $_SESSION['nome'];?></p>

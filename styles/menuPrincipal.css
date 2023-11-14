@@ -14,7 +14,10 @@ main
     background-position-x: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    background-color: transparent;
+    opacity: 20%;
     display: flex;
+
 }
 
 .conteudoMenuPrincipal
@@ -37,5 +40,6 @@ main
     border-radius:  10px;
     justify-content: space-around;
     font-size: 21.2px;
+    font-style: italic;
 }
 /**fim do estilo do main**/

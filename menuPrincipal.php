@@ -42,14 +42,12 @@ include('./protect.php')
             </div>
             <div class="conteudoMenuPrincipal">
                 <div class="containerConteudo">
-                    <h2>Bem Vindo(a)!</h2>
-                    <p>Nesta página você encontra seus dados de usuário:</p>
+                    <h2>Sobre nós:<h2>
+                    <p></p>
                     <div class="dados">
-                        <p>seu nome é: <?php echo $_SESSION['nome'];?></p>
-                        <p>seu cargo no aplicativo é: <?php echo $_SESSION['cargo'];?></p>
-                        <p>seu email é: <?php echo $_SESSION['email'];?></p>
-                        <p>seu nome de usuário é: <?php echo $_SESSION['apelido'];?></p>
-                        <p>seu telefone é: <?php echo $_SESSION['telefone'];?></p>
+                        <p>Somos uma empresa de desenvolvimento de software onde fizemos esse sistema</p>
+                        <p>para facilitar as clinicas medicas no geral, focado em gestão!</p>
+                        
                     </div>
                 </div>
             </div>

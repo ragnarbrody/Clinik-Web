@@ -18,28 +18,55 @@
 
 .conteudoUsuarios
 {
-    height: 100%;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
- #tabelaDiv {
-     padding: 1vw;
-     width: fit-content;
-     align-items: center;
-     display: flex;
-     flex-direction: column;
-     background-color: aliceblue;
-     box-shadow: 0 0 20px 0 #3C9FAC;
-     border-radius: 10px;
-     justify-content: space-around;
- }
+#tabelaDiv {
+    padding: 1vw;
+    max-height: 80%;
+    min-height: 80%;
+    width: 92%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    box-shadow: 0 0 20px 0 #3C9FAC;
+    border-radius: 10px;
+    justify-content: space-evenly;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
 
- #tabelaDiv table {
-     border-radius: 10px;
-     margin-bottom: 10px;
- }
+#tabelaDiv table {
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.tabelaPrin{
+    table-layout: fixed;
+    display: block;
+    width: 98%;
+    max-height: 170px;
+    min-height: 170px;
+}
+
+.tabelaPrin th, td {
+    text-align: center;
+    padding: 3px;
+    word-wrap: break-word;
+}
+table{
+    overflow: auto;
+}
+
+@media only screen and (max-width: 760px){
+    .tabelaPrin{
+        width: 100%;
+    }
+}
 
  /*Códigos Css para o modal de editar usuario*/
  /* Estilo do modal */

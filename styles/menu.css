@@ -1,23 +1,41 @@
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.menu
+{
+    max-height: 100%;
+}
+
 .menu ul.menuServicos
  {
-     list-style: none;
-     background-color: #826B51;
-     display: flex;
-     justify-content: space-around;
-     padding: 10px;
-     align-items: center;
- }
+    list-style: none;
+    background-color: #826B51;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+ } 
+
+.nav-bar {
+    display: flex;
+    background-color: #826B51;
+    max-height: 15%;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: center;
+}
  
- .icons
+.icons
  {
      margin-right: 5px;
      height: 30px;
      object-fit: fill;
- }
+ } 
  
  .menu ul.menuServicos li 
  {
-     margin: 0 10px; /* Espaçamento entre os itens */
+     
      padding: 5px 10px;
      border-radius: 5px;
      transition: background-color 0.3s;
@@ -27,7 +45,7 @@
  
  .menu ul.menuServicos li:hover 
  {
-     background-color: #5c4c3a;
+     background-color: #0e0d0c;
  }
  
  .menu ul.menuServicos li a
@@ -37,3 +55,106 @@
      text-decoration: none;
      color: #fff;
  }
+ 
+ .login-button button {
+    
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #0187a7;
+}
+
+.login-button button a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.mobile-menu-icon {
+    display: none;
+}
+.mobile-menu {
+    display: none;
+}
+
+@media screen and (max-width: 760px) {
+    .nav-link
+    {
+        background-color: #897258;
+        padding: 5px;
+        width: fit-content;
+        border: 1px solid #7b644b;
+        border-radius: 5px;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+
+    .nav-link:hover
+    {
+        background-color: #eae5e0;
+        border: 1px solid #7b644b;
+        color: #3C9FAC;
+    }
+
+    .nav-bar {
+        width: 100vw;
+        justify-content: center;
+    }
+    .nav-item {
+        display: none;
+    }
+    .login-button {
+        display: none;
+    }
+    .mobile-menu-icon {
+        display: block;
+        margin-left: 0px;
+    }
+    .mobile-menu-icon button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .mobile-menu-icon button .icon{
+        max-height: 10%;
+        object-fit: contain;
+    }
+
+    .mobile-menu ul {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 1rem;
+    }
+    .mobile-menu .nav-item {
+        display: flex;
+        padding-top: 1.2rem;
+        justify-content: center;
+    }
+    .mobile-menu .login-button {
+        display: block;
+        padding: 1rem 2rem;
+    }
+    .mobile-menu .login-button button {
+        width: 100%;
+    }
+    .mobile-menu{
+        background-color: #826B51;   
+     }
+    .open {
+        display: block;
+    }
+    .icon {
+        align-items: center;
+    }
+    ul.menuServicos {
+        position: absolute;
+        background-color: #826B51;
+        width: 100vw;
+    }
+}

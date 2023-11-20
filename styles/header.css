@@ -1,18 +1,22 @@
-/**inicio do estilo do header**/
 header
 {
     display: flex;
     height: 15vh;
+    min-height: 10vh;
     width: 100vw;
     align-items: center;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
+    top: 0; /* Fixa o footer na parte inferior da página */
+    max-width: 100%; /* Largura total da página */
 }
+
 
 .Logo.Icon
 {
     display: flex;
-    width: 10%;
+    max-width: 20%;
+    margin-right: 5%;
     height: 100%;
     flex-direction: row;
     align-items: center;
@@ -31,10 +35,10 @@ header
 
 .Logo.nomeSlogan
 {
-    width: 70%;
+    max-width: 75%;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    max-height: 100%;
     align-items: center;
 }
 
@@ -42,21 +46,55 @@ header
 {
     object-fit: fill;
     width: 65%;
-    height: 70%;
+    min-height: 65%;
+    max-height: 65%;
 }
 
 .Logo.nomeSlogan .Slogan
 {
     color: #3C9FAC;
-    margin: 0%;
-    height: 30%;
+    margin: 0 auto;
+    min-height: 30%;
+    max-height: 30%;
     font-family: cursive;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    font-size: 100%;
+}
+@media only screen and (max-width: 420px) {
+    .Logo.nomeSlogan{
+        width: 1100px;
+        height: 90px;
+        align-items: center;
+        margin-left: 15%;
+    }
+    .Logo.Icon{
+        display: none;
+    }
+
 }
 
 @media only screen and (max-width: 600px) {
-    .Logo.nomeSlogan .Slogan 
-    {
-      font-size: 10px;
+
+    .Nome{
+        margin-right: 1vw;
     }
-  }
-/**fim do estilo do header**/
+    .Slogan{
+        display: none !important;
+    }
+
+
+    .Logo.Icon 
+    {
+        height: 80%;
+        width: 80%;
+        margin-left: 2px;   
+    }
+    .Logo.nomeSlogan
+    {
+        width: 200%;
+        margin-right: 10vw;
+        margin-top: 4vh;
+    }
+}

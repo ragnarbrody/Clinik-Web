@@ -29,31 +29,31 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                         <option value=''></option>
                         <?php
                         foreach($dadosClinica['servicos'] as $servico) {
-                            echo "<option value='{$servico['ID']}'>{$servico['Servico']}</option>";
+                            echo "<option value='{$servico['Servico']}' data-id='{$servico['ID']}'>{$servico['Servico']}</option>";
                         }
                         ?>
                     </select>
-                    <input type="hidden" name="ID_servico" id="ID_servico" value=""><br>
+                    <input type="hidden" name="ID_servico" id="ID_servico" value="<?php echo $servico['ID']; ?>"><br>
                     <label for="Paciente">Paciente:</label><br>
                     <select name="Paciente" id="Paciente" required>
                         <option value=''></option>
                         <?php
                         foreach($dadosClinica['pacientes'] as $paciente) {
-                            echo "<option value='{$paciente['ID']}'>{$paciente['nome_completo']}</option>";
+                            echo "<option value='{$paciente['nome_completo']}' data-id='{$paciente['ID']}'>{$paciente['nome_completo']}</option>";
                         }
                         ?>
                     </select>
-                    <input type="hidden" name="ID_paciente" id="ID_paciente" value=""><br>
+                    <input type="hidden" name="ID_paciente" id="ID_paciente" value="<?php echo $paciente['ID']; ?>"><br>
                     <label id="LabelProf_responsavel" for="Prof_responsavel" style="display: none;">Profissional Responsável:</label>
                     <select name="Prof_responsavel" id="Prof_responsavel" required style="display: none;">
                         <option value=''></option>
                         <?php
                         foreach($dadosClinica['profissionais'] as $profissional) {
-                            echo "<option value='{$profissional['ID']}'>{$profissional['Nome']}</option>";
+                            echo "<option value='{$profissional['Nome']}'>{$profissional['Nome']}</option>";
                         }
                         ?>
                     </select>
-                    <input type="hidden" name="ID_profResponsavel" id="ID_profResponsavel" value=""><br>
+                    <input type="hidden" name="ID_profResponsavel" id="ID_profResponsavel" value="<?php echo $profissional['ID']; ?>"><br>
                     <input type="hidden" name="ID_clinica" id="ID_clinica" value="<?php echo $_SESSION['ID_clinica']; ?>"><br>
                 </div>  
                 <div class="conjInput">
@@ -99,6 +99,8 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
         document.addEventListener("DOMContentLoaded", function() {
             // Obtém os dados da clínica do atributo data-dados
             var dadosClinica = JSON.parse(document.getElementById('dadosClinica').getAttribute('data-dados'));
+            var campoPaciente = document.getElementById('Paciente');
+            var campoIDPaciente = document.getElementById('ID_paciente');
             var campoServico = document.getElementById('Servico');
             var campoIDServico = document.getElementById('ID_servico');
             var campoProfResponsavel = document.getElementById('Prof_responsavel');
@@ -121,76 +123,121 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
             document.getElementById('Data_atendimento').textContent = dataFormatada;
             document.getElementById("Horario_inicio").value = horaAtual;
 
-            // Adiciona um evento de mudança ao campo de seleção de serviço
-            campoServico.addEventListener('click', function() {
-                // Obtém o valor selecionado do campo Paciente
-                var idServicoSelecionado = this.value;
-                // Atualiza o valor do campo hidden ID_paciente
-                campoIDServico.value = idServicoSelecionado;
+            // Adiciona um ouvinte de evento para o campo Servico
+            campoServico.addEventListener('click', function () {
+                // Obtém o valor selecionado no campo Servico
+                var selectedServico = campoServico.value;
 
-                // Obtém o serviço selecionado
-                var servicoSelecionadoID = this.value;
-                var servicoSelecionado = dadosClinica.servicos.find(servico => servico.ID === servicoSelecionadoID);
-
-                // Define o valor do campo Setor com base no serviço selecionado
-                if (servicoSelecionado) {
-                    campoSetor.value = servicoSelecionado.Especialidade;
-
-                    // Filtra os profissionais por setor igual à especialidade do serviço
-                    var profissionaisEspecialistas = dadosClinica.profissionais.filter(profissional => profissional.Setor === servicoSelecionado.Especialidade);
-                    
-                    // Limpa o campo Prof_responsavel antes de adicionar as opções
-                    campoProfResponsavel.innerHTML = '';
-
-                    // Preenche o campo Prof_responsavel apenas com profissionais que atendem aos critérios
-                    profissionaisEspecialistas.forEach(profissional => {
-                        var option = document.createElement('option');
-                        option.value = profissional.ID;
-                        option.textContent = profissional.Nome;
-                        campoProfResponsavel.appendChild(option);
-                    });
-
-                    // Torna o campo Prof_responsavel visível
+                // Se o serviço selecionado não for vazio
+                if (selectedServico !== '') {
+                    // Exibe o campo Prof_responsavel
                     campoProfResponsavel.style.display = 'block';
                     labelProfResponsavel.style.display = 'block';
 
-                    // Obtém o ID_profResponsavel selecionado
-                    var idProfissionalSelecionado = this.value;
-                    // Atualiza o valor do campo hidden ID_profResponsavel
-                    campoIDProfResponsavel.value = idProfissionalSelecionado;
+                    // Obtém o ID do serviço selecionado
+                    var selectedServicoId = campoServico.options[campoServico.selectedIndex].getAttribute('data-id');
+                    // Atribui o ID do serviço ao campo ID_servico
+                    campoIDServico.value = selectedServicoId;
+
+                    // Preenche automaticamente o campo Setor com o valor correspondente ao serviço selecionado
+                    var setorDoServico = null;
+
+                    for (var i = 0; i < dadosClinica.servicos.length; i++) {
+                        if (dadosClinica.servicos[i].Servico === selectedServico) {
+                            setorDoServico = dadosClinica.servicos[i].Especialidade;
+                            break;
+                        }
+                    }
+
+                    // Preenche o campo Prof_responsavel apenas com os especialistas do setor correspondente ao serviço selecionado
+                    campoProfResponsavel.innerHTML = ''; // Limpa as opções existentes
+
+                    // Obtém os dados dos profissionais da clínica
+                    var profissionais = dadosClinica.profissionais;
+
+                    // Filtra os profissionais que são especialistas e pertencem ao mesmo setor do serviço selecionado
+                    var profEspecialistas = profissionais.filter(function (profissional) {
+                        return profissional.Setor === setorDoServico;
+                    });
+
+                    // Adiciona as opções ao campo Prof_responsavel
+                    profEspecialistas.forEach(function (profissional) {
+                        var option = document.createElement('option');
+                        option.value = profissional.Nome;
+                        option.textContent = profissional.Nome;
+                        option.setAttribute('data-id', profissional.ID); // Adiciona o ID do profissional como um atributo data
+                        campoProfResponsavel.appendChild(option)
+                    });
+
+                    // Preenche o campo ID_profResponsavel com o ID do primeiro profissional
+                    if (profEspecialistas.length > 0) {
+                        campoIDProfResponsavel.value = profEspecialistas[0].ID;
+                    } else {
+                        // Se não houver profissionais, limpa o campo ID_profResponsavel
+                        campoIDProfResponsavel.value = '';
+                    }
+
+                    if (setorDoServico !== null) {
+                        campoSetor.value = setorDoServico;
+                    } else {
+                        console.error("Setor não encontrado para o serviço selecionado.");
+                        campoSetor.value = ''; // Limpa o campo Setor em caso de erro
+                    }
+                    
                 } else {
-                    campoSetor.value = '';
-                    // Limpa o campo Prof_responsavel se nenhum serviço estiver selecionado
-                    campoProfResponsavel.innerHTML = '';
-                    // Torna o campo Prof_responsavel invisível
+                    // Se o serviço selecionado for vazio, esconde o campo Prof_responsavel
                     campoProfResponsavel.style.display = 'none';
                     labelProfResponsavel.style.display = 'none';
+                    campoSetor.value = '';
                 }
             });
 
-            // Adiciona um evento de mudança ao campo de seleção de paciente
-            var campoPaciente = document.getElementById('Paciente');
-            var campoIDPaciente = document.getElementById('ID_paciente');
-            campoPaciente.addEventListener('click', function() {
-                // Obtém o valor selecionado do campo Paciente
-                var idPacienteSelecionado = this.value;
-                // Atualiza o valor do campo hidden ID_paciente
-                campoIDPaciente.value = idPacienteSelecionado;
+            // Adiciona um ouvinte de evento para o campo Prof_responsavel
+            campoProfResponsavel.addEventListener('change', function () {
+                // Obtém o valor selecionado no campo Prof_responsavel
+                var selectedProfissional = campoProfResponsavel.value;
 
-                // Obtém o paciente selecionado
-                var pacienteSelecionado = this.options[this.selectedIndex].text;
-                
-                // Obtém o objeto do paciente selecionado
-                var paciente = dadosClinica.pacientes.find(paciente => paciente.nome_completo === pacienteSelecionado);
-                // Verifica se o paciente foi encontrado e se as propriedades CPF e responsavel_legal existem
-                if (paciente.CPF && paciente.responsavel_legal) {
-                    // Define os valores padrão para os campos de CPF e responsável legal
-                    document.getElementById('CPF_paciente').value = paciente.CPF;
-                    document.getElementById('Responsavel_legal').value = paciente.responsavel_legal;
+                // Se o profissional selecionado não for vazio
+                if (selectedProfissional !== '') {
+                    // Obtém o ID do profissional selecionado
+                    var selectedProfissionalId = campoProfResponsavel.options[campoProfResponsavel.selectedIndex].getAttribute('data-id');
+
+                    // Atribui o ID do profissional ao campo ID_profResponsavel
+                    campoIDProfResponsavel.value = selectedProfissionalId;
                 } else {
-                    // Se as propriedades não existem, define os campos como 'Não encontrado'
-                    document.getElementById('CPF_paciente').value = 'Não encontrado';
-                    document.getElementById('Responsavel_legal').value = 'Não encontrado';
+                    // Se o profissional selecionado for vazio, limpa o campo ID_profResponsavel
+                    campoIDProfResponsavel.value = '';
+                }
+            });
+
+            // Adiciona um ouvinte de evento para o campo Paciente
+            campoPaciente.addEventListener('change', function () {
+                // Obtém o valor selecionado no campo Paciente
+                var selectedPaciente = campoPaciente.value;
+
+                // Se o paciente selecionado não for vazio
+                if (selectedPaciente !== '') {
+                    // Obtém o ID do serviço selecionado
+                    var selectedPacienteId = campoPaciente.options[campoPaciente.selectedIndex].getAttribute('data-id');
+                    // Atribui o ID do serviço ao campo ID_servico
+                    campoIDPaciente.value = selectedPacienteId;
+
+                    // Obtém os dados do paciente selecionado
+                    var pacienteSelecionado = dadosClinica.pacientes.find(function (paciente) {
+                        return paciente.nome_completo === selectedPaciente;
+                    });
+
+                    // Preenche os campos CPF_paciente e Responsavel_legal com os dados do paciente
+                    if (pacienteSelecionado) {
+                        document.getElementById('CPF_paciente').value = pacienteSelecionado.CPF;
+                        document.getElementById('Responsavel_legal').value = pacienteSelecionado.responsavel_legal;
+                    } else {
+                        console.error("Dados do paciente não encontrados.");
+                    }
+                } else {
+                    // Se o paciente selecionado for vazio, limpa os campos CPF_paciente e Responsavel_legal
+                    document.getElementById('CPF_paciente').value = '';
+                    document.getElementById('Responsavel_legal').value = '';
                 }
             });
         });

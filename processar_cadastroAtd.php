@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $Protocolo = $mysqli->real_escape_string($_POST['Protocolo']);
     // Armazena o ID_clinica do usuário logado
     $idClinica = $_SESSION['ID_clinica'];
-
     // Insere os dados no banco de dados
     $sql = "INSERT INTO atendimentos (Servico, ID_servico, Nome_paciente, ID_paciente, Prof_responsavel, ID_profResponsavel, ID_clinica, Data_atendimento, Horario_inicio, Risco, Retorno, CPF_paciente, Responsavel_legal, Setor, Situacao, Protocolo) VALUES ('$Servico', '$ID_servico', '$Paciente', '$ID_paciente', '$Prof_responsavel', '$ID_profResponsavel', '$ID_clinica', '$Data_atendimento', '$Horario_inicio', '$Risco', '$Retorno', '$CPF_paciente', '$Responsavel_legal', '$Setor', '$Situacao', '$Protocolo')";
 

@@ -19,7 +19,8 @@ main
 
 .conteudoMenuPrincipal
 {
-    height: 100%;
+    min-height: 85%;
+    max-height: 85%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,6 +28,7 @@ main
 
 .containerConteudo
 {
+    max-height: 80%;
     padding: 1%;
     width: fit-content;
     align-items: center;
@@ -36,5 +38,15 @@ main
     box-shadow: 0 0 20px 0 #3C9FAC;
     border-radius:  10px;
     justify-content: space-around;
+    overflow: hidden; /* Adiciona overflow: hidden para evitar a barra de rolagem */
+    flex-wrap: wrap; /* Permite que a div cresça conforme necessário */
+}
+
+.containerConteudo h2,
+.containerConteudo p,
+.containerConteudo .dados
+{
+    max-height: 100%; /* Define uma altura máxima para os elementos internos */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse a altura máxima */
 }
 /**fim do estilo do main**/

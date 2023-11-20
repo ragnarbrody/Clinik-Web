@@ -61,6 +61,7 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./styles/header.css">
         <link rel="stylesheet" href="./styles/login.css">
         <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
         <title>Login</title>
@@ -70,11 +71,10 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
             <div class="Logo Icon">
                 <img src="./Imagens/Logo.png" alt="Logo do aplicativo Clinik Flow" class="Clinik">
                 <img src="./Imagens/Linhas.png" alt="" class="Linhas">
-            </div>          
+            </div>
             <div class="Logo nomeSlogan">
                 <img src="./Imagens/Clinik.png" alt="Nome do aplicativo Clinik Flow" class="Nome">
-                <p class="Slogan">O software que leva eficiência à sua clínica</p>
-            </div>     
+            </div>
         </header>
         <main>
             <form action="" method="POST" class="formLogin">

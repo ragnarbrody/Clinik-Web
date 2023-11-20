@@ -2,11 +2,13 @@
 footer
 {
     border-top: #3C9FAC 4px solid;
-    height: 9vh;
-    min-height: 9vh;
+    height: 10vh;
+    min-height: 10vh;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    bottom: 0; /* Fixa o footer na parte inferior da página */
+    max-width: 100%; /* Largura total da página */
+    background-color: aliceblue; /* Cor de fundo opcional */
 }
 
 .footerLogo

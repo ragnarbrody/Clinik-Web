@@ -57,31 +57,33 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/editar_usuario.css">
+    <link rel="stylesheet" href="./styles/modal.css">
     <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
     <title>Editar Usuário</title>
 </head>
 <body>
-    <div class="editUser">
+    <div class="addUser">
         <h2>Editar Usuário</h2>
-        <form action="editar_usuario.php" method="POST" class="form_editUser">
+        <form action="editar_usuario.php" method="POST" class="form_addUser">
             <div class="conteudoForm">
                 <input type="hidden" name="id" value="<?php echo $row['ID']; ?>">
                 <div class="conjInput">
-                    <label for="novoNome">Nome Completo:</label>              
-                    <input type="text" id="novoNome" name="novoNome" value="<?php echo $row['Nome']; ?>"><br>
-                    <label for="novoEmail">Email:</label>
-                    <input type="email" id="novoEmail" name="novoEmail" value="<?php echo $row['Email']; ?>"><br>
+                    <label class="label" for="novoNome">Nome Completo:</label><br>            
+                    <input class="input" type="text" id="novoNome" name="novoNome" value="<?php echo $row['Nome']; ?>"><br>
+                    <label class="label" for="novoEmail">Email:</label><br>
+                    <input class="input" type="email" id="novoEmail" name="novoEmail" value="<?php echo $row['Email']; ?>"><br>
                 </div>             
                 <div class="conjInput">
-                    <label for="novaNacionalidade">Nacionalidade:</label>
-                    <input type="text" id="novaNacionalidade" name="novaNacionalidade" value="<?php echo $row['Nacionalidade']; ?>"><br>
-                    <label for="novoSetor">Setor:</label>
-                    <input type="text" id="novoSetor" name="novoSetor" value="<?php echo $row['Setor']; ?>"><br>
+                    <label class="label" for="novaNacionalidade">Nacionalidade:</label><br>
+                    <input class="input" type="text" id="novaNacionalidade" name="novaNacionalidade" value="<?php echo $row['Nacionalidade']; ?>"><br>
+                    <label class="label" for="novoSetor">Setor:</label><br>
+                    <input class="input" type="text" id="novoSetor" name="novoSetor" value="<?php echo $row['Setor']; ?>"><br>
                 </div>
+            </div>
+            <div class="conteudoForm">
                 <div class="conjInput">
-                    <label for="novoCargo">Cargo:</label> 
-                    <select name="novoCargo" id="novoCargo">
+                    <label class="label" for="novoCargo">Cargo:</label><br>
+                    <select class="input" name="novoCargo" id="novoCargo">
                         <?php if ($row['Cargo'] == 'ADM'): ?>
                             <option value="ADM" selected>ADM</option>
                         <?php endif; ?>
@@ -89,30 +91,30 @@ if (isset($_GET['id'])) {
                         <option value="ESPECIALISTA" <?php if ($row['Cargo'] == 'ESPECIALISTA') echo 'selected'; ?>>Especialista</option>
                         <option value="CHEFE_DPTO" <?php if ($row['Cargo'] == 'CHEFE_DPTO') echo 'selected'; ?>>Chefe de setor</option>
                     </select><br>
-                    <label for="novoCrm	">CRM ou NF:</label>
-                    <input type="text" id="novoCrm" name="novoCrm" value="<?php echo $row['CRM']; ?>"><br>
+                    <label class="label" for="novoCrm	">CRM ou NF:</label><br>
+                    <input class="input" type="text" id="novoCrm" name="novoCrm" value="<?php echo $row['CRM']; ?>"><br>
                 </div> 
+                <div class="conjInput">
+                    <label class="label" for="novoApelido">Nome de usuário:</label><br>
+                    <input class="input" type="text" id="novoApelido" name="novoApelido" value="<?php echo $row['Apelido']; ?>"><br>
+                    <label class="label" for="novaSenha">Senha:</label><br>
+                    <input class="input" type="password" id="novaSenha" name="novaSenha" value="<?php echo $row['Senha']; ?>"><br>
+                </div>
             </div>
             <div class="conteudoForm">  
                 <div class="conjInput">
-                    <label for="novoApelido">Nome de usuário:</label>
-                    <input type="text" id="novoApelido" name="novoApelido" value="<?php echo $row['Apelido']; ?>"><br>
-                    <label for="novaSenha">Senha:</label>
-                    <input type="password" id="novaSenha" name="novaSenha" value="<?php echo $row['Senha']; ?>"><br>
-                </div>
-                <div class="conjInput">
-                    <label for="novaEspecialidade">Área de Atuação/Especialidade:</label>
-                    <input type="text" id="novaEspecialidade" name="novaEspecialidade" value="<?php echo $row['Especialidade']; ?>"><br>
-                    <label for="novoCpf">CPF:</label>
-                    <input type="number" id="novoCpf" name="novoCpf" value="<?php echo $row['CPF']; ?>"><br>
+                    <label class="label" for="novaEspecialidade">Área de Atuação/Especialidade:</label><br>
+                    <input class="input" type="text" id="novaEspecialidade" name="novaEspecialidade" value="<?php echo $row['Especialidade']; ?>"><br>
+                    <label class="label" for="novoCpf">CPF:</label><br>
+                    <input class="input" type="number" id="novoCpf" name="novoCpf" value="<?php echo $row['CPF']; ?>"><br>
                 </div> 
                 <div class="conjInput">
-                    <label for="novoRg">RG:</label>
-                    <input type="text" id="novoRg" name="novoRg" value="<?php echo $row['RG']; ?>"><br>
-                    <label for="novaData_nascimento">Data de Nascimento:</label>
-                    <input type="date" id="novaData_nascimento" name="novaData_nascimento" value="<?php echo $row['Data_nascimento']; ?>"><br>
-                    <label for="novoTelefone">Telefone:</label>
-                    <input type="number" id="novoTelefone" name="novoTelefone" value="<?php echo $row['Telefone']; ?>"><br>
+                    <label class="label" for="novoRg">RG:</label><br>
+                    <input class="input" type="text" id="novoRg" name="novoRg" value="<?php echo $row['RG']; ?>"><br>
+                    <label class="label" for="novaData_nascimento">Data de Nascimento:</label><br>
+                    <input class="input" type="date" id="novaData_nascimento" name="novaData_nascimento" value="<?php echo $row['Data_nascimento']; ?>"><br>
+                    <label class="label" for="novoTelefone">Telefone:</label><br>
+                    <input class="input"type="number" id="novoTelefone" name="novoTelefone" value="<?php echo $row['Telefone']; ?>"><br>
                 </div> 
             </div>                                                
             <div class="enviarUser">

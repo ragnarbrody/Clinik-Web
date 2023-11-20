@@ -20,7 +20,8 @@ body, ul {
 .nav-bar {
     display: flex;
     background-color: #826B51;
-    max-height: 15%;
+    max-height: fit-content;
+    min-height: fit-content;
     max-width: 100%;
     flex-direction: row;
     justify-content: center;
@@ -30,7 +31,6 @@ body, ul {
  {
      margin-right: 5px;
      height: 30px;
-     object-fit: fill;
  } 
  
  .menu ul.menuServicos li 
@@ -122,7 +122,6 @@ body, ul {
 
     .mobile-menu-icon button .icon{
         max-height: 10%;
-        object-fit: contain;
     }
 
     .mobile-menu ul {

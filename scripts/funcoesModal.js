@@ -26,6 +26,7 @@
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
         iframe.src = 'cadastrar_usuario.php';
+        iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
     }
     //------------------------------------------//
@@ -35,6 +36,7 @@
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
         iframe.src = 'editar_usuario.php?id=' + userId;
+        iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
     }
     //------------------------------------------//    
@@ -74,6 +76,7 @@
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
         iframe.src = 'cadastrar_paciente.php';
+        iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
     }
     //------------------------------------------//
@@ -83,6 +86,7 @@
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
         iframe.src = 'editar_paciente.php?id=' + userId;
+        iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
     }
     //------------------------------------------//   
@@ -122,6 +126,7 @@
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
         iframe.src = 'cadastrar_servico.php';
+        iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
     }
     //------------------------------------------//
@@ -131,6 +136,7 @@
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
         iframe.src = 'editar_servico.php?id=' + userId;
+        iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
     }
     //------------------------------------------//   
@@ -170,6 +176,7 @@
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
         iframe.src = 'cadastrar_atendimento.php';
+        iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
     }
     //------------------------------------------//
@@ -179,6 +186,7 @@
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
         iframe.src = 'editar_atendimento.php?id=' + userId;
+        iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
     }
     //------------------------------------------//   

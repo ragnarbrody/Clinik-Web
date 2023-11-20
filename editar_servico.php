@@ -50,37 +50,39 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/editar_servico.css">
+    <link rel="stylesheet" href="./styles/modal.css">
     <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
     <title>Editar Serviço</title>
 </head>
 <body>
-    <div class="editUser">
+    <div class="addUser">
         <h2>Editar Serviço</h2>
-        <form action="editar_servico.php" method="POST" class="form_editUser">
+        <form action="editar_servico.php" method="POST" class="form_addUser">
             <div class="conteudoForm">
                 <input type="hidden" name="id" value="<?php echo $row['ID']; ?>">
                 <div class="conjInput">
-                    <label for="novoServico">Servico:</label>              
-                    <input type="text" id="novoServico" name="novoServico" value="<?php echo $row['Servico']; ?>"><br>
-                    <label for="novoValor">Valor:</label>
-                    <input type="number" id="novoValor" name="novoValor" value="<?php echo $row['Valor']; ?>"><br>
+                    <label class="label" for="novoServico">Servico:</label>   <br>           
+                    <input class="input" type="text" id="novoServico" name="novoServico" value="<?php echo $row['Servico']; ?>"><br>
+                    <label class="label" for="novoValor">Valor:</label><br>
+                    <input class="input" type="number" id="novoValor" name="novoValor" value="<?php echo $row['Valor']; ?>"><br>
                 </div>    
                 <div class="conjInput">          
-                    <label for="novoDescricao">Descrição:</label>
-                    <textarea name="novoDescricao" id="novoDescricao" cols="30" rows="10"><?php echo $row['Descricao']; ?></textarea><br>
-                    <label for="novoEspecialidade">Especialidade:</label>
-                    <input type="text" id="novoEspecialidade" name="novoEspecialidade" value="<?php echo $row['Especialidade']; ?>"><br>
-                </div>
-                <div class="conjInput">          
-                    <label for="novoSituacao">Situação:</label>
-                    <select name="novoSituacao" id="novoSituacao">
+                    <label class="label" for="novoSituacao">Situação:</label><br>
+                    <select class="input" name="novoSituacao" id="novoSituacao">
                         <option value="Ativo" <?php if ($row['Situacao'] == 'Ativo') echo 'selected'; ?>>Ativo</option>
                         <option value="Inativo" <?php if ($row['Situacao'] == 'Inativo') echo 'selected'; ?>>Inativo</option>
-                    </select>
-                    <label for="novoDuracao_Estimada">Duração Estimada:</label>
-                    <input type="time" id="novoDuracao_Estimada" name="novoDuracao_Estimada" value="<?php echo $row['Duracao_Estimada']; ?>"><br>
-                </div>         
+                    </select><br>
+                    <label class="label" for="novoDuracao_Estimada">Duração Estimada:</label>
+                    <input class="input" type="time" id="novoDuracao_Estimada" name="novoDuracao_Estimada" value="<?php echo $row['Duracao_Estimada']; ?>"><br>
+                </div> 
+            </div>
+            <div class="conteudoForm">
+                <div class="conjInput">          
+                    <label class="label" for="novoDescricao">Descrição:</label><br>
+                    <textarea class="input" name="novoDescricao" id="novoDescricao" cols="30" rows="10"><?php echo $row['Descricao']; ?></textarea><br>
+                    <label class="label" or="novoEspecialidade">Especialidade:</label><br>
+                    <input class="input" type="text" id="novoEspecialidade" name="novoEspecialidade" value="<?php echo $row['Especialidade']; ?>"><br>
+                </div>
             </div>                                               
             <div class="enviarServ">
                 <input type="submit" value="Salvar">

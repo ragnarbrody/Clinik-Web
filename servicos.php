@@ -90,7 +90,7 @@ if ($sql_query->num_rows > 0) {
     
                 
                 <div class="mobile-menu-icon">
-                    <button onclick="menuShow()"><img class="icon" src="./imagens/menu_white_36dp.svg" alt=""></button>
+                    <button onclick="menuShow()"><img class="icon" src="./imagens/burguer.png" alt=""></button>
                 </div>
             </nav>
 
@@ -107,7 +107,7 @@ if ($sql_query->num_rows > 0) {
             </div>   
             <!--////////--> 
             <div class="conteudoUsuarios">
-                <div id="tabelaDiv">
+                <div id="tabelaDiv" class="tabelaDiv">
                     <h2>Serviços</h2>
                     <div class="filtros">
                         <label for="searchInput">Pesquisar por ID ou Nome do Serviço: </label>
@@ -122,7 +122,7 @@ if ($sql_query->num_rows > 0) {
                 <div class="modal">
                     <div class="modal-content" id="editarUser">
                         <span class="close-btn" onclick="closeModal()">&times;</span>
-                        <iframe src="editar_usuario.php" width="100%" height="400"></iframe>
+                        <iframe src="editar_servico.php" width="100%" height="400"></iframe>
                     </div>
                 </div>
                 <div class="modal" id="cadastrarServ">

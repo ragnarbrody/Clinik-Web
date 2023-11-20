@@ -85,12 +85,6 @@ table{
     overflow: auto;
 }
 
-@media only screen and (max-width: 760px){
-    .tabelaPrin{
-        width: 100%;
-    }
-}
-
 #searchInput
 {
     margin-bottom: 2%;
@@ -130,7 +124,11 @@ table{
 
 /*Códigos Css para o modal de editar usuario*/
 /* Estilo do modal */
-
+.frameCadastro
+{
+    border: none;
+    height: 450px;
+}
 
 .modal {
     display: none;
@@ -147,10 +145,10 @@ table{
 .modal-content {
     background-color: #fff;
     margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
+    border: 4px solid #3C9FAC;
+    width: 50%;
+    border-radius: 10px;
+ }
 
 /* Botão para fechar o modal */
 .close-btn {
@@ -175,7 +173,6 @@ table{
 #cadastrarUser .modal-content {
     background-color: #fff;
     margin: 10% auto;
-    padding: 20px;
     border: 1px solid #888;
     width: 80%;
 }
@@ -185,4 +182,30 @@ table{
     text-align: right;
     font-size: 24px;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 760px){
+    .tabelaPrin{
+        width: 100%;
+    }
+
+    .tabelaDiv{
+        min-width: 92%;
+    }
+
+    .modal-content {
+        width: 85% !important;
+    }
+
+    .frameCadastro
+    {
+        height: 500px;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .frameCadastro
+    {
+        height: 600px;
+    }
 }

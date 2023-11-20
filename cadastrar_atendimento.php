@@ -14,79 +14,87 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/cadastrar_atendimento.css">
+    <link rel="stylesheet" href="./styles/modal.css">
     <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
     <title>Abertura de Atendimento</title>
 </head>
 <body>
-    <div class="addAtd">
+    <div class="addUser">
         <h2>Abertura de Atendimento</h2>
-        <form action="processar_cadastroAtd.php" method="POST" class="form_addAtd">
+        <form action="processar_cadastroAtd.php" method="POST" class="form_addUser">
             <div class="conteudoForm">
                 <div class="conjInput">
-                    <label for="Servico">Servico:</label>
-                    <select name="Servico" id="Servico" required>
+                    <label class="label" for="Servico">Servico:</label><br>
+                    <select class="input" name="Servico" id="Servico" required>
                         <option value=''></option>
                         <?php
                         foreach($dadosClinica['servicos'] as $servico) {
                             echo "<option value='{$servico['Servico']}' data-id='{$servico['ID']}'>{$servico['Servico']}</option>";
                         }
                         ?>
-                    </select>
-                    <input type="hidden" name="ID_servico" id="ID_servico" value="<?php echo $servico['ID']; ?>"><br>
-                    <label for="Paciente">Paciente:</label><br>
-                    <select name="Paciente" id="Paciente" required>
-                        <option value=''></option>
-                        <?php
-                        foreach($dadosClinica['pacientes'] as $paciente) {
-                            echo "<option value='{$paciente['nome_completo']}' data-id='{$paciente['ID']}'>{$paciente['nome_completo']}</option>";
-                        }
-                        ?>
-                    </select>
-                    <input type="hidden" name="ID_paciente" id="ID_paciente" value="<?php echo $paciente['ID']; ?>"><br>
-                    <label id="LabelProf_responsavel" for="Prof_responsavel" style="display: none;">Profissional Responsável:</label>
-                    <select name="Prof_responsavel" id="Prof_responsavel" required style="display: none;">
+                    </select><br>
+                    <label class="label" id="LabelProf_responsavel" for="Prof_responsavel" style="display: none;">Profissional Responsável:</label><br>
+                    <select class="input" name="Prof_responsavel" id="Prof_responsavel" required style="display: none;">
                         <option value=''></option>
                         <?php
                         foreach($dadosClinica['profissionais'] as $profissional) {
                             echo "<option value='{$profissional['Nome']}'>{$profissional['Nome']}</option>";
                         }
                         ?>
-                    </select>
-                    <input type="hidden" name="ID_profResponsavel" id="ID_profResponsavel" value="<?php echo $profissional['ID']; ?>"><br>
-                    <input type="hidden" name="ID_clinica" id="ID_clinica" value="<?php echo $_SESSION['ID_clinica']; ?>"><br>
-                </div>  
+                    </select><br>
+                </div> 
                 <div class="conjInput">
-                    <label for="Data_atendimento">Data de atendimento:</label>
-                    <input type="date" name="Data_atendimento" id="Data_atendimento"><br>
-                    <label for="Horario_inicio">Horário de Inicio:</label>
-                    <input type="time" name="Horario_inicio" id="Horario_inicio"><br>
-                    <label for="Risco">Risco:</label>
-                    <select name="Risco" id="Risco" required>
+                <label class="label" for="Paciente">Paciente:</label><br>
+                    <select class="input" name="Paciente" id="Paciente" required>
+                        <option value=''></option>
+                        <?php
+                        foreach($dadosClinica['pacientes'] as $paciente) {
+                            echo "<option value='{$paciente['nome_completo']}' data-id='{$paciente['ID']}'>{$paciente['nome_completo']}</option>";
+                        }
+                        ?>
+                    </select><br>
+                    <label class="label" for="Data_atendimento">Data de atendimento:</label><br>
+                    <input class="input" type="date" name="Data_atendimento" id="Data_atendimento"><br>
+                </div>  
+            </div>
+            <div class="conteudoForm">
+                <div class="conjInput">
+                    <label class="label" for="Horario_inicio">Horário de Inicio:</label><br>
+                    <input class="input" type="time" name="Horario_inicio" id="Horario_inicio"><br>
+                    <label class="label" for="Risco">Risco:</label><br>
+                    <select class="input" name="Risco" id="Risco" required>
                         <option value="Baixo">Baixo</option>
                         <option value="Médio">Médio</option>
                         <option value="Alto">Alto</option>
                     </select><br>
                 </div> 
                 <div class="conjInput">
-                    <label for="Retorno">É atendimento de retorno:</label>
-                    <select name="Retorno" id="Retorno" required>
+                    <label class="label" for="Retorno">É atendimento de retorno:</label><br>
+                    <select class="input" name="Retorno" id="Retorno" required>
                         <option value="Sim">Sim</option>
                         <option value="Não" selected>Não</option>
                     </select><br>
-                    <label for="CPF_paciente">CPF do Paciente:</label>
-                    <input type="text" name="CPF_paciente" id="CPF_paciente"><br>
-                    <label for="Responsavel_legal">Responsavel legal do paciente:</label>
-                    <input type="text" name="Responsavel_legal" id="Responsavel_legal"><br>
+                    <label class="label" for="CPF_paciente">CPF do Paciente:</label><br>
+                    <input class="input" type="text" name="CPF_paciente" id="CPF_paciente"><br>
                 </div> 
             </div>
             <div class="conteudoForm">
                 <div class="conjInput">
-                    <label for="Setor">Setor:</label>
-                    <input type="text" name="Setor" id="Setor"><br> 
+                    <label class="label" for="Responsavel_legal">Responsavel legal do paciente:</label><br>
+                    <input class="input" type="text" name="Responsavel_legal" id="Responsavel_legal"><br>
+                    <label for="Setor">Setor:</label><br>
+                    <input class="label" class="input" type="text" name="Setor" id="Setor"><br> 
+                    <label class="label" for="Protocolo">Protocolo:</label><br>
+                    <input class="input" type="text" name="Protocolo" id="Protocolo" value='<?php echo($protocolo); ?>' readonly><br>
+                </div> 
+            </div>
+            <div class="conteudoForm">
+                <div class="conjInput">
+                    <input type="hidden" name="ID_servico" id="ID_servico" value="<?php echo $servico['ID']; ?>">
+                    <input type="hidden" name="ID_paciente" id="ID_paciente" value="<?php echo $paciente['ID']; ?>">
+                    <input type="hidden" name="ID_profResponsavel" id="ID_profResponsavel" value="<?php echo $profissional['ID']; ?>">
+                    <input type="hidden" name="ID_clinica" id="ID_clinica" value="<?php echo $_SESSION['ID_clinica']; ?>">
                     <input type="hidden" name="Situacao" id="Situacao" value="Ativo">
-                    <label for="Protocolo">Protocolo:</label>
-                    <input type="text" name="Protocolo" id="Protocolo" value='<?php echo($protocolo); ?>' readonly><br>
                 </div> 
             </div>
             <div class="enviarAtd">  

@@ -90,7 +90,7 @@ if ($sql_query->num_rows > 0) {
     
                 
                 <div class="mobile-menu-icon">
-                    <button onclick="menuShow()"><img class="icon" src="./imagens/burguer.png" alt=""></button>
+                    <button onclick="menuShow()"><img class="icon" src="./Imagens/burguer.png" alt=""></button>
                 </div>
             </nav>
 

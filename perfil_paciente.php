@@ -63,7 +63,7 @@ if (isset($_GET['id'])) {
     
                 
                 <div class="mobile-menu-icon">
-                    <button onclick="menuShow()"><img class="icon" src="./imagens/burguer.png" alt=""></button>
+                    <button onclick="menuShow()"><img class="icon" src="./Imagens/burguer.png" alt=""></button>
                 </div>
             </nav>
 

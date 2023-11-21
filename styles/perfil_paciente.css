@@ -19,7 +19,7 @@ main
 
 .conteudoPerfil
 {
-    height: 100%;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,23 +28,54 @@ main
 .containerConteudo
 {
     padding: 1vw;
-    width: fit-content;
+    max-height: 80%;
     align-items: center;
+    max-width: 92%;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     background-color: aliceblue;
     box-shadow: 0 0 20px 0 #3C9FAC;
-    border-radius:  10px;
-    justify-content: space-around;
+    border-radius: 10px;
+}
+
+.headerTab
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.headerTab .titHeader
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .dados
 {
+    justify-content: flex-start;
     display: flex;  
+}
+
+
+.titLabel
+{
+    color: #3C9FAC;
+}
+
+.dado
+{
+    text-align: center;
+    margin-top: 0.2vh;
 }
 
 .divSeparador
 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
     padding-left: 2%;
     padding-right: 2%;
     border-left: 1px solid black;

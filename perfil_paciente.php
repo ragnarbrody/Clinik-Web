@@ -81,17 +81,24 @@ if (isset($_GET['id'])) {
             <!--////////--> 
             <div class="conteudoPerfil">
                 <div class="containerConteudo">
-                    <h2>Bem Vindo(a)!</h2>
-                    <h3>Nesta página você encontra os dados do paciente:</h3>
+                    <div class="headerTab">
+                        <div class="titHeader">
+                            <h2>Bem Vindo(a)!</h2>
+                            <h3>Nesta página você encontra os dados do paciente:</h3>       
+                        </div>
+                        <div class="btnHeader">
+                            <a href="#">Histórico</a>
+                        </div>
+                    </div>
                     <div class="dados">
                         <div class="divSeparador">
-                            <p>ID do paciente é: <?php echo $paciente['ID'];?></p>
-                            <p>Nome do paciente é: <?php echo $paciente['nome_completo'];?></p>
-                            <p>CPF do paciente é: <?php echo $paciente['CPF'];?></p>
-                            <p>RG do paciente é: <?php echo $paciente['RG'];?></p>
-                            <p>RNE do paciente é: <?php echo $paciente['RNE'];?></p>
-                            <p>Nome do pai do paciente é: <?php echo $paciente['nome_pai'];?></p>
-                            <p>Nome da mãe do paciente é: <?php echo $paciente['nome_mae'];?></p>                        
+                            <label class="titLabel" for="dado">ID: </label><p class="dado"><?php echo $paciente['ID'];?></p>
+                            <label class="titLabel" for="dado">Nome: </label><p class="dado"><?php echo $paciente['nome_completo'];?></p>
+                            <label class="titLabel" for="dado">CPF: </label><p class="dado"><?php echo $paciente['CPF'];?></p>
+                            <label class="titLabel" for="dado">RG: </label><p class="dado"><?php echo $paciente['RG'];?></p>
+                            <label class="titLabel" for="dado">RNE: </label><p class="dado"><?php echo $paciente['RNE'];?></p>
+                            <label class="titLabel" for="dado">Nome do pai: </label><p class="dado"><?php echo $paciente['nome_pai'];?></p>
+                            <label class="titLabel" for="dado">Nome da mãe: </label><p class="dado"><?php echo $paciente['nome_mae'];?></p>                        
                         </div>                    
                         <div class="divSeparador">
                             <p>Estado civil do paciente é: <?php echo $paciente['estado_civil'];?></p>

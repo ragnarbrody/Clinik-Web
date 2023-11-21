@@ -46,8 +46,11 @@ include('./protect.php')
                     <h2>Sobre nós:<h2>
                     <a href="#" id="item5"><img src="./Imagens/IconFunc.png" alt="Foto quem somos" class="foto"></a>
                     <div class="dados">
-                        <p>Somos uma empresa de desenvolvimento de software onde fizemos esse sistema<br>
-                        para facilitar as clinicas medicas no geral, focado em gestão.</p>
+                        <p>Somos uma empresa de desenvolvimento de software, criada em julho de 2023, para <br>
+                        criarmos soluçoes de desenvolvimento, onde juntos fizemos esse sistema para facilitar<br>
+                        e auxiliar as clinicas medicas no geral, focado em gestão e organização das clinicas<br>
+                        auxiliando no processo de cadastro, gerenciamento de pacientes, calendario e a parte<br>
+                        financeira. </p>
                         <p>
                     </div>
                 </div>

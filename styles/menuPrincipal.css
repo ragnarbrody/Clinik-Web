@@ -15,8 +15,7 @@ main
     background-position-x: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-color: transparent;
-    opacity: 20%;
+    background-color: #F4F0F0;
     display: flex;
 }
 
@@ -40,6 +39,21 @@ main
     border-radius:  10px;
     justify-content: space-around;
     font-size: 21.2px;
+    color: #3c9fac;
     font-style: italic;
+}
+
+.containerConteudo .dados 
+{
+    font-size: 21.2px;
+    color: #826B51;
+    font-style: italic;
+    align-items: flex-start
+}
+
+.foto
+{
+   margin: auto;
+   display: block;
 }
 /**fim do estilo do main**/

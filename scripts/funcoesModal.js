@@ -171,7 +171,7 @@
 //--------------------------------------------//
 
 //Funções para a tela de atendimento//
-    //Funções para o modal de cadastrar serviços
+    //Funções para o modal de cadastrar atendimento
     function openModalRegAtd() {
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
@@ -181,7 +181,7 @@
     }
     //------------------------------------------//
 
-    //Funções para o modal de edição de serviços
+    //Funções para o modal de edição de atendimento
     function openModalEditAtd(userId) {
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
@@ -190,32 +190,44 @@
         modal.style.display = 'block';
     }
     //------------------------------------------//   
-    //Código para excluir o atendimento
-    var excluirButtons = document.querySelectorAll('.excluir-btnAtd');
+    //Código para finalizar o atendimento
+    var excluirButtons = document.querySelectorAll('.finalizar-btnAtd');
     excluirButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             var userId = this.getAttribute('data-id');
-            var confirmDelete = confirm('Tem certeza de que deseja excluir este atendimento?');
+            var confirmDelete = confirm('Tem certeza de que deseja finalizar este atendimento?');
             
             if (confirmDelete) {
                 var userId = this.getAttribute('data-id'); 
-                // Faz uma solicitação para o arquivo PHP de exclusão
-                fetch('excluir_atendimento.php?id=' + userId, {
+                // Faz uma solicitação para o arquivo PHP de finalização
+                fetch('finalizar_atendimento.php?Protocolo=\'' + userId + '\'', {
                     method: 'GET'
                 })
                 .then(response => response.text())
                 .then(data => {
-                    // Exibe a resposta do servidor após a exclusão
+                    // Exibe a resposta do servidor após a finalização
                     alert(data);
                     
                     // Recarregar a página
                     location.reload();
                 })
                 .catch(error => {
-                    console.error('Erro ao excluir o atendimento:', error);
+                    console.error('Erro ao finalizar o atendimento:', error);
                 });
             }
         });
     });
     //------------------------------------------//  
+//--------------------------------------------//
+
+//Funções para a tela de histórico//
+    //Funções para o modal de histórico
+    function openModalHistorico() {
+        var modal = document.querySelector('.modal');
+        var iframe = document.querySelector('iframe');
+        iframe.src = 'historico_paciente.php?id=' + pacienteId;
+        iframe.classList.add('frameCadastro');
+        modal.style.display = 'block';
+    }
+    //------------------------------------------//
 //--------------------------------------------//

@@ -60,7 +60,7 @@ if ($sql_query->num_rows > 0) {
         $tabelaHTML .= '<td>' . $row['Setor'] . '</td>';
         $tabelaHTML .= '<td>' . $row['Retorno'] . '</td>';
         $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEditAtd(' . $row["Protocolo"] . ')">Editar</button></td>';
-        $tabelaHTML .= '<td>' . '<button class="excluir-btnAtd" data-id="' . $row["Protocolo"] . '">Excluir</button>' . '</td>';
+        $tabelaHTML .= '<td>' . '<button class="finalizar-btnAtd" data-id="' . $row["Protocolo"] . '">Finalizar</button>' . '</td>';
         $tabelaHTML .= '</tr>';
     }
 

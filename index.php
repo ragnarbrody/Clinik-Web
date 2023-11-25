@@ -45,6 +45,8 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
 
             // Dados da clínica
             $_SESSION['Nome_clinica'] = $usuario['Nome_clinica'];
+            $_SESSION['Email_clinica'] = $usuario['Email_clinica'];
+            $_SESSION['Senha_email'] = $usuario['Senha_email'];
             $_SESSION['Logradouro'] = $usuario['Logradouro'];
             $_SESSION['Cidade'] = $usuario['Cidade'];
             header("Location: menuPrincipal.php");

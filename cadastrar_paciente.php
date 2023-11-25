@@ -72,18 +72,20 @@
                 <div class="conjInput">
                     <label class="label" class="label"for="telefone">Telefone:</label><br>
                     <input class="input" type="tel" id="telefone" name="telefone" required><br>
-                    <label class="label" for="nome_emergencia">Nome contato de emergência:</label><br>
-                    <input class="input" type="text" id="nome_emergencia" name="nome_emergencia"><br>
+                    <label class="label" class="label"for="email">Email:</label><br>
+                    <input class="input" type="email" id="email" name="email" required><br>
                 </div>
                 <div class="conjInput">
+                    <label class="label" for="nome_emergencia">Nome contato de emergência:</label><br>
+                    <input class="input" type="text" id="nome_emergencia" name="nome_emergencia"><br>
                     <label class="label" for="telefone_emergencia">Telefone de Emergência:</label><br>
                     <input class="input" type="tel" id="telefone_emergencia" name="telefone_emergencia"><br>
-                    <label class="label" for="parentesco_emergencia">Parentesco do contato de emergencia:</label><br>
-                    <input class="input" type="text" id="parentesco_emergencia" name="parentesco_emergencia"><br>
                 </div>
             </div>
             <div class="conteudoForm">
                 <div class="conjInput">
+                    <label class="label" for="parentesco_emergencia">Parentesco do contato de emergencia:</label><br>
+                    <input class="input" type="text" id="parentesco_emergencia" name="parentesco_emergencia"><br>
                     <label class="label" for="CEP">CEP:</label><br>
                     <input class="input" type="number" id="CEP" name="CEP" required><br>
                     <label class="label" for="endereco_rua">Endereço:</label><br>

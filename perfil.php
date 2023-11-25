@@ -72,6 +72,8 @@ include('./protect.php')
                         <p>seu telefone é: <?php echo $_SESSION['telefone'];?></p>
                         <p>o nome da sua clinica é: <?php echo $_SESSION['Nome_clinica'];?></p>
                         <p>o endereço da sua clinica é: <?php echo $_SESSION['Logradouro'];?></p>
+                        <p>o email da sua clinica é: <?php echo $_SESSION['Email_clinica'];?></p>
+                        <p>a senha de app é: <?php echo $_SESSION['Senha_email'];?></p>
                     </div>
                 </div>
             </div>

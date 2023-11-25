@@ -5,14 +5,25 @@ include('./protect.php');
 // Armazena o ID_clinica do usuário logado
 $idClinica = $_SESSION['ID_clinica'];
 
+//$dataAtual = date('Y-m-d');
+// Verifica se a data atual corresponde a alguma data de atendimento agendado
+// Define a data para teste (29-11-2023)
 $dataAtual = date('Y-m-d');
+
+// Atualiza os atendimentos para "Atrasado" se a data for menor que hoje
+$sqlAtualizarAtrasados = "UPDATE atendimentos SET Situacao = 'Atrasado' WHERE Data_atendimento < '$dataAtual' AND Situacao = 'Agendado'";
+$mysqli->query($sqlAtualizarAtrasados);
+
+// Atualiza os atendimentos para "Ativo" se a data for igual a hoje
+$sqlAtualizarAtivos = "UPDATE atendimentos SET Situacao = 'Ativo' WHERE Data_atendimento = '$dataAtual' AND Situacao = 'Agendado'";
+$mysqli->query($sqlAtualizarAtivos);
 
 // Verifica se foi passado um parâmetro 'status' na URL
 $status = isset($_GET['status']) ? $_GET['status'] : 'Ativo';
 
 if($status == 'Ativo')
 {
-    $sql_code = "SELECT * FROM atendimentos WHERE ID_clinica = '$idClinica' AND Situacao = '$status' AND Data_atendimento <= '$dataAtual'";
+    $sql_code = "SELECT * FROM atendimentos WHERE ID_clinica = '$idClinica' AND (Situacao = '$status' OR Situacao = 'Atrasado')";
     $titulo = "Atendimentos";
     $naoEncontrado = "Nenhum atendimento encontrado!";
 }
@@ -22,8 +33,6 @@ elseif($status == "Agendado")
     $titulo = "Agendamentos";
     $naoEncontrado = "Nenhum agendamento encontrado!";
 }
-
-
 
 // Executa a consulta SQL
 $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
@@ -36,6 +45,7 @@ if ($sql_query->num_rows > 0) {
     // Iniciar a tabela HTML
     $tabelaHTML .= '<table border="1" class="tabelaPrin">
             <tr>
+                <th>Situação</th>
                 <th>Protocolo</th>
                 <th>Nome do Paciente</th>
                 <th>Serviço/Procedimento</th>
@@ -49,11 +59,14 @@ if ($sql_query->num_rows > 0) {
 
     // Loop através dos registros e exibir em linhas da tabela
     while ($row = $sql_query->fetch_assoc()) {
+        $dataAtendimentoFormatada = date('d-m-Y', strtotime($row['Data_atendimento']));
+
         $tabelaHTML .= '<tr>';
+        $tabelaHTML .= '<td>' . $row['Situacao'] . '</td>';
         $tabelaHTML .= '<td>' . $row['Protocolo'] . '</td>';
         $tabelaHTML .= '<td>' . $row['Nome_paciente'] . '</td>';       
         $tabelaHTML .= '<td>' . $row['Servico'] . '</td>';
-        $tabelaHTML .= '<td>' . $row['Data_atendimento'] . '</td>';
+        $tabelaHTML .= '<td>' . $dataAtendimentoFormatada . '</td>';
         $tabelaHTML .= '<td>' . $row['Horario_inicio'] . '</td>';
         $tabelaHTML .= '<td>' . $row['Prof_responsavel'] . '</td>';
         $tabelaHTML .= '<td>' . $row['Risco'] . '</td>';
@@ -81,7 +94,6 @@ if ($sql_query->num_rows > 0) {
         <link rel="stylesheet" href="./styles/footer.css">
         <link rel="icon" href="./Imagens/IconeLogo.ico" type="image/x-icon">
         <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="./scripts/menubarra.js"></script>
         <title>Atendimentos</title>
     </head>
@@ -166,6 +178,7 @@ if ($sql_query->num_rows > 0) {
                 <img src="./Imagens/Logo.png" alt="Logo do aplicativo Clinik Flow" class="Clinik">
             </div>
         </footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="./scripts/funcoesModal.js"></script>
         <script src="./scripts/filtroPesquisaAtd.js"></script>
     </body>

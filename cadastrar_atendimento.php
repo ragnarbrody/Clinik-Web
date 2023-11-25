@@ -54,7 +54,7 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                         ?>
                     </select><br>
                     <label class="label" for="Data_atendimento">Data de atendimento:</label><br>
-                    <input class="input" type="date" name="Data_atendimento" id="Data_atendimento"><br>
+                    <input class="input" type="date" name="Data_atendimento" id="Data_atendimento" value="<?php echo date('Y-m-d'); ?>"><br>
                 </div>  
             </div>
             <div class="conteudoForm">
@@ -76,6 +76,8 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                     </select><br>
                     <label class="label" for="CPF_paciente">CPF do Paciente:</label><br>
                     <input class="input" type="text" name="CPF_paciente" id="CPF_paciente"><br>
+                    <label class="label" for="Email_paciente">Email do Paciente:</label><br>
+                    <input class="input" type="text" name="Email_paciente" id="Email_paciente"><br>
                 </div> 
             </div>
             <div class="conteudoForm">
@@ -115,6 +117,21 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
             var campoIDProfResponsavel  = document.getElementById('ID_profResponsavel');
             var labelProfResponsavel = document.getElementById('LabelProf_responsavel');
             var campoSetor = document.getElementById('Setor');
+            var campoData = document.getElementById('Data_atendimento');
+
+            campoData.addEventListener('change', function() {
+                var dataEscolhida = new Date(this.value + 'T00:00:00');
+
+                var dataAtual = new Date();
+                dataAtual.setHours(0, 0, 0, 0); // Configurando horas, minutos, segundos e milissegundos para zero
+
+                // Comparando as datas
+                if (dataEscolhida < dataAtual) {
+                    // Se a data escolhida for anterior à data atual, redefine a data de volta para a data atual
+                    this.value = dataAtual.toISOString().split('T')[0];
+                }
+            });
+
             // Obtém a data atual
             var dataAtual = new Date();
             // Separa a data para eu poder formatar depois para o nosso padrão brasileiro: dia/mês/ano
@@ -239,6 +256,7 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                     if (pacienteSelecionado) {
                         document.getElementById('CPF_paciente').value = pacienteSelecionado.CPF;
                         document.getElementById('Responsavel_legal').value = pacienteSelecionado.responsavel_legal;
+                        document.getElementById('Email_paciente').value = pacienteSelecionado.email;
                     } else {
                         console.error("Dados do paciente não encontrados.");
                     }

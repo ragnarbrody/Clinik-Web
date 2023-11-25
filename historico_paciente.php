@@ -21,7 +21,9 @@ if (isset($_GET['id'])) {
                     <th>Protocolo</th>
                     <th>Serviço/Procedimento</th>
                     <th>Data do atendimento</th>
-                    <th>Horário de Início</th>            
+                    <th>Data de finalização</th>
+                    <th>Horário de Início</th> 
+                    <th>Horário de Saída</th>           
                     <th>Profissional Responsável</th>
                     <th>Risco</th>
                     <th>Setor</th>
@@ -30,11 +32,16 @@ if (isset($_GET['id'])) {
 
         // Loop através dos registros e exibir em linhas da tabela
         while ($row = $sql_query->fetch_assoc()) {
+            $dataAtendimentoFormatada = date('d-m-Y', strtotime($row['Data_atendimento']));
+            $dataFinalizadoFormatada = date('d-m-Y', strtotime($row['Data_finalizado']));
+
             $tabelaHTML .= '<tr>';
             $tabelaHTML .= '<td>' . $row['Protocolo'] . '</td>';
             $tabelaHTML .= '<td>' . $row['Servico'] . '</td>';
-            $tabelaHTML .= '<td>' . $row['Data_atendimento'] . '</td>';
+            $tabelaHTML .= '<td>' . $dataAtendimentoFormatada . '</td>';
+            $tabelaHTML .= '<td>' . $dataFinalizadoFormatada . '</td>';
             $tabelaHTML .= '<td>' . $row['Horario_inicio'] . '</td>';
+            $tabelaHTML .= '<td>' . $row['Horario_saida'] . '</td>';
             $tabelaHTML .= '<td>' . $row['Prof_responsavel'] . '</td>';
             $tabelaHTML .= '<td>' . $row['Risco'] . '</td>';
             $tabelaHTML .= '<td>' . $row['Setor'] . '</td>';

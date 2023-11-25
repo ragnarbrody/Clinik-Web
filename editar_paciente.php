@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $novaData_nascimento = $_POST['novaData_nascimento'];
     $novoResponsavel = $_POST['novoResponsavel'];
     $novoTelefone = $_POST['novoTelefone'];
+    $novoEmail = $_POST['novoEmail'];
     $novoNome_emergencia = $_POST['novoNome_emergencia'];
     $novoTelefone_emergencia = $_POST['novoTelefone_emergencia'];
     $novoParentesco_emergencia = $_POST['novoParentesco_emergencia'];
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $novoComplemento = $_POST['novoComplemento'];
     $novoCarteirinha = $_POST['novoCarteirinha'];
     // Atualizar os dados do paciente no banco de dados
-    $sql = "UPDATE paciente SET nome_completo = '$novoNome', CPF = '$novoCPF', RG = '$novaRG', nome_pai = '$novoNome_pai', nome_mae = '$novoNome_mae', RNE = '$novoRNE', estado_civil = '$novoEstado_civil', sexo = '$novoSexo', etnia = '$novoEtnia', nacionalidade = '$novaNacionalidade', data_nascimento = '$novaData_nascimento', responsavel_legal = '$novoResponsavel', telefone = '$novoTelefone', nome_emergencia = '$novoNome_emergencia', telefone_emergencia = '$novoTelefone_emergencia', parentesco_emergencia = '$novoParentesco_emergencia', CEP = '$novoCEP', endereco_rua = '$novoEndereco_rua', endereco_numero = '$novoEndereco_numero', complemento = '$novoComplemento', numero_carteirinha = '$novoCarteirinha' WHERE ID = $id";
+    $sql = "UPDATE paciente SET nome_completo = '$novoNome', CPF = '$novoCPF', RG = '$novaRG', nome_pai = '$novoNome_pai', nome_mae = '$novoNome_mae', RNE = '$novoRNE', estado_civil = '$novoEstado_civil', sexo = '$novoSexo', etnia = '$novoEtnia', nacionalidade = '$novaNacionalidade', data_nascimento = '$novaData_nascimento', responsavel_legal = '$novoResponsavel', telefone = '$novoTelefone', nome_emergencia = '$novoNome_emergencia', telefone_emergencia = '$novoTelefone_emergencia', parentesco_emergencia = '$novoParentesco_emergencia', CEP = '$novoCEP', endereco_rua = '$novoEndereco_rua', endereco_numero = '$novoEndereco_numero', complemento = '$novoComplemento', numero_carteirinha = '$novoCarteirinha', email = '$novoEmail' WHERE ID = $id";
 
     if ($mysqli->query($sql)) {
         echo '<script>
@@ -135,18 +136,20 @@ if (isset($_GET['id'])) {
                 <div class="conjInput">
                     <label class="label" for="novoTelefone">Telefone:</label>
                     <input class="input" type="tel" id="novoTelefone" name="novoTelefone" value="<?php echo $row['telefone']; ?>"><br>
-                    <label class="label" for="novoNome_emergencia">Nome contato de emergência:</label>
-                    <input class="input" type="text" id="novoNome_emergencia" name="novoNome_emergencia" value="<?php echo $row['nome_emergencia']; ?>"><br>
+                    <label class="label" for="novoEmail">Email:</label>
+                    <input class="input" type="email" id="novoEmail" name="novoEmail" value="<?php echo $row['email']; ?>"><br>
                 </div>
                 <div class="conjInput">
+                    <label class="label" for="novoNome_emergencia">Nome contato de emergência:</label>
+                    <input class="input" type="text" id="novoNome_emergencia" name="novoNome_emergencia" value="<?php echo $row['nome_emergencia']; ?>"><br>
                     <label class="label" for="novoTelefone_emergencia">Telefone de Emergência:</label>
                     <input class="input" type="tel" id="novoTelefone_emergencia" name="novoTelefone_emergencia" value="<?php echo $row['telefone_emergencia']; ?>"><br>
-                    <label class="label" for="novoParentesco_emergencia">Parentesco do contato de emergencia:</label>
-                    <input class="input" type="text" id="novoParentesco_emergencia" name="novoParentesco_emergencia" value="<?php echo $row['parentesco_emergencia']; ?>"><br>
                 </div>
             </div>
             <div class="conteudoForm">
                 <div class="conjInput">
+                    <label class="label" for="novoParentesco_emergencia">Parentesco do contato de emergencia:</label>
+                    <input class="input" type="text" id="novoParentesco_emergencia" name="novoParentesco_emergencia" value="<?php echo $row['parentesco_emergencia']; ?>"><br>
                     <label class="label" for="novoCEP">CEP:</label>
                     <input class="input" type="number" id="novoCEP" name="novoCEP" value="<?php echo $row['CEP']; ?>"><br>
                     <label class="label" for="novoEndereco_rua">Endereço:</label>

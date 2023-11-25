@@ -24,6 +24,7 @@ if ($sql_query->num_rows > 0) {
                 <th>Etnia</th>
                 <th>Data de Nascimento</th>
                 <th>Telefone</th>
+                <th>Email</th>
                 <th>Carteira de Saúde</th>
                 <th>Protocolo</th>
             </tr>';
@@ -40,6 +41,7 @@ if ($sql_query->num_rows > 0) {
         $tabelaHTML .= '<td>' . $row['etnia'] . '</td>';
         $tabelaHTML .= '<td>' . $row['data_nascimento'] . '</td>';
         $tabelaHTML .= '<td>' . $row['telefone'] . '</td>';
+        $tabelaHTML .= '<td>' . $row['email'] . '</td>';
         $tabelaHTML .= '<td>' . $row['numero_carteirinha'] . '</td>';
         $tabelaHTML .= '<td>' . $row['protocolo_atendimento'] . '</td>';
         $tabelaHTML .= '<td><a class="perfil-btn" href="./perfil_paciente.php?id=' . $row["ID"] . '">Perfil</a></td>';

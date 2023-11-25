@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data_nascimento = $mysqli->real_escape_string($_POST['data_nascimento']);
     $responsavel_legal = $mysqli->real_escape_string($_POST['responsavel']);
     $telefone = $mysqli->real_escape_string($_POST['telefone']);
+    $email = $mysqli->real_escape_string($_POST['email']);
     $nome_emergencia = $mysqli->real_escape_string($_POST['nome_emergencia']);
     $telefone_emergencia = $mysqli->real_escape_string($_POST['telefone_emergencia']);
     $parentesco_emergencia = $mysqli->real_escape_string($_POST['parentesco_emergencia']);
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idClinica = $_SESSION['ID_clinica'];
 
     // Insere os dados no banco de dados
-    $sql = "INSERT INTO paciente (nome_completo, CPF, RG, nome_pai, nome_mae, RNE, estado_civil, sexo, etnia, nacionalidade, data_nascimento, responsavel_legal, telefone, nome_emergencia, telefone_emergencia, parentesco_emergencia, CEP, endereco_rua, endereco_numero, complemento, numero_carteirinha, ID_clinica) VALUES ('$nome', '$CPF', '$RG', '$nome_pai', '$nome_mae', '$RNE', '$estado_civil', '$sexo', '$etnia', '$nacionalidade', '$data_nascimento', '$responsavel_legal', '$telefone', '$nome_emergencia', '$telefone_emergencia', '$parentesco_emergencia', '$CEP', '$endereco_rua', '$endereco_numero', '$complemento', '$numero_carteirinha', '$idClinica')";
+    $sql = "INSERT INTO paciente (nome_completo, CPF, RG, nome_pai, nome_mae, RNE, estado_civil, sexo, etnia, nacionalidade, data_nascimento, responsavel_legal, telefone, nome_emergencia, telefone_emergencia, parentesco_emergencia, CEP, endereco_rua, endereco_numero, complemento, numero_carteirinha, email, ID_clinica) VALUES ('$nome', '$CPF', '$RG', '$nome_pai', '$nome_mae', '$RNE', '$estado_civil', '$sexo', '$etnia', '$nacionalidade', '$data_nascimento', '$responsavel_legal', '$telefone', '$nome_emergencia', '$telefone_emergencia', '$parentesco_emergencia', '$CEP', '$endereco_rua', '$endereco_numero', '$complemento', '$numero_carteirinha', '$email','$idClinica')";
 
     if ($mysqli->query($sql)) {
         echo '<script>

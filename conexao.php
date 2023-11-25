@@ -18,7 +18,7 @@ function buscarDadosClinica($idClinica) {
     $dados = array();
 
     // Buscar Pacientes
-    $sqlPacientes = "SELECT ID, nome_completo, CPF, responsavel_legal FROM paciente WHERE ID_clinica = '$idClinica'";
+    $sqlPacientes = "SELECT ID, nome_completo, CPF, responsavel_legal, email FROM paciente WHERE ID_clinica = '$idClinica'";
     $resultPacientes = $mysqli->query($sqlPacientes);
 
     // Buscar Serviços

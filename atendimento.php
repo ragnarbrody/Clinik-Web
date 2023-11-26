@@ -26,12 +26,14 @@ if($status == 'Ativo')
     $sql_code = "SELECT * FROM atendimentos WHERE ID_clinica = '$idClinica' AND (Situacao = '$status' OR Situacao = 'Atrasado')";
     $titulo = "Atendimentos";
     $naoEncontrado = "Nenhum atendimento encontrado!";
+    $botao = "Finalizar";
 }
 elseif($status == "Agendado")
 {
     $sql_code = "SELECT * FROM atendimentos WHERE ID_clinica = '$idClinica' AND Situacao = '$status'";
     $titulo = "Agendamentos";
     $naoEncontrado = "Nenhum agendamento encontrado!";
+    $botao = "Cancelar";
 }
 
 // Executa a consulta SQL
@@ -73,7 +75,7 @@ if ($sql_query->num_rows > 0) {
         $tabelaHTML .= '<td>' . $row['Setor'] . '</td>';
         $tabelaHTML .= '<td>' . $row['Retorno'] . '</td>';
         $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEditAtd(' . $row["Protocolo"] . ')">Editar</button></td>';
-        $tabelaHTML .= '<td>' . '<button class="finalizar-btnAtd" data-id="' . $row["Protocolo"] . '">Finalizar</button>' . '</td>';
+        $tabelaHTML .= '<td>' . '<button class="finalizar-btnAtd" data-id="' . $row["Protocolo"] . '">'.$botao.'</button>' . '</td>';
         $tabelaHTML .= '</tr>';
     }
 

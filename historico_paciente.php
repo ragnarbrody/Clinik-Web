@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     $pacienteId = $_GET['id'];
 
     // Consulta SQL para obter os atendimentos finalizados para o paciente com base no ID fornecido
-    $sql_code = "SELECT * FROM atendimentos WHERE ID_paciente = $pacienteId AND Situacao = 'Finalizado'";
+    $sql_code = "SELECT * FROM atendimentos WHERE ID_paciente = $pacienteId AND (Situacao = 'Finalizado' OR Situacao = 'Cancelado')";
     $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
     // Variável para armazenar a tabela HTML
@@ -28,6 +28,8 @@ if (isset($_GET['id'])) {
                     <th>Risco</th>
                     <th>Setor</th>
                     <th>Retorno</th>
+                    <th>Situação</th>
+                    <th>Motivo de finalização/cancelamento</th>
                 </tr>';
 
         // Loop através dos registros e exibir em linhas da tabela
@@ -46,6 +48,8 @@ if (isset($_GET['id'])) {
             $tabelaHTML .= '<td>' . $row['Risco'] . '</td>';
             $tabelaHTML .= '<td>' . $row['Setor'] . '</td>';
             $tabelaHTML .= '<td>' . $row['Retorno'] . '</td>';
+            $tabelaHTML .= '<td>' . $row['Situacao'] . '</td>';
+            $tabelaHTML .= '<td>' . $row['Motivo_canc'] . '</td>';
             $tabelaHTML .= '</tr>';
         }
 

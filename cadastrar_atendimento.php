@@ -82,8 +82,12 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
             </div>
             <div class="conteudoForm">
                 <div class="conjInput">
+                    <label class="label" for="Observacao">Observação:</label><br>
+                    <textarea class="input" name="Observacao" id="Observacao" cols="20" rows="8"></textarea><br>
+                </div> 
+                <div class="conjInput">
                     <label class="label" for="Responsavel_legal">Responsavel legal do paciente:</label><br>
-                    <input class="input" type="text" name="Responsavel_legal" id="Responsavel_legal"><br>
+                    <input class="input" type="text" name="Responsavel_legal" id="Responsavel_legal" required><br>
                     <label for="Setor">Setor:</label><br>
                     <input class="label" class="input" type="text" name="Setor" id="Setor"><br> 
                     <label class="label" for="Protocolo">Protocolo:</label><br>

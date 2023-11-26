@@ -194,13 +194,21 @@
     var excluirButtons = document.querySelectorAll('.finalizar-btnAtd');
     excluirButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            var userId = this.getAttribute('data-id');
+            var protocolo = this.getAttribute('data-id');
             var confirmDelete = confirm('Tem certeza de que deseja finalizar este atendimento?');
             
             if (confirmDelete) {
-                var userId = this.getAttribute('data-id'); 
+                var motivo = null;
+                
+                motivo = prompt('Digite o motivo do(a) cancelamento/finalização:');
+                // Verifica se o motivo foi preenchido
+                if (motivo === null || motivo.trim() === '') {
+                    alert('O motivo é obrigatório.');
+                    return;
+                }
+
                 // Faz uma solicitação para o arquivo PHP de finalização
-                fetch('finalizar_atendimento.php?Protocolo=\'' + userId + '\'', {
+                fetch('finalizar_atendimento.php?Protocolo=\'' + protocolo + '\'&Motivo=' + motivo, {
                     method: 'GET'
                 })
                 .then(response => response.text())

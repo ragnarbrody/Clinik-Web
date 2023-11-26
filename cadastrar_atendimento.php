@@ -77,7 +77,7 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                     <label class="label" for="CPF_paciente">CPF do Paciente:</label><br>
                     <input class="input" type="text" name="CPF_paciente" id="CPF_paciente"><br>
                     <label class="label" for="Email_paciente">Email do Paciente:</label><br>
-                    <input class="input" type="text" name="Email_paciente" id="Email_paciente"><br>
+                    <input class="input" type="text" readonly name="Email_paciente" id="Email_paciente"><br>
                 </div> 
             </div>
             <div class="conteudoForm">

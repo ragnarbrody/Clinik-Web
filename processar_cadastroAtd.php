@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 //Configurações do servidor de email
                 //Apenas para debug de desenvolvimento
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 //
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
@@ -77,11 +77,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->CharSet = 'UTF-8';
                 $mail->isHTML(true); //Email em formato HTML
                 $mail->SetLanguage("br");
-                $mail->Subject = 'AGENDAMENTO - Agendamento para o dia: '. $Data_atendimento_formatada . ', <strong>Confirmado!</strong> - ' . $_SESSION['Nome_clinica'];
+                $mail->Subject = 'AGENDAMENTO - Agendamento para o dia: '. $Data_atendimento_formatada . ', Confirmado! - ' . $_SESSION['Nome_clinica'];
                 $message = '<h1>Olá, ' . $Paciente . ',</h1><br>';
                 $message .= 'Seu agendamento foi confirmado para o dia: ' . $Data_atendimento_formatada . ',<br>';
-                $message .= 'Com horário de início estimado para: ' . $Horario_inicio . ', para o serviço: ' . $Servico . '.<br><br>';
-                $message .= 'Atenciosamente,' . $_SESSION['Nome_clinica'];
+                $message .= 'Com horário de início estimado para às: ' . $Horario_inicio . ' horas, para o serviço: ' . $Servico . '.<br><br>';
+                $message .= 'Atenciosamente, ' . $_SESSION['Nome_clinica'];
                 
                 $mail->Body = $message;
                 $mail->Body = $message;

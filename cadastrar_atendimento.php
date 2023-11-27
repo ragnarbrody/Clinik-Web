@@ -75,9 +75,9 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                         <option value="Não" selected>Não</option>
                     </select><br>
                     <label class="label" for="CPF_paciente">CPF do Paciente:</label><br>
-                    <input class="input" type="text" name="CPF_paciente" id="CPF_paciente"><br>
+                    <input class="input" type="text" name="CPF_paciente" id="CPF_paciente" readonly><br>
                     <label class="label" for="Email_paciente">Email do Paciente:</label><br>
-                    <input class="input" type="text" readonly name="Email_paciente" id="Email_paciente"><br>
+                    <input class="input" type="text" readonly name="Email_paciente" id="Email_paciente" readonly><br>
                 </div> 
             </div>
             <div class="conteudoForm">
@@ -89,7 +89,7 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                     <label class="label" for="Responsavel_legal">Responsavel legal do paciente:</label><br>
                     <input class="input" type="text" name="Responsavel_legal" id="Responsavel_legal" required><br>
                     <label for="Setor">Setor:</label><br>
-                    <input class="label" class="input" type="text" name="Setor" id="Setor"><br> 
+                    <input class="label" class="input" type="text" name="Setor" id="Setor" readonly><br> 
                     <label class="label" for="Protocolo">Protocolo:</label><br>
                     <input class="input" type="text" name="Protocolo" id="Protocolo" value='<?php echo($protocolo); ?>' readonly><br>
                 </div> 

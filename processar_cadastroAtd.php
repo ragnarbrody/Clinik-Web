@@ -45,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($mysqli->query($sql)) {
         // Verifica se a Situacao é "Agendado" antes de enviar o e-mail
         if ($Situacao == "Agendado"){
+
             //Data formatada para o envio de e-mails:
             $Data_atendimento_formatada = date("d/m/Y", strtotime($Data_atendimento));
             //Create an instance; passing `true` enables exceptions
             $mail = new PHPMailer(true);
-
             try {
                 //Configurações do servidor de email
                 //Apenas para debug de desenvolvimento
@@ -77,11 +77,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->CharSet = 'UTF-8';
                 $mail->isHTML(true); //Email em formato HTML
                 $mail->SetLanguage("br");
-                $mail->Subject = 'AGENDAMENTO - Agendamento para o dia: '. $Data_atendimento_formatada . ', Confirmado! - ' . $_SESSION['Nome_clinica'];
-                $message = '<h1>Olá, ' . $Paciente . ',</h1><br>';
-                $message .= 'Seu agendamento foi confirmado para o dia: ' . $Data_atendimento_formatada . ',<br>';
-                $message .= 'Com horário de início estimado para às: ' . $Horario_inicio . ' horas, para o serviço: ' . $Servico . '.<br><br>';
-                $message .= 'Atenciosamente, ' . $_SESSION['Nome_clinica'];
+
+                if($Retorno == "Sim")
+                {
+                    $mail->Subject = 'AGENDAMENTO PARA RETORNO - Para o dia: '. $Data_atendimento_formatada . ', Confirmado! - ' . $_SESSION['Nome_clinica'];
+                    $message = '<h1>Olá, ' . $Paciente . ',</h1><br>';
+                    $message .= 'Seu agendamento de retorno foi confirmado para o dia: ' . $Data_atendimento_formatada . ',<br>';
+                    $message .= 'Com horário de início estimado para às: ' . $Horario_inicio . ' horas, para o serviço: ' . $Servico . '.<br>';
+                    $message .= 'Em caso de dúvidas, entre em contato com a clínica.<br><br>';
+                    $message .= 'Atenciosamente, ' . $_SESSION['Nome_clinica'];
+                }
+                else
+                {
+                    $mail->Subject = 'AGENDAMENTO - Para o dia: '. $Data_atendimento_formatada . ', Confirmado! - ' . $_SESSION['Nome_clinica'];
+                    $message = '<h1>Olá, ' . $Paciente . ',</h1><br>';
+                    $message .= 'Seu agendamento foi confirmado para o dia: ' . $Data_atendimento_formatada . ',<br>';
+                    $message .= 'Com horário de início estimado para às: ' . $Horario_inicio . ' horas, para o serviço: ' . $Servico . '.<br><br>';
+                    $message .= 'Atenciosamente, ' . $_SESSION['Nome_clinica'];
+                }
                 
                 $mail->Body = $message;
                 $mail->Body = $message;

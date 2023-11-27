@@ -182,10 +182,10 @@
     //------------------------------------------//
 
     //Funções para o modal de edição de atendimento
-    function openModalEditAtd(userId) {
+    function openModalEditAtd(protocolo) {
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
-        iframe.src = 'editar_atendimento.php?id=' + userId;
+        iframe.src = 'editar_atendimento.php?protocolo=' + protocolo;
         iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
     }

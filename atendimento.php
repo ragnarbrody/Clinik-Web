@@ -61,7 +61,7 @@ if ($sql_query->num_rows > 0) {
 
     // Loop através dos registros e exibir em linhas da tabela
     while ($row = $sql_query->fetch_assoc()) {
-        $dataAtendimentoFormatada = date('d-m-Y', strtotime($row['Data_atendimento']));
+        $dataAtendimentoFormatada = date('d/m/Y', strtotime($row['Data_atendimento']));
 
         $tabelaHTML .= '<tr>';
         $tabelaHTML .= '<td>' . $row['Situacao'] . '</td>';
@@ -74,7 +74,7 @@ if ($sql_query->num_rows > 0) {
         $tabelaHTML .= '<td>' . $row['Risco'] . '</td>';
         $tabelaHTML .= '<td>' . $row['Setor'] . '</td>';
         $tabelaHTML .= '<td>' . $row['Retorno'] . '</td>';
-        $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEditAtd(' . $row["Protocolo"] . ')">Editar</button></td>';
+        $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEditAtd(\'' . $row["Protocolo"] . '\')">Editar</button></td>';
         $tabelaHTML .= '<td>' . '<button class="finalizar-btnAtd" data-id="' . $row["Protocolo"] . '">'.$botao.'</button>' . '</td>';
         $tabelaHTML .= '</tr>';
     }
@@ -161,8 +161,8 @@ if ($sql_query->num_rows > 0) {
                     </div>                   
                 </div>
                 <!--Os modais abaixo só aparecem quando chamados pelas respectivas funções-->
-                <div class="modal">
-                    <div class="modal-content" id="editarAtd">
+                <div class="modal" id="editarAtd">
+                    <div class="modal-content">
                         <span class="close-btn" onclick="closeModal()">&times;</span>
                         <iframe src="editar_atendimento.php" width="100%" height="400"></iframe>
                     </div>

@@ -20,6 +20,9 @@ if (isset($_GET['protocolo'])) {
 
         // Converte a data do formato do banco de dados para o formato desejado
         $atendimentoParaEditar['Data_atendimento'] = date('Y-m-d', strtotime($atendimentoParaEditar['Data_atendimento']));
+        
+        // Pega a situação do atendimento
+        $situacao = $atendimentoParaEditar['Situacao'];
 
         // Define o serviço selecionado
         $selectedServico = $atendimentoParaEditar['Servico'];
@@ -68,11 +71,29 @@ if (isset($_GET['protocolo'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/modal.css">
     <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
-    <title>Edição de Atendimento</title>
+    <?php
+        if ($situacao == 'Ativo') {
+            echo "<title>Edição de Atendimento</title>";
+        } else  if ($situacao == 'Atrasado') {
+            echo "<title>Edição de Atendimento Atrasado</title>";
+        }  
+        else  if ($situacao == 'Agendado') {
+            echo "<title>Edição de Agendamento</title>";
+        } 
+    ?>
 </head>
 <body>
     <div class="addUser">
-        <h2>Edição de Atendimento</h2>
+        <?php
+            if ($situacao == 'Ativo') {
+                echo "<h2>Edição de Atendimento</h2>";
+            } else  if ($situacao == 'Atrasado') {
+                echo "<h2>Edição de Atendimento Atrasado</h2>";
+            }  
+            else  if ($situacao == 'Agendado') {
+                echo "<h2>Edição de Agendamento</h2>";
+            } 
+        ?>
         <form action="processar_atualizacaoAtd.php" method="POST" class="form_addUser">
             <div class="conteudoForm">
                 <div class="conjInput">
@@ -95,7 +116,13 @@ if (isset($_GET['protocolo'])) {
                     <label class="label" for="Paciente">Paciente:</label><br>
                     <input class="input" type="text" name="Paciente" id="Paciente" readonly value="<?php echo $atendimentoParaEditar['Nome_paciente']; ?>"><br>
                     <label class="label" for="Data_atendimento">Data de atendimento:</label><br>
-                    <input class="input" type="date" name="Data_atendimento" id="Data_atendimento" value="<?php echo $atendimentoParaEditar['Data_atendimento']; ?>"><br>
+                    <?php
+                    if ($situacao == 'Ativo' || $situacao == 'Atrasado') {
+                        echo "<input class='input' type='date' name='Data_atendimento' id='Data_atendimento' value='{$atendimentoParaEditar['Data_atendimento']}' readonly><br>";
+                    } else {
+                        echo "<input class='input' type='date' name='Data_atendimento' id='Data_atendimento' value='{$atendimentoParaEditar['Data_atendimento']}'><br>";
+                    }  
+                    ?>
                 </div>  
             </div>
             <div class="conteudoForm">

@@ -34,8 +34,8 @@ if (isset($_GET['id'])) {
 
         // Loop através dos registros e exibir em linhas da tabela
         while ($row = $sql_query->fetch_assoc()) {
-            $dataAtendimentoFormatada = date('d-m-Y', strtotime($row['Data_atendimento']));
-            $dataFinalizadoFormatada = date('d-m-Y', strtotime($row['Data_finalizado']));
+            $dataAtendimentoFormatada = date('d/m/Y', strtotime($row['Data_atendimento']));
+            $dataFinalizadoFormatada = date('d/m/Y', strtotime($row['Data_finalizado']));
 
             $tabelaHTML .= '<tr>';
             $tabelaHTML .= '<td>' . $row['Protocolo'] . '</td>';

@@ -19,7 +19,8 @@ main
 
 .conteudoPerfil
 {
-    height: 100%;
+    height: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,14 +28,57 @@ main
 
 .containerConteudo
 {
+    max-height: 90%;
+    height: 60%;
+    min-height: 50%;
+    max-width: 90%;
+    width: 30%;
+    min-width: 30%;
     padding: 1vw;
     width: fit-content;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
     background-color: aliceblue;
     box-shadow: 0 0 20px 0 #3C9FAC;
     border-radius:  10px;
     justify-content: space-around;
+}
+
+.conjDados
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.dadosFoto
+{
+    margin-left: 10px;
+}
+
+.dados
+{
+    margin-right: 2vw;
+}
+
+.campos
+{
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #473724;
+    font-weight: bold;
+    font-variant-caps: titling-caps;
+}
+
+.fotoPerfil 
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #3C9FAC;
+    box-shadow: 2px 4px 13px 0px rgba(0, 0, 0, 0.5);
 }
 /**fim do estilo do main**/

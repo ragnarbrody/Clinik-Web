@@ -27,12 +27,23 @@ function buscarDadosClinica($idClinica) {
 
     // Buscar Profissionais
     $sqlProfissionais = "SELECT ID, Nome, Setor FROM usuarios WHERE ID_clinica = '$idClinica' AND Cargo = 'ESPECIALISTA'";
-    $resultProfissionais = $mysqli->query($sqlProfissionais);
-    
+    $resultProfissionais = $mysqli->query($sqlProfissionais);  
+
     // Adicionar dados ao array
     $dados['pacientes'] = $resultPacientes->fetch_all(MYSQLI_ASSOC);
     $dados['servicos'] = $resultServicos->fetch_all(MYSQLI_ASSOC);
     $dados['profissionais'] = $resultProfissionais->fetch_all(MYSQLI_ASSOC);
 
     return $dados;
+}
+
+function contarAtendimentos($idUsuario) {
+    global $mysqli;
+
+    // Contar atendimentos para o usuário logado
+    $sqlContarAtendimentos = "SELECT COUNT(*) AS total FROM atendimentos WHERE ID_profResponsavel = '$idUsuario' AND Situacao = 'Ativo'";
+    $resultContarAtendimentos = $mysqli->query($sqlContarAtendimentos);
+    $row = $resultContarAtendimentos->fetch_assoc();
+
+    return $row['total'];
 }

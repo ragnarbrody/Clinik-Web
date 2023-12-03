@@ -53,15 +53,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($totalUsuarios >= $limiteUsuarios) 
             {
                 echo '<script>
-                alert("Limite de usuários atingido para esta clínica.");
+                alert("Limite de usuários atingido!");
                 window.parent.closeModalAndReload(); // Chama a função do pai para fechar o modal e recarregar a página pai
                 </script>';
             } 
             else 
             {
+                if (isset($_FILES['foto'])){
+                    $foto = $_FILES['foto'];
+                    if ($foto['error'] === 0) {
+                        $nomeFoto = $mysqli->real_escape_string($foto['name']);
+                        $tamanhoFoto = $foto['size'];
+                        $tipoFoto = $foto['type'];
+                        $caminhoTemporario = $foto['tmp_name'];
+                
+                        // Verifica se o arquivo é uma imagem
+                        if (strpos($tipoFoto, 'image') !== false) {
+                            // Move a imagem para um diretório específico
+                            $caminhoDestino = './Imagens/fotosPerfil/' . $nomeFoto;
+                            move_uploaded_file($caminhoTemporario, $caminhoDestino);
+                            $sql = "INSERT INTO usuarios (Nome, Nacionalidade, Setor, Cargo, CRM, Apelido, Senha, Especialidade, CPF, RG, Data_nascimento, Email, Telefone, ID_clinica, Foto) 
+                            VALUES ('$nome', '$nacionalidade', '$setor', '$cargo', '$crm', '$nick', '$senha', '$especialidade', '$cpf', '$rg', '$data_nascimento', '$email', '$telefone', '$idClinica', '$caminhoDestino')";
+                        } else {
+                            echo '<script>
+                                alert("Erro: O arquivo enviado não é uma imagem.");
+                                window.parent.closeModalAndReload(); // Chama a função do pai para fechar o modal e recarregar a página pai
+                            </script>';
+                        }
+                    }else{
+                        $sql = "INSERT INTO usuarios (Nome, Nacionalidade, Setor, Cargo, CRM, Apelido, Senha, Especialidade, CPF, RG, Data_nascimento, Email, Telefone, ID_clinica) 
+                        VALUES ('$nome', '$nacionalidade', '$setor', '$cargo', '$crm', '$nick', '$senha', '$especialidade', '$cpf', '$rg', '$data_nascimento', '$email', '$telefone', '$idClinica')";
+                    }
+                }
                 // Insere o novo usuário no banco de dados
-                $sql = "INSERT INTO usuarios (Nome, Nacionalidade, Setor, Cargo, CRM, Apelido, Senha, Especialidade, CPF, RG, Data_nascimento, Email, Telefone, ID_clinica) 
-                VALUES ('$nome', '$nacionalidade', '$setor', '$cargo', '$crm', '$nick', '$senha', '$especialidade', '$cpf', '$rg', '$data_nascimento', '$email', '$telefone', '$idClinica')";
                 if ($mysqli->query($sql)) {
                     echo '<script>
                         alert("Usuário cadastrado com sucesso!");

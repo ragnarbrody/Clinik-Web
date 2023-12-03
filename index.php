@@ -27,29 +27,45 @@ if(isset($_POST['usuario']) && isset($_POST['senha']))
         {
             $usuario = $sql_query->fetch_assoc();
 
+            $sql_idUser = "SELECT ID FROM usuarios WHERE Apelido = '$nickname' AND Senha = '$senha'";
+            $sql_queryUser = $mysqli->query($sql_idUser) or die("Falha na execução do código SQL: " . $mysqli->error);
+            $idUser = $sql_queryUser->fetch_assoc();
+
             if(!isset($_SESSION))
             {
                 session_start();
             }
             
-            // Dados do usuário
-            $_SESSION['id'] = $usuario['ID'];
-            $_SESSION['nome'] = $usuario['Nome'];
-            $_SESSION['cargo'] = $usuario['Cargo'];
-            $_SESSION['email'] = $usuario['Email'];
-            $_SESSION['apelido'] = $usuario['Apelido'];
-            $_SESSION['telefone'] = $usuario['Telefone'];
-            $_SESSION['crm'] = $usuario['Crm'];
-            $_SESSION['especialidade'] = $usuario['Especialidade'];
-            $_SESSION['ID_clinica'] = $usuario['ID_clinica'];
+            // Verificar se a coluna 'ID' está definida antes de acessá-la
+            if (isset($usuario['ID'])) {
+                // Dados do usuário
+                $_SESSION['id'] = $idUser['ID'];
+                $_SESSION['nome'] = $usuario['Nome'];
+                $_SESSION['cargo'] = $usuario['Cargo'];
+                $_SESSION['email'] = $usuario['Email'];
+                $_SESSION['apelido'] = $usuario['Apelido'];
+                $_SESSION['telefone'] = $usuario['Telefone'];
+                $_SESSION['crm'] = $usuario['Crm'];
+                $_SESSION['especialidade'] = $usuario['Especialidade'];
+                $_SESSION['ID_clinica'] = $usuario['ID_clinica'];
+                $_SESSION['Foto'] = $usuario['Foto'];
+                $_SESSION['Data_nascimento'] = $usuario['Data_nascimento'];
+                $_SESSION['Nacionalidade'] = $usuario['Nacionalidade'];
+                $_SESSION['Setor'] = $usuario['Setor'];
+                $_SESSION['CPF'] = $usuario['CPF'];
+                $_SESSION['RG'] = $usuario['RG'];
 
-            // Dados da clínica
-            $_SESSION['Nome_clinica'] = $usuario['Nome_clinica'];
-            $_SESSION['Email_clinica'] = $usuario['Email_clinica'];
-            $_SESSION['Senha_email'] = $usuario['Senha_email'];
-            $_SESSION['Logradouro'] = $usuario['Logradouro'];
-            $_SESSION['Cidade'] = $usuario['Cidade'];
-            header("Location: menuPrincipal.php");
+                // Dados da clínica
+                $_SESSION['Nome_clinica'] = $usuario['Nome_clinica'];
+                $_SESSION['Email_clinica'] = $usuario['Email_clinica'];
+                $_SESSION['Senha_email'] = $usuario['Senha_email'];
+                $_SESSION['Logradouro'] = $usuario['Logradouro'];
+                $_SESSION['Cidade'] = $usuario['Cidade'];
+
+                header("Location: menuPrincipal.php");
+            } else {
+                echo "Erro: Coluna 'ID' não encontrada no resultado da consulta.";
+            }
         }
         else
         {

@@ -67,14 +67,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Verifica se a data foi alterada
                 if ((date("Y-m-d", strtotime($dataAnterior)) != date("Y-m-d", strtotime($Data_atendimento))) || ($horaAnteriorFormatada != $horarioInicioFormatado)) {
                     // Consulta SQL para obter o email do paciente
-                    $sqlEmailPaciente = "SELECT email FROM paciente WHERE ID = (SELECT ID_paciente FROM atendimentos WHERE Protocolo = $Protocolo)";
+                    $sqlEmailPaciente = "SELECT email FROM paciente WHERE ID = (SELECT ID_paciente FROM atendimentos WHERE Protocolo = '$Protocolo')";
                     $resultEmailPaciente = $mysqli->query($sqlEmailPaciente);
 
-                    if ($resultEmailPaciente->num_rows > 0) {
-                        $emailPaciente = $resultEmailPaciente->fetch_assoc()['email'];
+                    // Verifica se a consulta foi bem-sucedida
+                    if ($resultEmailPaciente !== false) {
+                        // Verifica se há pelo menos uma linha retornada
+                        if ($resultEmailPaciente->num_rows > 0) {
+                            $emailPaciente = $resultEmailPaciente->fetch_assoc()['email'];
+                        } else {
+                            // Trata o caso em que não há resultados
+                            echo "Email do paciente não encontrado.";
+                            exit;
+                        }
                     } else {
-                        // Trata erro, email do paciente não encontrado
-                        echo "Email do paciente não encontrado.";
+                        // Trata o caso em que houve um erro na consulta SQL
+                        echo "Erro na consulta SQL: " . $mysqli->error;
                         exit;
                     }
                     
@@ -107,10 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $mail->CharSet = 'UTF-8';
                         $mail->isHTML(true); //Email em formato HTML
                         $mail->SetLanguage("br");
-                        $mail->Subject = 'ALTERAÇÃO - Agendamento para o dia: '. $dataAnterior . ', alterado! - ' . $_SESSION['Nome_clinica'];
+                        $mail->Subject = 'ALTERAÇÃO - Agendamento para o dia: '. date('d/m/Y', strtotime($dataAnterior)) . ', alterado! - ' . $_SESSION['Nome_clinica'];
                         $message = '<h1>Olá, ' . $Paciente . ',</h1><br>';
-                        $message .= 'Seu agendamento para o dia: ' . $dataAnterior . ', e início para às: '. $horaAnteriorFormatada .', e para o serviço: ' . $Servico . ', foi <b>alterado!</b><br>';
-                        $message .= 'A nova data para seu agendamento agora é para o dia: '. $Data_atendimento .' e para o início às: '. $horarioInicioFormatado .'<br>';
+                        $message .= 'Seu agendamento para o dia: ' . date('d/m/Y', strtotime($dataAnterior)) . ', com início para às: '. $horaAnteriorFormatada .', e para o serviço: ' . $Servico . ', foi <b>alterado!</b><br>';
+                        $message .= 'A nova data para seu agendamento agora é para o dia: <strong>'. date('d/m/Y', strtotime($Data_atendimento)) .'</strong> e hora de início para às: <strong>'. $horarioInicioFormatado .'</strong><br>';
                         $message .= 'Verifique com a clínica como proceder!<br><br>';
                         $message .= 'Atenciosamente, ' . $_SESSION['Nome_clinica'];
                         

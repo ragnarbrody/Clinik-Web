@@ -17,63 +17,41 @@ include('./protect.php')
         <title>Perfil</title>
     </head>
     <body>
-        <header>
-            <div class="Logo Icon">
-                <img src="./Imagens/Logo.png" alt="Logo do aplicativo Clinik Flow" class="Clinik">
-                <img src="./Imagens/Linhas.png" alt="" class="Linhas">
-            </div>
-            <div class="Logo nomeSlogan">
-                <img src="./Imagens/Clinik.png" alt="Nome do aplicativo Clinik Flow" class="Nome">
-                <p class="Slogan">Seja bem-vindo(a) ao Clinik Flow, <?php echo $_SESSION['nome']; ?></p>
-            </div>
-        </header>
+        <!--////////--> 
+        <?php include 'header.php'; ?>
+        <!--////////--> 
         <main>
             <!-- classes para criação dos menus em desktop e mobile-->
-            <nav  class="nav-bar">
-                <div class="menu">
-                    <ul class="menuServicos">
-                        <li class="nav-item"><a href="./perfil.php" class = "nav-link" id="item0"><img src="./Imagens/iconPerfil2.png" alt="icone de usuarios" class="icons">Perfil</a></li>
-                        <li class="nav-item"><a href="./usuarios.php" class = "nav-link"  id="item1"><img src="./Imagens/IconPerfil.png" alt="icone de usuarios" class="icons">Usuarios</a></li>
-                        <li class="nav-item"><a href="./pacientes.php" class = "nav-link"  id="item2"><img src="./Imagens/Pacientes.png" alt="icone de pacientes" class="icons">Pacientes</a></li>
-                        <li class="nav-item"><a href="./servicos.php" class = "nav-link"  id="item3"><img src="./Imagens/box.png" alt="icone de serviços" class="icons">Serviços</a></li>
-                        <li class="nav-item"><a href="./atendimento.php" class = "nav-link"  id="item3"><img src="./Imagens/Agenda.png" alt="icone de usuarios" class="icons">Agenda/Atendimento</a></li>
-                        <li class="nav-item"><a href="#" class = "nav-link"  id="item4"><img src="./Imagens/Financeiro.png" alt="icone de usuarios" class="icons">Financeiro</a></li>
-                        <li class="nav-item" class="btnSair no-ajax"><a href="./logout.php" class = "nav-link" ><img src="./Imagens/sair.png" alt="icone de usuarios" class="icons">Sair</a></li>
-                    </ul>
-                </div>
-    
-                
-                <div class="mobile-menu-icon">
-                    <button onclick="menuShow()"><img class="icon" src="./Imagens/burguer.png" alt=""></button>
-                </div>
-            </nav>
-
-            <div class = "mobile-menu">
-                <ul class="menuServicos">
-                    <li class="nav-item"><a href="./perfil.php" class = "nav-link" id="item0"><img src="./Imagens/iconPerfil2.png" alt="icone de usuarios" class="icons">Perfil</a></li>
-                    <li class="nav-item"><a href="./usuarios.php" class = "nav-link"  id="item1"><img src="./Imagens/IconPerfil.png" alt="icone de usuarios" class="icons">Usuarios</a></li>
-                    <li class="nav-item"><a href="./pacientes.php" class = "nav-link"  id="item2"><img src="./Imagens/Pacientes.png" alt="icone de pacientes" class="icons">Pacientes</a></li>
-                    <li class="nav-item"><a href="./servicos.php" class = "nav-link"  id="item3"><img src="./Imagens/box.png" alt="icone de serviços" class="icons">Serviços</a></li>
-                    <li class="nav-item"><a href="./atendimento.php" class = "nav-link"  id="item3"><img src="./Imagens/Agenda.png" alt="icone de usuarios" class="icons">Agenda/Atendimento</a></li>
-                    <li class="nav-item"><a href="#" class = "nav-link"  id="item4"><img src="./Imagens/Financeiro.png" alt="icone de usuarios" class="icons">Financeiro</a></li>
-                    <li class="nav-item" class="btnSair no-ajax"><a href="./logout.php" class = "nav-link" ><img src="./Imagens/sair.png" alt="icone de usuarios" class="icons">Sair</a></li>
-                </ul>
-            </div>   
+            <?php include 'menu.php'; ?>
             <!--////////--> 
             <div class="conteudoPerfil">
                 <div class="containerConteudo">
-                    <h2>Bem Vindo(a)!</h2>
-                    <p>Nesta página você encontra seus dados de usuário:</p>
-                    <div class="dados">
-                        <p>seu nome é: <?php echo $_SESSION['nome'];?></p>
-                        <p>seu cargo no aplicativo é: <?php echo $_SESSION['cargo'];?></p>
-                        <p>seu email é: <?php echo $_SESSION['email'];?></p>
-                        <p>seu nome de usuário é: <?php echo $_SESSION['apelido'];?></p>
-                        <p>seu telefone é: <?php echo $_SESSION['telefone'];?></p>
-                        <p>o nome da sua clinica é: <?php echo $_SESSION['Nome_clinica'];?></p>
-                        <p>o endereço da sua clinica é: <?php echo $_SESSION['Logradouro'];?></p>
-                        <p>o email da sua clinica é: <?php echo $_SESSION['Email_clinica'];?></p>
-                        <p>a senha de app é: <?php echo $_SESSION['Senha_email'];?></p>
+                    <div class="conjDados">
+                        <?php if (isset($_SESSION['Foto'])) : ?>
+                            <img src="<?php echo $_SESSION['Foto']; ?>" alt="Foto de Perfil" class="fotoPerfil">
+                        <?php else : ?>
+                            <img src="./Imagens/fotosPerfil/iconPerfilPdr.png" alt="Foto de Perfil" class="fotoPerfil">
+                        <?php endif; ?>
+                        <div class="dadosFoto">
+                            <p class="campos">Nome:</p><?php echo empty($_SESSION['nome']) ? "[SEM INFO]" : $_SESSION['nome'];?><br>
+                            <p class="campos">Data de Nascimento:</p><?php echo empty($_SESSION['Data_nascimento']) ? "[SEM INFO]" : date("d/m/Y", strtotime($_SESSION['Data_nascimento']));?><br>
+                            <p class="campos">CPF:</p><?php echo empty($_SESSION['CPF']) ? "[SEM INFO]" : $_SESSION['CPF'];?><br>
+                            <p class="campos">RG:</p><?php echo empty($_SESSION['RG']) ? "[SEM INFO]" : $_SESSION['RG'];?><br>
+                        </div>
+                    </div>
+                    <div class="conjDados">
+                        <div class="dados">
+                            <p class="campos">Cargo:</p><?php echo empty($_SESSION['cargo']) ? "[SEM INFO]" : $_SESSION['cargo'];?><br>
+                            <p class="campos">Email:</p><?php echo empty($_SESSION['email']) ? "[SEM INFO]" : $_SESSION['email'];?><br>
+                            <p class="campos">Apelido:</p><?php echo empty($_SESSION['apelido']) ? "[SEM INFO]" : $_SESSION['apelido'];?><br>
+                            <p class="campos">Telefone:</p><?php echo empty($_SESSION['telefone']) ? "[SEM INFO]" : $_SESSION['telefone'];?><br>
+                        </div>
+                        <div class="dados">
+                            <p class="campos">CRM:</p><?php echo empty($_SESSION['crm']) ? "[SEM INFO]" : $_SESSION['crm'];?><br>
+                            <p class="campos">Especialidade:</p><?php echo empty($_SESSION['especialidade']) ? "[SEM INFO]" : $_SESSION['especialidade'];?><br>
+                            <p class="campos">Nacionalidade:</p><?php echo empty($_SESSION['Nacionalidade']) ? "[SEM INFO]" : $_SESSION['Nacionalidade'];?><br>
+                            <p class="campos">Setor:</p><?php echo empty($_SESSION['Setor']) ? "[SEM INFO]" : $_SESSION['Setor'];?><br>
+                        </div>
                     </div>
                 </div>
             </div>

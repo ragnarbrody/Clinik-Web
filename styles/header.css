@@ -28,6 +28,13 @@ header
     object-fit: fill;
 }
 
+.clinik_A
+{
+    height: 100px;
+    width: 50px;
+    margin-right: 30px;
+}
+
 .Logo.Icon .Linhas
 {
     height: 80%;
@@ -45,6 +52,12 @@ header
 .Logo.nomeSlogan .Nome
 {
     object-fit: fill;
+    width: 100%;
+    max-height: 100%;
+}
+
+.nome_A
+{
     width: 65%;
     min-height: 65%;
     max-height: 65%;
@@ -53,7 +66,7 @@ header
 .Logo.nomeSlogan .Slogan
 {
     color: #3C9FAC;
-    margin: 0 auto;
+    margin: 0;
     min-height: 30%;
     max-height: 30%;
     font-family: cursive;

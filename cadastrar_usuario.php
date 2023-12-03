@@ -10,19 +10,37 @@
 <body>
     <div class="addUser">
         <h2>Cadastro de Usuário</h2>
-        <form action="processar_cadastroUser.php" method="POST" class="form_addUser">
+        <form action="processar_cadastroUser.php" method="POST" class="form_addUser" enctype="multipart/form-data">
             <div class="conteudoForm">
-                <div class="conjInput">
+                <div class="conjInputFoto">
+                    <img id="thumbnail" src="#" alt="Thumbnail da Foto" style="display:none"><br>
+                    <label class="label" for="foto" id="lblFoto">Clique para escolher uma foto</label><br>
+                    <input class="input" type="file" id="foto" name="foto" accept="image/*" style="display:none" onchange="exibirThumbnail()"><br>
+                    <script>
+                        function exibirThumbnail() {
+                            var inputFoto = document.getElementById('foto');
+                            var thumbnail = document.getElementById('thumbnail');
+
+                            if (inputFoto.files && inputFoto.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    thumbnail.src = e.target.result;
+                                    thumbnail.style.display = 'block';
+                                };
+
+                                reader.readAsDataURL(inputFoto.files[0]);
+                            }
+                        }
+                    </script>
+                </div>  
+                <div class="conjInput">    
                     <label class="label" for="nome">Nome Completo:</label><br>
-                    <input class="input" type="text" id="nome" name="nome" required><br>
+                    <input class="input" type="text" id="nome" name="nome" required><br>      
                     <label class="label" for="email">Email:</label><br>
                     <input class="input" type="email" id="email" name="email" required><br>
-                </div>  
-                <div class="conjInput">          
                     <label class="label" for="nacionalidade">Nacionalidade:</label><br>
                     <input class="input" type="text" id="nacionalidade" name="nacionalidade" required><br>
-                    <label class="label" for="setor">Setor:</label><br>
-                    <input class="input" type="text" id="setor" name="setor" required><br>
                 </div>
             </div>
             <div class="conteudoForm">
@@ -49,6 +67,8 @@
                     <input class="input" type="text" id="especialidade" name="especialidade"><br>
                     <label class="label" for="cpf">CPF:</label><br>
                     <input class="input" type="number" id="cpf" name="cpf" required><br>
+                    <label class="label" for="setor">Setor:</label><br>
+                    <input class="input" type="text" id="setor" name="setor" required><br>
                 </div>
                 <div class="conjInput">
                     <label class="label" for="rg">RG:</label><br>

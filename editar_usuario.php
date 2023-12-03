@@ -18,8 +18,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $novoRg = $_POST['novoRg'];
     $novaData_nascimento = $_POST['novaData_nascimento'];
     $novoTelefone = $_POST['novoTelefone'];
-    // Atualizar os dados do usuário no banco de dados
-    $sql = "UPDATE usuarios SET Nome = '$novoNome', Email = '$novoEmail', Nacionalidade = '$novaNacionalidade', Setor = '$novoSetor', Cargo = '$novoCargo', Crm = '$novoCrm', Apelido = '$novoApelido', Senha = '$novaSenha', Especialidade = '$novaEspecialidade', CPF = '$novoCpf', RG = '$novoRg', Data_nascimento = '$novaData_nascimento', Telefone = '$novoTelefone' WHERE ID = $id";
+
+    // Upload da nova foto
+    $fotoPath = '';
+
+    if ($_FILES['foto']['error'] == 0) {
+        $uploadDir = './Imagens/fotosPerfil/';
+        $uploadFile = $uploadDir . basename($_FILES['foto']['name']);
+        
+        // Move o arquivo para o diretório de upload
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $uploadFile)) {
+            $fotoPath = $uploadFile;
+        } else {
+            echo "Erro no upload da foto.";
+            exit;
+        }
+    }else {
+        // Não houve upload de nova foto, manter o caminho existente
+        $fotoPath = $_POST['fotoExistente'];
+    }
+
+    // Atualizar os dados do usuário no banco de dados, incluindo o caminho da foto
+    $sql = "UPDATE usuarios SET Nome = '$novoNome', Email = '$novoEmail', Nacionalidade = '$novaNacionalidade', Setor = '$novoSetor', Cargo = '$novoCargo', Crm = '$novoCrm', Apelido = '$novoApelido', Senha = '$novaSenha', Especialidade = '$novaEspecialidade', CPF = '$novoCpf', RG = '$novoRg', Data_nascimento = '$novaData_nascimento', Telefone = '$novoTelefone', Foto = '$fotoPath' WHERE ID = $id";
 
     if ($mysqli->query($sql)) {
         echo '<script>
@@ -64,20 +84,47 @@ if (isset($_GET['id'])) {
 <body>
     <div class="addUser">
         <h2>Editar Usuário</h2>
-        <form action="editar_usuario.php" method="POST" class="form_addUser">
+        <form action="editar_usuario.php" method="POST" class="form_addUser" enctype="multipart/form-data">
             <div class="conteudoForm">
                 <input type="hidden" name="id" value="<?php echo $row['ID']; ?>">
+                <div class="conjInputFoto">
+                    <?php
+                        // Verifica se há uma foto existente
+                        if (isset($row['Foto']) && !empty($row['Foto']) && file_exists($row['Foto'])) {
+                            echo '<img id="thumbnail" src="' . $row['Foto'] . '" alt="Thumbnail da Foto"><br>';
+                        }
+                        else{
+                            echo '<img id="thumbnail" src="#" alt="Thumbnail da Foto" style="display:none"><br>';
+                        }
+                    ?>
+                    <input type="hidden" name="fotoExistente" value="<?php echo $row['Foto']; ?>">
+                    <label class="label" for="foto" id="lblFoto">Clique para escolher uma foto</label><br>
+                    <input class="input" type="file" id="foto" name="foto" accept="image/*" style="display:none" onchange="exibirThumbnail()"><br>
+                    <script>
+                        function exibirThumbnail() {
+                            var inputFoto = document.getElementById('foto');
+                            var thumbnail = document.getElementById('thumbnail');
+
+                            if (inputFoto.files && inputFoto.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    thumbnail.src = e.target.result;
+                                    thumbnail.style.display = 'block';
+                                };
+
+                                reader.readAsDataURL(inputFoto.files[0]);
+                            }
+                        }
+                    </script>
+                </div>             
                 <div class="conjInput">
                     <label class="label" for="novoNome">Nome Completo:</label><br>            
                     <input class="input" type="text" id="novoNome" name="novoNome" value="<?php echo $row['Nome']; ?>"><br>
                     <label class="label" for="novoEmail">Email:</label><br>
                     <input class="input" type="email" id="novoEmail" name="novoEmail" value="<?php echo $row['Email']; ?>"><br>
-                </div>             
-                <div class="conjInput">
                     <label class="label" for="novaNacionalidade">Nacionalidade:</label><br>
                     <input class="input" type="text" id="novaNacionalidade" name="novaNacionalidade" value="<?php echo $row['Nacionalidade']; ?>"><br>
-                    <label class="label" for="novoSetor">Setor:</label><br>
-                    <input class="input" type="text" id="novoSetor" name="novoSetor" value="<?php echo $row['Setor']; ?>"><br>
                 </div>
             </div>
             <div class="conteudoForm">
@@ -107,6 +154,8 @@ if (isset($_GET['id'])) {
                     <input class="input" type="text" id="novaEspecialidade" name="novaEspecialidade" value="<?php echo $row['Especialidade']; ?>"><br>
                     <label class="label" for="novoCpf">CPF:</label><br>
                     <input class="input" type="number" id="novoCpf" name="novoCpf" value="<?php echo $row['CPF']; ?>"><br>
+                    <label class="label" for="novoSetor">Setor:</label><br>
+                    <input class="input" type="text" id="novoSetor" name="novoSetor" value="<?php echo $row['Setor']; ?>"><br>
                 </div> 
                 <div class="conjInput">
                     <label class="label" for="novoRg">RG:</label><br>

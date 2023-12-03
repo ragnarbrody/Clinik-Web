@@ -45,7 +45,7 @@ body, ul {
  
  .menu ul.menuServicos li:hover 
  {
-     background-color: #0e0d0c;
+     background-color: #3C9FAC;
  }
  
  .menu ul.menuServicos li a
@@ -95,9 +95,9 @@ body, ul {
 
     .nav-link:hover
     {
-        background-color: #eae5e0;
+        background-color: #3C9FAC;
         border: 1px solid #7b644b;
-        color: #3C9FAC;
+        color: #fff;
     }
 
     .nav-bar {

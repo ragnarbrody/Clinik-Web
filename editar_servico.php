@@ -80,8 +80,13 @@ if (isset($_GET['id'])) {
                 <div class="conjInput">          
                     <label class="label" for="novoDescricao">Descrição:</label><br>
                     <textarea class="input" name="novoDescricao" id="novoDescricao" cols="30" rows="10"><?php echo $row['Descricao']; ?></textarea><br>
-                    <label class="label" or="novoEspecialidade">Especialidade:</label><br>
-                    <input class="input" type="text" id="novoEspecialidade" name="novoEspecialidade" value="<?php echo $row['Especialidade']; ?>"><br>
+                    <label class="label" or="novoEspecialidade">Setor:</label><br>
+                    <?php if ($_SESSION['cargo'] == 'ADM') : ?>
+                        <input class="input" type="text" id="novoEspecialidade" name="novoEspecialidade" value="<?php echo $row['Especialidade']; ?>"><br>
+                    <?php endif; ?>
+                    <?php if ($_SESSION['cargo'] == 'CHEFE_DPTO') : ?>
+                        <input class="input" type="text" id="novoEspecialidade" name="novoEspecialidade" value="<?php echo $row['Especialidade']; ?>"readonly><br>
+                    <?php endif; ?>    
                 </div>
             </div>                                               
             <div class="enviarServ">

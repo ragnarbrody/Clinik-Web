@@ -1,0 +1,58 @@
+ /* Reset de estilos padrão do navegador */
+ body,ul {
+    margin: 0;
+    padding: 0;
+}
+
+main
+{
+   flex-direction: column;
+   background-image: url(../Imagens/MinBackground5.jpg);
+   height: 75vh;
+   background-position-y: center;
+   background-position-x: center;
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   display: flex;
+}
+
+.conteudoUsuarios
+{
+   height: 90%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.filtros
+{
+    max-height: 13%;
+    min-height: 13%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+}
+
+#lucroChart {
+    padding: 1vw;
+    max-height: 80%;
+    min-height: 80%;
+    max-width: 80%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    box-shadow: 0 0 20px 0 #3C9FAC;
+    border-radius: 10px;
+    justify-content: space-evenly;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 760px){
+
+    #lucroChart{
+        max-width: 92%;
+    }
+}

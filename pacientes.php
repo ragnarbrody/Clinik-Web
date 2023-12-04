@@ -46,7 +46,10 @@ if ($sql_query->num_rows > 0) {
         $tabelaHTML .= '<td>' . $row['protocolo_atendimento'] . '</td>';
         $tabelaHTML .= '<td><a class="perfil-btn" href="./perfil_paciente.php?id=' . $row["ID"] . '">Perfil</a></td>';
         $tabelaHTML .= '<td><button class="editar-btn" onclick="openModalEditPac(' . $row["ID"] . ')">Editar</button></td>';
-        $tabelaHTML .= '<td><a class="excluir-btnPac" data-id="' . $row["ID"] . '">Excluir</a>' . '</td>';
+        if ($_SESSION['cargo'] == 'ADM')
+        {
+            $tabelaHTML .= '<td><a class="excluir-btnPac" data-id="' . $row["ID"] . '">Excluir</a>' . '</td>';
+        }      
         // Deixei aqui pra adicionar mais colunas se precisar
         $tabelaHTML .= '</tr>';
     }
@@ -95,13 +98,13 @@ if ($sql_query->num_rows > 0) {
                 <!--Os modais abaixo só aparecem quando chamados pelas respectivas funções-->
                 <div class="modal">
                     <div class="modal-content" id="editarPaciente">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                        <a class="close-btn" onclick="closeModal()"><img src="./Imagens/close.png" alt="botão de fechar"></a>
                         <iframe src="editar_paciente.php" width="100%" height="400"></iframe>
                     </div>
                 </div>
                 <div class="modal" id="cadastrarPac">
                     <div class="modal-content">
-                        <span class="close-btn" onclick="closeTesteModal()">&times;</span>
+                        <a class="close-btn" onclick="closeModal()"><img src="./Imagens/close.png" alt="botão de fechar"></a>
                         <iframe src="cadastrar_paciente" width="100%" height="400"></iframe>
                     </div>
                 </div>

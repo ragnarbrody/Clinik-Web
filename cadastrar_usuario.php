@@ -1,3 +1,7 @@
+<?php
+include('./conexao.php');
+include('./protect.php');
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -47,9 +51,11 @@
                 <div class="conjInput">   
                     <label class="label" for="cargo">Cargo:</label><br>
                     <select class="input" name="cargo" id="cargo" required>
-                        <option value="RECEPCIONISTA">Recepcionista</option>
-                        <option value="ESPECIALISTA">Especialista</option>
-                        <option value="CHEFE_DPTO">Chefe de setor</option>
+                        <?php if ($_SESSION['cargo'] == 'ADM') : ?>
+                            <option value="CHEFE_DPTO">Chefe de setor</option>
+                            <option value="RECEPCIONISTA">Recepcionista</option>
+                        <?php endif; ?>     
+                        <option value="ESPECIALISTA">Especialista</option>                       
                     </select><br>
                     <label class="label" for="crm	">CRM ou NF:</label><br>
                     <input class="input" type="text" id="crm" name="crm"><br>
@@ -68,7 +74,12 @@
                     <label class="label" for="cpf">CPF:</label><br>
                     <input class="input" type="number" id="cpf" name="cpf" required><br>
                     <label class="label" for="setor">Setor:</label><br>
-                    <input class="input" type="text" id="setor" name="setor" required><br>
+                    <?php if ($_SESSION['cargo'] == 'ADM') : ?>
+                        <input class="input" type="text" id="setor" name="setor" required><br>
+                    <?php endif; ?>
+                    <?php if ($_SESSION['cargo'] == 'CHEFE_DPTO') : ?>
+                        <input class="input" type="text" id="setor" name="setor" value="<?php echo $_SESSION['Setor']; ?>" readonly><br>
+                    <?php endif; ?>
                 </div>
                 <div class="conjInput">
                     <label class="label" for="rg">RG:</label><br>

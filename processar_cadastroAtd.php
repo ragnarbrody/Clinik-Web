@@ -27,6 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $Protocolo = $mysqli->real_escape_string($_POST['Protocolo']);
     $Email = $mysqli->real_escape_string($_POST['Email_paciente']);
     $Observacao = $mysqli->real_escape_string($_POST['Observacao']);
+    $Valor = preg_replace("/[^0-9.]/", "", $_POST['valorServico']);
+
+    // Converta para um número
+    $Valor = floatval($Valor);
     //
     $dataAtual = strtotime(date('Y-m-d'));
     $dataAtendimentoTimestamp = strtotime($Data_atendimento);
@@ -40,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insere os dados no banco de dados
-    $sql = "INSERT INTO atendimentos (Servico, ID_servico, Nome_paciente, ID_paciente, Prof_responsavel, ID_profResponsavel, ID_clinica, Data_atendimento, Horario_inicio, Risco, Retorno, CPF_paciente, Responsavel_legal, Setor, Situacao, Observacao, Protocolo) VALUES ('$Servico', '$ID_servico', '$Paciente', '$ID_paciente', '$Prof_responsavel', '$ID_profResponsavel', '$ID_clinica', '$Data_atendimento', '$Horario_inicio', '$Risco', '$Retorno', '$CPF_paciente', '$Responsavel_legal', '$Setor', '$Situacao', '$Observacao', '$Protocolo')";
+    $sql = "INSERT INTO atendimentos (Servico, ID_servico, Nome_paciente, ID_paciente, Prof_responsavel, ID_profResponsavel, ID_clinica, Data_atendimento, Horario_inicio, Risco, Retorno, CPF_paciente, Responsavel_legal, Setor, Situacao, Observacao, Protocolo, valorServico) VALUES ('$Servico', '$ID_servico', '$Paciente', '$ID_paciente', '$Prof_responsavel', '$ID_profResponsavel', '$ID_clinica', '$Data_atendimento', '$Horario_inicio', '$Risco', '$Retorno', '$CPF_paciente', '$Responsavel_legal', '$Setor', '$Situacao', '$Observacao', '$Protocolo', '$Valor')";
 
     if ($mysqli->query($sql)) {
         // Verifica se a Situacao é "Agendado" antes de enviar o e-mail

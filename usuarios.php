@@ -4,8 +4,17 @@ include('./protect.php');
 
 // Armazena o ID_clinica do usuário logado
 $idClinica = $_SESSION['ID_clinica'];
-// Consulta SQL para obter todos os registros de usuários
-$sql_code = "SELECT * FROM usuarios WHERE ID_clinica = '$idClinica'";
+// Armazena o setor do usuário logado
+$setorUsuarioLogado = $_SESSION['Setor'];
+// Armazena o cargo do usuário logado
+$cargoUsuarioLogado = $_SESSION['cargo'];
+// Consulta SQL
+if ($cargoUsuarioLogado == 'CHEFE_DPTO'){
+    $sql_code = "SELECT * FROM usuarios WHERE ID_clinica = '$idClinica' AND Setor = '$setorUsuarioLogado'";
+} else if ($cargoUsuarioLogado == 'ADM'){
+    $sql_code = "SELECT * FROM usuarios WHERE ID_clinica = '$idClinica'";
+}
+
 $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
 // Variável para armazenar a tabela HTML
@@ -87,7 +96,12 @@ if ($sql_query->num_rows > 0) {
             <!--////////--> 
             <div class="conteudoUsuarios">
                 <div id="tabelaDiv">
-                    <h2>Usuários</h2>
+                    <?php if ($_SESSION['cargo'] == 'ADM') : ?>
+                        <h2>Usuários da clinica</h2>
+                    <?php endif; ?>
+                    <?php if ($_SESSION['cargo'] == 'CHEFE_DPTO') : ?>
+                        <h2>Usuários do seu Setor</h2>
+                    <?php endif; ?>
                     <?php echo $tabelaHTML; ?>
                     <div class="btnsTabela">
                         <button onclick="openModalReg()">Cadastrar</button>
@@ -96,13 +110,13 @@ if ($sql_query->num_rows > 0) {
                 <!--Os modais abaixo só aparecem quando chamados pelas respectivas funções-->
                 <div class="modal">
                     <div class="modal-content" id="editarUser">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                        <a class="close-btn" onclick="closeModal()"><img src="./Imagens/close.png" alt="botão de fechar"></a>
                         <iframe src="editar_usuario.php" width="100%" height="400"></iframe>
                     </div>
                 </div>
                 <div class="modal" id="cadastrarUser">
                     <div class="modal-content">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                        <a class="close-btn" onclick="closeModal()"><img src="./Imagens/close.png" alt="botão de fechar"></a>
                         <iframe src="cadastrar_usuario.php" width="100%" height="400"></iframe>
                     </div>
                 </div>

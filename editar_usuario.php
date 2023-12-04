@@ -134,9 +134,16 @@ if (isset($_GET['id'])) {
                         <?php if ($row['Cargo'] == 'ADM'): ?>
                             <option value="ADM" selected>ADM</option>
                         <?php endif; ?>
-                        <option value="RECEPCIONISTA" <?php if ($row['Cargo'] == 'RECEPCIONISTA') echo 'selected'; ?>>Recepcionista</option>
+                        <?php if ($row['Cargo'] == 'CHEFE_DPTO') : ?>
+                            <option value="CHEFE_DPTO" selected>Chefe de setor</option>
+                        <?php endif; ?>
+                        <?php if ($_SESSION['cargo'] == 'ADM') : ?>
+                            <?php if ($row['Cargo'] != 'CHEFE_DPTO') : ?>
+                                <option value="CHEFE_DPTO" <?php if ($row['Cargo'] == 'CHEFE_DPTO') echo 'selected'; ?>>Chefe de setor</option>
+                            <?php endif; ?>           
+                            <option value="RECEPCIONISTA" <?php if ($row['Cargo'] == 'RECEPCIONISTA') echo 'selected'; ?>>Recepcionista</option>
+                        <?php endif; ?>
                         <option value="ESPECIALISTA" <?php if ($row['Cargo'] == 'ESPECIALISTA') echo 'selected'; ?>>Especialista</option>
-                        <option value="CHEFE_DPTO" <?php if ($row['Cargo'] == 'CHEFE_DPTO') echo 'selected'; ?>>Chefe de setor</option>
                     </select><br>
                     <label class="label" for="novoCrm	">CRM ou NF:</label><br>
                     <input class="input" type="text" id="novoCrm" name="novoCrm" value="<?php echo $row['CRM']; ?>"><br>
@@ -155,7 +162,12 @@ if (isset($_GET['id'])) {
                     <label class="label" for="novoCpf">CPF:</label><br>
                     <input class="input" type="number" id="novoCpf" name="novoCpf" value="<?php echo $row['CPF']; ?>"><br>
                     <label class="label" for="novoSetor">Setor:</label><br>
-                    <input class="input" type="text" id="novoSetor" name="novoSetor" value="<?php echo $row['Setor']; ?>"><br>
+                    <?php if ($_SESSION['cargo'] == 'ADM') : ?>
+                        <input class="input" type="text" id="novoSetor" name="novoSetor" value="<?php echo $row['Setor']; ?>"><br>
+                    <?php endif; ?>
+                    <?php if ($_SESSION['cargo'] == 'CHEFE_DPTO') : ?>
+                        <input class="input" type="text" id="novoSetor" name="novoSetor" value="<?php echo $row['Setor']; ?>" readonly><br>
+                    <?php endif; ?>              
                 </div> 
                 <div class="conjInput">
                     <label class="label" for="novoRg">RG:</label><br>

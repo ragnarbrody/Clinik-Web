@@ -4,8 +4,17 @@ include('./protect.php');
 
 // Armazena o ID_clinica do usuário logado
 $idClinica = $_SESSION['ID_clinica'];
-// Consulta SQL para obter todos os registros de usuários
-$sql_code = "SELECT * FROM servicos WHERE ID_clinica = '$idClinica'";
+// Armazena o setor do usuário logado
+$setorUsuarioLogado = $_SESSION['Setor'];
+// Armazena o cargo do usuário logado
+$cargoUsuarioLogado = $_SESSION['cargo'];
+// Consulta SQL
+if ($cargoUsuarioLogado == 'CHEFE_DPTO'){
+    $sql_code = "SELECT * FROM servicos WHERE ID_clinica = '$idClinica' AND Especialidade = '$setorUsuarioLogado'";
+} else if ($cargoUsuarioLogado == 'ADM'){
+    $sql_code = "SELECT * FROM servicos WHERE ID_clinica = '$idClinica'";
+}
+
 $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
 
 // Variável para armazenar a tabela HTML
@@ -72,9 +81,14 @@ if ($sql_query->num_rows > 0) {
             <!--////////--> 
             <div class="conteudoUsuarios">
                 <div id="tabelaDiv" class="tabelaDiv">
-                    <h2>Serviços</h2>
+                    <?php if ($_SESSION['cargo'] == 'ADM') : ?>
+                        <h2>Serviços da clinica</h2>
+                    <?php endif; ?>
+                    <?php if ($_SESSION['cargo'] == 'CHEFE_DPTO') : ?>
+                        <h2>Serviços do seu Setor</h2>
+                    <?php endif; ?>
                     <div class="filtros">
-                        <label for="searchInput">Pesquisar por ID ou Nome do Serviço: </label>
+                        <label for="searchInput">Pesquisar por ID ou Serviço: </label>
                         <input type="text" id="searchInput" name="searchInput" placeholder="ID ou Nome"><br>
                     </div>
                     <?php echo $tabelaHTML; ?>
@@ -85,13 +99,13 @@ if ($sql_query->num_rows > 0) {
                 <!--Os modais abaixo só aparecem quando chamados pelas respectivas funções-->
                 <div class="modal">
                     <div class="modal-content" id="editarUser">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                        <a class="close-btn" onclick="closeModal()"><img src="./Imagens/close.png" alt="botão de fechar"></a>
                         <iframe src="editar_servico.php" width="100%" height="400"></iframe>
                     </div>
                 </div>
                 <div class="modal" id="cadastrarServ">
                     <div class="modal-content">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                        <a class="close-btn" onclick="closeModal()"><img src="./Imagens/close.png" alt="botão de fechar"></a>
                         <iframe src="cadastrar_servico.php" width="100%" height="400"></iframe>
                     </div>
                 </div>

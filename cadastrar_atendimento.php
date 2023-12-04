@@ -5,6 +5,10 @@ include('protect.php');
 
 // Chama a função para buscar dados com base no ID_clinica do usuário logado
 $dadosClinica = buscarDadosClinica($_SESSION['ID_clinica']);
+// Armazena o setor do usuário logado
+$setorUsuarioLogado = $_SESSION['Setor'];
+// Armazena o cargo do usuário logado
+$cargoUsuarioLogado = $_SESSION['cargo'];
 
 //Gera um protocolo aleatório que começa com 'P', seguido pelo timestamp atual e mais 1 caracter aleatório e depois mais 2 carácteres alphanuméricos aleatórios
 $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1) . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 2);
@@ -29,7 +33,13 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                         <option value=''></option>
                         <?php
                         foreach($dadosClinica['servicos'] as $servico) {
-                            echo "<option value='{$servico['Servico']}' data-id='{$servico['ID']}'>{$servico['Servico']}</option>";
+                            // Verifica se o usuário é ADM ou RECEPCIONISTA
+                            // ou se é CHEFE_DPTO/ESPECIALISTA e o Setor do serviço é igual ao Setor do usuário logado
+                            if ($cargoUsuarioLogado == 'ADM' || $cargoUsuarioLogado == 'RECEPCIONISTA'
+                                || ($cargoUsuarioLogado == 'CHEFE_DPTO' && $servico['Especialidade'] == $setorUsuarioLogado)
+                                || ($cargoUsuarioLogado == 'ESPECIALISTA' && $servico['Especialidade'] == $setorUsuarioLogado)) {
+                                echo "<option value='{$servico['Servico']}' data-id='{$servico['ID']}'>{$servico['Servico']}</option>";
+                            }
                         }
                         ?>
                     </select><br>
@@ -37,8 +47,14 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                     <select class="input" name="Prof_responsavel" id="Prof_responsavel" required style="display: none;">
                         <option value=''></option>
                         <?php
-                        foreach($dadosClinica['profissionais'] as $profissional) {
-                            echo "<option value='{$profissional['Nome']}'>{$profissional['Nome']}</option>";
+                        if($cargoUsuarioLogado == 'ADM' || $cargoUsuarioLogado == 'RECEPCIONISTA' || $cargoUsuarioLogado == 'CHEFE_DPTO')
+                        {
+                            foreach($dadosClinica['profissionais'] as $profissional) {
+                                echo "<option value='{$profissional['Nome']}'>{$profissional['Nome']}</option>";
+                            }
+                        }else if ($cargoUsuarioLogado == "ESPECIALISTA") {
+                            // Exibe apenas o especialista logado como opção
+                            echo "<option value='{$_SESSION['nome']}'>{$_SESSION['nome']}</option>";
                         }
                         ?>
                     </select><br>
@@ -67,6 +83,8 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                         <option value="Médio">Médio</option>
                         <option value="Alto">Alto</option>
                     </select><br>
+                    <label class="label" for="valorServico">Valor do Serviço:</label><br>
+                    <input class="input" type="text" name="valorServico" id="valorServico" value=""><br>
                 </div> 
                 <div class="conjInput">
                     <label class="label" for="Retorno">É atendimento de retorno:</label><br>
@@ -122,7 +140,6 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
             var labelProfResponsavel = document.getElementById('LabelProf_responsavel');
             var campoSetor = document.getElementById('Setor');
             var campoData = document.getElementById('Data_atendimento');
-
             campoData.addEventListener('change', function() {
                 var dataEscolhida = new Date(this.value + 'T00:00:00');
 
@@ -153,16 +170,34 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
             document.getElementById("Horario_inicio").value = horaAtual;
 
             // Adiciona um ouvinte de evento para o campo Servico
-            campoServico.addEventListener('click', function () {
+            campoServico.addEventListener('change', function () {
                 // Obtém o valor selecionado no campo Servico
                 var selectedServico = campoServico.value;
 
                 // Se o serviço selecionado não for vazio
                 if (selectedServico !== '') {
+                    // Adicione o código abaixo para buscar e preencher o valor do serviço no campo valorServico
+                    var valorServico = null;      
+                    
+                    // Encontrar o serviço selecionado nos dados da clínica
+                    var servicoSelecionado = dadosClinica.servicos.find(function (servico) {
+                        return servico.Servico === selectedServico;
+                    });
+
+                    // Se encontrar o serviço, obtém o valor
+                    if (servicoSelecionado) {
+                        valorServico = servicoSelecionado.Valor;
+                    } else {
+                        console.error("Dados do serviço não encontrados.");
+                    }
+
+                    // Preencher o campo valorServico
+                    document.getElementById('valorServico').value = "R$" + valorServico;
+
                     // Exibe o campo Prof_responsavel
                     campoProfResponsavel.style.display = 'block';
                     labelProfResponsavel.style.display = 'block';
-
+                    
                     // Obtém o ID do serviço selecionado
                     var selectedServicoId = campoServico.options[campoServico.selectedIndex].getAttribute('data-id');
                     // Atribui o ID do serviço ao campo ID_servico
@@ -178,41 +213,41 @@ $protocolo = 'P' . time() . substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0,
                         }
                     }
 
+                    // Preenche o campo Setor
+                    campoSetor.value = setorDoServico;
+
                     // Preenche o campo Prof_responsavel apenas com os especialistas do setor correspondente ao serviço selecionado
                     campoProfResponsavel.innerHTML = ''; // Limpa as opções existentes
 
-                    // Obtém os dados dos profissionais da clínica
-                    var profissionais = dadosClinica.profissionais;
+                    // Se o usuário for ESPECIALISTA, exibe apenas o próprio especialista como opção
+                    if ("<?php echo $cargoUsuarioLogado; ?>" === "ESPECIALISTA") {
+                        campoProfResponsavel.innerHTML = "<option value='<?php echo $_SESSION['nome']; ?>'><?php echo $_SESSION['nome']; ?></option>";
+                    }else {
+                        // Obtém os dados dos profissionais da clínica
+                        var profissionais = dadosClinica.profissionais;
 
-                    // Filtra os profissionais que são especialistas e pertencem ao mesmo setor do serviço selecionado
-                    var profEspecialistas = profissionais.filter(function (profissional) {
-                        return profissional.Setor === setorDoServico;
-                    });
+                        // Filtra os profissionais que são especialistas e pertencem ao mesmo setor do serviço selecionado
+                        var profEspecialistas = profissionais.filter(function (profissional) {
+                            return profissional.Setor === setorDoServico;
+                        });
 
-                    // Adiciona as opções ao campo Prof_responsavel
-                    profEspecialistas.forEach(function (profissional) {
-                        var option = document.createElement('option');
-                        option.value = profissional.Nome;
-                        option.textContent = profissional.Nome;
-                        option.setAttribute('data-id', profissional.ID); // Adiciona o ID do profissional como um atributo data
-                        campoProfResponsavel.appendChild(option)
-                    });
+                        // Adiciona as opções ao campo Prof_responsavel
+                        profEspecialistas.forEach(function (profissional) {
+                            var option = document.createElement('option');
+                            option.value = profissional.Nome;
+                            option.textContent = profissional.Nome;
+                            option.setAttribute('data-id', profissional.ID); // Adiciona o ID do profissional como um atributo data
+                            campoProfResponsavel.appendChild(option)
+                        });
 
-                    // Preenche o campo ID_profResponsavel com o ID do primeiro profissional
-                    if (profEspecialistas.length > 0) {
-                        campoIDProfResponsavel.value = profEspecialistas[0].ID;
-                    } else {
-                        // Se não houver profissionais, limpa o campo ID_profResponsavel
-                        campoIDProfResponsavel.value = '';
+                        // Preenche o campo ID_profResponsavel com o ID do primeiro profissional
+                        if (profEspecialistas.length > 0) {
+                            campoIDProfResponsavel.value = profEspecialistas[0].ID;
+                        } else {
+                            // Se não houver profissionais, limpa o campo ID_profResponsavel
+                            campoIDProfResponsavel.value = '';
+                        }
                     }
-
-                    if (setorDoServico !== null) {
-                        campoSetor.value = setorDoServico;
-                    } else {
-                        console.error("Setor não encontrado para o serviço selecionado.");
-                        campoSetor.value = ''; // Limpa o campo Setor em caso de erro
-                    }
-                    
                 } else {
                     // Se o serviço selecionado for vazio, esconde o campo Prof_responsavel
                     campoProfResponsavel.style.display = 'none';

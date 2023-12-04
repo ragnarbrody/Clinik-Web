@@ -22,11 +22,11 @@ function buscarDadosClinica($idClinica) {
     $resultPacientes = $mysqli->query($sqlPacientes);
 
     // Buscar Serviços
-    $sqlServicos = "SELECT ID, Servico, Especialidade FROM servicos WHERE ID_clinica = '$idClinica'";
+    $sqlServicos = "SELECT ID, Servico, Especialidade, Valor FROM servicos WHERE ID_clinica = '$idClinica'";
     $resultServicos = $mysqli->query($sqlServicos);
 
     // Buscar Profissionais
-    $sqlProfissionais = "SELECT ID, Nome, Setor FROM usuarios WHERE ID_clinica = '$idClinica' AND Cargo = 'ESPECIALISTA'";
+    $sqlProfissionais = "SELECT ID, Nome, Setor FROM usuarios WHERE ID_clinica = '$idClinica' AND Cargo = 'ESPECIALISTA' or Cargo = 'CHEFE_DPTO'";
     $resultProfissionais = $mysqli->query($sqlProfissionais);  
 
     // Adicionar dados ao array

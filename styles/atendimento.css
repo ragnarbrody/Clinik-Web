@@ -152,10 +152,11 @@ table{
 
 /* Botão para fechar o modal */
 .close-btn {
-    display: block;
+    display: flex;
     text-align: right;
     font-size: 24px;
     cursor: pointer;
+    justify-content: flex-end;
 }
 
 /*códigos CSS para o modal de cadastro*/

@@ -131,12 +131,14 @@ table{
     width: 80%;
 }
 
-#cadastrarUser .close-btn {
-    display: block;
+ /* Botão para fechar o modal */
+ .close-btn {
+    display: flex;
     text-align: right;
     font-size: 24px;
     cursor: pointer;
-}
+    justify-content: flex-end;
+ }
 
 @media only screen and (max-width: 760px){
     .tabelaPrin{

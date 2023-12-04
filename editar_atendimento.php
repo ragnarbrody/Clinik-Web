@@ -5,6 +5,10 @@ include('protect.php');
 
 // Chama a função para buscar dados com base no ID_clinica do usuário logado
 $dadosClinica = buscarDadosClinica($_SESSION['ID_clinica']);
+// Armazena o setor do usuário logado
+$setorUsuarioLogado = $_SESSION['Setor'];
+// Armazena o cargo do usuário logado
+$cargoUsuarioLogado = $_SESSION['cargo'];
 
 $atendimentoParaEditar = null;
 
@@ -26,6 +30,9 @@ if (isset($_GET['protocolo'])) {
 
         // Define o serviço selecionado
         $selectedServico = $atendimentoParaEditar['Servico'];
+
+        // Define o valor do serviço
+        $valor = $atendimentoParaEditar['valorServico'];
 
         // Consulta SQL para obter os dados do serviço pelo nome
         $sqlServico = "SELECT * FROM servicos WHERE Servico = '$selectedServico'";
@@ -100,17 +107,22 @@ if (isset($_GET['protocolo'])) {
                     <label class="label" for="Servico">Servico:</label><br>
                     <input class="input" type="text" name="Servico" id="Servico" readonly value="<?php echo $atendimentoParaEditar['Servico']; ?>">
                     <label class="label" id="LabelProf_responsavel" for="Prof_responsavel">Profissional Responsável:</label><br>
-                    <select class="input" name="Prof_responsavel" id="Prof_responsavel" required>
-                        <option value=''></option>
-                        <?php
-                        foreach($dadosClinica['profissionais'] as $profissional) {
-                            if ($profissional['Setor'] == $setorDoAtendimento) {
-                                $selected = ($profissional['Nome'] == $atendimentoParaEditar['Prof_responsavel']) ? 'selected' : '';
-                                echo "<option value='{$profissional['Nome']}' data-id='{$profissional['ID']}' $selected>{$profissional['Nome']}</option>";
-                            }
-                        }
-                        ?>
-                    </select><br>
+                    <?php if ($cargoUsuarioLogado == 'ADM' || $cargoUsuarioLogado == 'RECECPCIONISTA' || $cargoUsuarioLogado == 'CHEFE_DPTO') : ?>
+                        <select class="input" name="Prof_responsavel" id="Prof_responsavel" required>
+                            <option value=''></option>
+                            <?php
+                                foreach($dadosClinica['profissionais'] as $profissional) {
+                                    if ($profissional['Setor'] == $setorDoAtendimento) {
+                                        $selected = ($profissional['Nome'] == $atendimentoParaEditar['Prof_responsavel']) ? 'selected' : '';
+                                        echo "<option value='{$profissional['Nome']}' data-id='{$profissional['ID']}' $selected>{$profissional['Nome']}</option>";
+                                    }
+                                }
+                            ?>
+                        </select><br>
+                    <?php endif; ?>
+                    <?php if ($cargoUsuarioLogado == 'ESPECIALISTA') : ?>
+                        <input class="input" type="text" name="Prof_responsavel" id="Prof_responsavel" readonly value="<?php echo $_SESSION['nome']; ?>">
+                    <?php endif; ?> 
                 </div> 
                 <div class="conjInput">
                     <label class="label" for="Paciente">Paciente:</label><br>
@@ -135,6 +147,8 @@ if (isset($_GET['protocolo'])) {
                         <option value="Médio" <?php echo ($atendimentoParaEditar['Risco'] === 'Médio') ? 'selected' : ''; ?>>Médio</option>
                         <option value="Alto" <?php echo ($atendimentoParaEditar['Risco'] === 'Alto') ? 'selected' : ''; ?>>Alto</option>
                     </select><br>
+                    <label class="label" for="valorServico">Valor do Serviço:</label><br>
+                    <input class="input" type="text" name="valorServico" id="valorServico" value="<?php echo $valor; ?>"><br>
                 </div> 
                 <div class="conjInput">
                     <label class="label" for="Retorno">É atendimento de retorno:</label><br>

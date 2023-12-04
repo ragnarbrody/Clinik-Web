@@ -1,3 +1,7 @@
+<?php
+include('./conexao.php');
+include('./protect.php');
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -32,8 +36,13 @@
                 <div class="conjInput">          
                     <label class="label" for="Descricao">Descrição:</label><br>
                     <textarea class="input" name="Descricao" id="Descricao" cols="20" rows="10"></textarea><br>
-                    <label class="label" for="Especialidade">Especialidade:</label><br>
-                    <input class="input" type="text" id="Especialidade" name="Especialidade"><br>
+                    <label class="label" for="Especialidade">Setor:</label><br>
+                    <?php if ($_SESSION['cargo'] == 'ADM') : ?>
+                        <input class="input" type="text" id="Especialidade" name="Especialidade"><br>
+                    <?php endif; ?>
+                    <?php if ($_SESSION['cargo'] == 'CHEFE_DPTO') : ?>
+                        <input class="input" type="text" id="Especialidade" name="Especialidade" value="<?php echo $_SESSION['Setor']; ?>" readonly><br>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="enviarServ">  

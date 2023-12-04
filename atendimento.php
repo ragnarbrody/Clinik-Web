@@ -4,10 +4,12 @@ include('./protect.php');
 
 // Armazena o ID_clinica do usuário logado
 $idClinica = $_SESSION['ID_clinica'];
+// Armazena o setor do usuário logado
+$setorUsuarioLogado = $_SESSION['Setor'];
+// Armazena o cargo do usuário logado
+$cargoUsuarioLogado = $_SESSION['cargo'];
 
-//$dataAtual = date('Y-m-d');
 // Verifica se a data atual corresponde a alguma data de atendimento agendado
-// Define a data para teste (29-11-2023)
 $dataAtual = date('Y-m-d');
 
 // Atualiza os atendimentos para "Atrasado" se a data for menor que hoje
@@ -21,16 +23,27 @@ $mysqli->query($sqlAtualizarAtivos);
 // Verifica se foi passado um parâmetro 'status' na URL
 $status = isset($_GET['status']) ? $_GET['status'] : 'Ativo';
 
+if ($cargoUsuarioLogado == 'CHEFE_DPTO'){
+    $condicaoCargo = "AND Setor = '$setorUsuarioLogado'";
+} else if ($cargoUsuarioLogado == 'ESPECIALISTA'){
+    $condicaoCargo = "AND Prof_responsavel = '" . $_SESSION['nome'] . "'";
+} else if ($cargoUsuarioLogado == 'ADM' || $cargoUsuarioLogado == 'RECEPCIONISTA'){
+    $condicaoCargo = "";
+} else {
+    die("Cargo de usuário não reconhecido.");
+}
+
 if($status == 'Ativo')
 {
-    $sql_code = "SELECT * FROM atendimentos WHERE ID_clinica = '$idClinica' AND (Situacao = '$status' OR Situacao = 'Atrasado')";
+
+    $sql_code = "SELECT * FROM atendimentos WHERE ID_clinica = '$idClinica' $condicaoCargo AND (Situacao = '$status' OR Situacao = 'Atrasado')";
     $titulo = "Atendimentos";
     $naoEncontrado = "Nenhum atendimento encontrado!";
     $botao = "Finalizar";
 }
 elseif($status == "Agendado")
 {
-    $sql_code = "SELECT * FROM atendimentos WHERE ID_clinica = '$idClinica' AND Situacao = '$status'";
+    $sql_code = "SELECT * FROM atendimentos WHERE ID_clinica = '$idClinica' $condicaoCargo AND Situacao = '$status'";
     $titulo = "Agendamentos";
     $naoEncontrado = "Nenhum agendamento encontrado!";
     $botao = "Cancelar";
@@ -127,13 +140,13 @@ if ($sql_query->num_rows > 0) {
                 <!--Os modais abaixo só aparecem quando chamados pelas respectivas funções-->
                 <div class="modal" id="editarAtd">
                     <div class="modal-content">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                        <a class="close-btn" onclick="closeModal()"><img src="./Imagens/close.png" alt="botão de fechar"></a>
                         <iframe src="editar_atendimento.php" width="100%" height="400"></iframe>
                     </div>
                 </div>
                 <div class="modal" id="cadastrarAtd">
                     <div class="modal-content">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                        <a class="close-btn" onclick="closeModal()"><img src="./Imagens/close.png" alt="botão de fechar"></a>
                         <iframe src="cadastrar_atendimento.php" width="100%" height="400"></iframe>
                     </div>
                 </div>

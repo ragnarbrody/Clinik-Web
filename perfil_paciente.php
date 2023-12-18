@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
                 <div class="containerConteudo">
                     <div class="headerTab">
                         <div class="btnHeader">
-                            <a onclick="openModalHistorico()">Histórico</a>
+                            <a onclick="openModalHistorico(<?php echo $pacienteId; ?>)">Histórico</a>
                         </div>
                         <div class="titHeader">
                             <h2>Dados do paciente:</h2>       

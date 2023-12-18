@@ -1,90 +1,63 @@
 <?php
-include('./conexao.php');
-include('./protect.php');
+    include('./conexao.php');
+    include('./protect.php');
 
-// Verifica se o parâmetro ID foi passado na URL
-if (isset($_GET['id'])) {
-    $pacienteId = $_GET['id'];
-
-    // Consulta SQL para obter os atendimentos finalizados para o paciente com base no ID fornecido
-    $sql_code = "SELECT * FROM atendimentos WHERE ID_paciente = $pacienteId AND (Situacao = 'Finalizado' OR Situacao = 'Cancelado')";
-    $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
-
-    // Variável para armazenar a tabela HTML
-    $tabelaHTML = '';
-
-    // Verificar se há registros
-    if ($sql_query->num_rows > 0) {
-        // Iniciar a tabela HTML
-        $tabelaHTML .= '<table border="1" class="tabelaPrin">
-                <tr>
-                    <th>Protocolo</th>
-                    <th>Serviço/Procedimento</th>
-                    <th>Data do atendimento</th>
-                    <th>Data de finalização</th>
-                    <th>Horário de Início</th> 
-                    <th>Horário de Saída</th>           
-                    <th>Profissional Responsável</th>
-                    <th>Risco</th>
-                    <th>Setor</th>
-                    <th>Retorno</th>
-                    <th>Situação</th>
-                    <th>Motivo de finalização/cancelamento</th>
-                </tr>';
-
-        // Loop através dos registros e exibir em linhas da tabela
-        while ($row = $sql_query->fetch_assoc()) {
-            $dataAtendimentoFormatada = date('d/m/Y', strtotime($row['Data_atendimento']));
-            $dataFinalizadoFormatada = date('d/m/Y', strtotime($row['Data_finalizado']));
-
-            $tabelaHTML .= '<tr>';
-            $tabelaHTML .= '<td>' . $row['Protocolo'] . '</td>';
-            $tabelaHTML .= '<td>' . $row['Servico'] . '</td>';
-            $tabelaHTML .= '<td>' . $dataAtendimentoFormatada . '</td>';
-            $tabelaHTML .= '<td>' . $dataFinalizadoFormatada . '</td>';
-            $tabelaHTML .= '<td>' . $row['Horario_inicio'] . '</td>';
-            $tabelaHTML .= '<td>' . $row['Horario_saida'] . '</td>';
-            $tabelaHTML .= '<td>' . $row['Prof_responsavel'] . '</td>';
-            $tabelaHTML .= '<td>' . $row['Risco'] . '</td>';
-            $tabelaHTML .= '<td>' . $row['Setor'] . '</td>';
-            $tabelaHTML .= '<td>' . $row['Retorno'] . '</td>';
-            $tabelaHTML .= '<td>' . $row['Situacao'] . '</td>';
-            $tabelaHTML .= '<td>' . $row['Motivo_canc'] . '</td>';
-            $tabelaHTML .= '</tr>';
-        }
-
-        // Fechar a tabela HTML
-        $tabelaHTML .= '</table>';
-    } else {
-        $tabelaHTML .= "Nenhum atendimento finalizado encontrado para este paciente!";
-    }
-} else {
-    $tabelaHTML .= 'ID do paciente não fornecido.';
-}
+    $pacienteId = isset($_GET['id']) ? $_GET['id'] : null;
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./styles/modal.css">
-        <link rel="icon" href="./Imagens/IconeLogo.ico" type="image/x-icon">
-        <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <title>Histórico</title>
-    </head>
-    <body>
-        <main>
-            <div class="conteudoUsuarios">             
-                <div id="tabelaDiv">
-                    <h2>Histórico</h2>
-                    <div class="filtros">                      
-                        <label for="searchInput">Pesquisar por protocolo ou data: </label>
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Data ou Protocolo">
-                    </div>
-                    <?php echo $tabelaHTML; ?>                 
-                </div>
-            </div>
-        </main>
-    </body>
-</html>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="mdlHistorico.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- Bootstrap JS e dependências -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+    .container
+    {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+</style>
+<div class="container mt-4">
+    <h2>Histórico de Atendimentos</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Protocolo</th>
+                <th>Serviço</th>
+                <th>Data do Atendimento</th>
+                <th>Data Finalizado</th>
+                <th>Profissional Responsável</th>
+                <th>Horário de Início</th>
+                <th>Horário de Saída</th>
+                <th>Setor</th>
+                <th>Situação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Sua lógica PHP para recuperar dados do banco de dados
+            $sql_code = "SELECT Protocolo, Servico, Data_atendimento, Data_finalizado, Prof_responsavel, Horario_inicio, Horario_saida, Setor, Situacao FROM atendimentos WHERE ID_paciente = $pacienteId AND (Situacao = 'Finalizado' OR Situacao = 'Cancelado')";
+            $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
+
+            while ($row = $sql_query->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>{$row['Protocolo']}</td>";
+                echo "<td>{$row['Servico']}</td>";
+                echo "<td>".date('d/m/Y', strtotime($row['Data_atendimento']))."</td>";
+                echo "<td>".date('d/m/Y', strtotime($row['Data_finalizado']))."</td>";
+                echo "<td>{$row['Prof_responsavel']}</td>";
+                echo "<td>{$row['Horario_inicio']}</td>";
+                echo "<td>{$row['Horario_saida']}</td>";
+                echo "<td>{$row['Setor']}</td>";
+                echo "<td>{$row['Situacao']}</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>

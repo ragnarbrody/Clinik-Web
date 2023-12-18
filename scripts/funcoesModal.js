@@ -230,12 +230,12 @@
 
 //Funções para a tela de histórico//
     //Funções para o modal de histórico
-    function openModalHistorico() {
+    function openModalHistorico(pacienteId) {
         var modal = document.querySelector('.modal');
         var iframe = document.querySelector('iframe');
         iframe.src = 'historico_paciente.php?id=' + pacienteId;
         iframe.classList.add('frameCadastro');
         modal.style.display = 'block';
-    }
+    }    
     //------------------------------------------//
 //--------------------------------------------//
